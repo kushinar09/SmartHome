@@ -13,14 +13,19 @@
     </head>
     <body>
         <table>
-            <tr>
-                <td>Tài khoản: </td>
-                <td><<input type="text" name="user" id="loginbox" placeholder="Enter username"></td>
-            </tr>
-            <tr>
-                <td>Mật khẩu: </td>
-                <td><<input type="text" name="pass" id="loginbox" placeholder="Enter password"></td>
-            </tr>
+            <form action="login" method="post">
+                <tr>
+                    <td>Username: </td>
+                    <td><input type="text" name="user" id="loginbox" placeholder="Enter username" autofocus></td>
+                </tr>
+                <tr>
+                    <td>Password: </td>
+                    <td><input type="text" name="pass" id="loginbox" placeholder="Enter password"></td>
+                </tr>
+                <tr>
+                    <td><Button:submit>Sign in</Button:submit></td>
+                </tr>
+            </form>
         </table>
     </body>
 </html>
