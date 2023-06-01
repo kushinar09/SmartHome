@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.ConnectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Account;
 
 /**
  *
@@ -57,7 +59,7 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
@@ -71,7 +73,17 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String gmail = request.getParameter("gmail");
+        String pass = request.getParameter("pass");
+        ConnectDAO cd = new ConnectDAO();
+        Account a = new Account();
+        a.setId(-1);
+        a.setGmail(gmail);
+        a.setPassword(pass);
+        int id = cd.checkAccount(a);
+        if(id == 1) {
+            request.setAttribute("error", "Gmail or password is incorrect");
+        }
     }
 
     /**

@@ -12,20 +12,21 @@
         <title>JSP Page</title>
     </head>
     <body>
+    <center>
         <table>
             <form action="login" method="post">
+                <h1>Sign in</h1>
                 <tr>
-                    <td>Username: </td>
-                    <td><input type="text" name="user" id="loginbox" placeholder="Enter username" autofocus></td>
+                    <td><input type="text" name="gmail" id="loginbox" placeholder="Gmail" autofocus required></td>
+                </tr>
+                <tr>                   
+                    <td><input type="text" name="pass" id="loginbox" placeholder="Password" required></td>
                 </tr>
                 <tr>
-                    <td>Password: </td>
-                    <td><input type="text" name="pass" id="loginbox" placeholder="Enter password"></td>
-                </tr>
-                <tr>
-                    <td><Button:submit>Sign in</Button:submit></td>
+                    <td><input type="button" value="Login Now"></td>
                 </tr>
             </form>
         </table>
-    </body>
+    </center>
+</body>
 </html>
