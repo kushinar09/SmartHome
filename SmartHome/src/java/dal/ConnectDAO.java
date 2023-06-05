@@ -14,19 +14,19 @@ import model.Account;
  * @author FR
  */
 public class ConnectDAO extends DBContext {
-    public String checkGmail(String gmail){
+    public String getPwdByGmail(String gmail){
         try{
-            String sql = "SELECT [password] FROM [Account] WHERE gmail = ?";
+            String sql = "SELECT * FROM [Account] WHERE [gmail] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, gmail);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()){
-                String pass = rs.getString("password");
-                if(pass != null) return pass;
+            if(rs.next()){              
+                return rs.getString("password");
             }
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }
-        return null;
+        return "";
     }
     
     public int checkAccount(Account a){
@@ -46,7 +46,7 @@ public class ConnectDAO extends DBContext {
     
     public Account getAccountById(int id){
         try{
-            String sql = "SELECT FROM [Account] WHERE id = ?";
+            String sql = "SELECT FROM [Account] WHERE [id] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -64,7 +64,7 @@ public class ConnectDAO extends DBContext {
     
     public Account getAccountByGmail(String gmail){
         try{
-            String sql = "SELECT FROM [Account] WHERE gmail = ?";
+            String sql = "SELECT FROM [Account] WHERE [gmail] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, gmail);
             ResultSet rs = statement.executeQuery();

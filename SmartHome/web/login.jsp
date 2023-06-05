@@ -9,33 +9,39 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login</title>
+        <link rel="stylesheet" href="css/logincss.css">
     </head>
     <body>
-    <center>
-        <table>
-            <form action="login" method="post">
-                <h1>Sign in</h1>
-                <tr>
-                    <td><input type="text" name="gmail" id="loginbox" placeholder="Gmail" autofocus required></td>
-                </tr>
-                <tr>                   
-                    <td><input type="password" name="pass" id="loginbox" placeholder="Password" required></td>
-                </tr>
-                <tr>
-                    <td>
-                        <i style="color: red;">
-                            <% if(request.getAttribute("error") != null){ %>
-                                <%= request.getAttribute("error").toString() %>
-                            <% } %>
-                        </i>   
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Login Now"></td>
-                </tr>
-            </form>
-        </table>
-    </center>
-</body>
+        <div class="container">
+            <div class="screen">
+                <div class="screen__content">
+                    <form action="login" class="login" method="post">
+                        <div class="login__field">
+                            <input type="text" class="login__input" name="gmail" placeholder="Email">
+                        </div>
+                        <div class="login__field">
+                            <input type="password" class="login__input" name="pwd" placeholder="Password">
+                        </div>
+                        <button class="button login__submit" type="submit">
+                            <span class="button__text">Log In Now</span>
+                        </button>
+                    </form>
+                    <div class="social-login">
+                        <div class="social-icons">
+                            <a href="#" class="instagram"></a>
+                            <a href="#" class="facebook"></a>
+                            <a href="#" class="twitter"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen__background">
+                    <span class="screen__background__shape screen__background__shape4"></span>
+                    <span class="screen__background__shape screen__background__shape3"></span>
+                    <span class="screen__background__shape screen__background__shape2"></span>
+                    <span class="screen__background__shape screen__background__shape1"></span>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

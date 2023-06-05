@@ -4,16 +4,15 @@
  */
 package dal;
 
-/**
- *
- * @author FR
- */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author FR
+ */
 public class DBContext {
-
     protected Connection connection;
     private final String serverName = "localhost";
     private final String dbName = "SmartHome";
