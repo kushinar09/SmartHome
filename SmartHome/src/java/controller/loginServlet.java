@@ -38,7 +38,7 @@ public class loginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet loginServlet</title>");            
+            out.println("<title>Servlet loginServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet loginServlet at " + request.getContextPath() + "</h1>");
@@ -59,7 +59,7 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**
@@ -80,11 +80,13 @@ public class loginServlet extends HttpServlet {
         a.setId(-1);
         a.setGmail(gmail);
         a.setPassword(pass);
-        int id = cd.checkAccount(a);
-        if(id == -1) {
+
+//        int id = cd.checkAccount(a);
+        int id = 0;
+        if (id < 1) {
             request.setAttribute("error", "Gmail or password is incorrect");
             request.getRequestDispatcher("login.jsp").forward(request, response);
-        }else{
+        } else {
             response.sendRedirect("home.jsp");
         }
     }

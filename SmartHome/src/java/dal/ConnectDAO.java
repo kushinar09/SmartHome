@@ -4,7 +4,6 @@
  */
 package dal;
 
-import com.sun.org.apache.bcel.internal.ExceptionConst;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,15 +31,12 @@ public class ConnectDAO extends DBContext {
     
     public int checkAccount(Account a){
         try{
-            String sql = "SELECT * FROM [Account]";
+            String sql = "SELECT * FROM [Account] WHERE [gmail] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, a.getGmail());
             ResultSet rs = statement.executeQuery();
             if(rs.next()){
-                String gmail = rs.getString("gmail");
-                String pass = rs.getString("password");
-                if(a.getGmail().equalsIgnoreCase(gmail) && a.getPassword().equals(pass)){
-                    return rs.getInt("id");
-                }
+                return rs.getInt("id");
             }
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
