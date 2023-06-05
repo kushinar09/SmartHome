@@ -81,8 +81,11 @@ public class loginServlet extends HttpServlet {
         a.setGmail(gmail);
         a.setPassword(pass);
         int id = cd.checkAccount(a);
-        if(id == 1) {
+        if(id == -1) {
             request.setAttribute("error", "Gmail or password is incorrect");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }else{
+            response.sendRedirect("home.jsp");
         }
     }
 

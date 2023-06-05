@@ -83,4 +83,17 @@ public class ConnectDAO extends DBContext {
         }
         return null;
     }
+    
+    public void insertAccount(Account a){
+        try{
+            String sql = "INSERT INTO [Account] ([gmail], [password])\n" +
+                         "VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, a.getGmail());
+            statement.setString(2, a.getPassword());
+            statement.executeUpdate();
+        }catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+    }
 }

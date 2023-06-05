@@ -20,7 +20,16 @@
                     <td><input type="text" name="gmail" id="loginbox" placeholder="Gmail" autofocus required></td>
                 </tr>
                 <tr>                   
-                    <td><input type="text" name="pass" id="loginbox" placeholder="Password" required></td>
+                    <td><input type="password" name="pass" id="loginbox" placeholder="Password" required></td>
+                </tr>
+                <tr>
+                    <td>
+                        <i style="color: red;">
+                            <% if(request.getAttribute("error") != null){ %>
+                                <%= request.getAttribute("error").toString() %>
+                            <% } %>
+                        </i>   
+                    </td>
                 </tr>
                 <tr>
                     <td><input type="button" value="Login Now"></td>
