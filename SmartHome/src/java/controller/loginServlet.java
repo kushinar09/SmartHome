@@ -72,19 +72,23 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String gmail = request.getParameter("gmail");
+        String email = request.getParameter("email");
         String pass = request.getParameter("pwd");
         ConnectDAO cd = new ConnectDAO();
-
-        if (!cd.getPwdByGmail(gmail).equals("")) {
-            if (pass.equals(cd.getPwdByGmail(gmail))) {
+        if (email.equals("")) {
+            request.setAttribute("error", "Enter your email and password");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+        if (!cd.getPwdByEmail(email).equals("")) {
+            if (pass.equals(cd.getPwdByEmail(email))) {
                 response.sendRedirect("home.jsp");
             } else {
                 request.setAttribute("error", "Password is incorrect");
+                request.setAttribute("email", email);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } else {
-            request.setAttribute("error", "Gmail is incorrect");
+            request.setAttribute("error", "Email is incorrect");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 

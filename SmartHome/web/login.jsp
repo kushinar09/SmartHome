@@ -19,16 +19,27 @@
                 <div class="screen__content">
                     <form action="login" class="login" method="post">
                         <div class="login__field">
-                            <i class="login__icon fas fa-user"></i>
-                            <input type="text" class="login__input" name="gmail" placeholder="Email">
+                            <i class="login__icon fas fa-envelope"></i>
+                            <input type="text" class="login__input" name="email" placeholder="Email" value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>">
                         </div>
                         <div class="login__field">
                             <i class="login__icon fas fa-lock"></i>
                             <input type="password" class="login__input" name="pwd" placeholder="Password">
                         </div>
-                        <button class="button login__submit" type="submit">
+                        <div>
+                            <i style="color: red; font-size: 0.85rem;">
+                                <% if(request.getAttribute("error") != null){ %>
+                                <%= request.getAttribute("error").toString() %>
+                                <% } %>
+                            </i>
+                        </div>
+                        <button class="button login__submit">
                             <span class="button__text">Log In Now</span>
+                            <i class="button__icon fas fa-sign-in-alt" style='font-size:24px'></i>
                         </button>
+                        <p class="login-callout">
+                            <a href="register.jsp">Create an account</a>.
+                        </p>
                     </form>
                     <div class="social-login">
                         <div class="social-icons">

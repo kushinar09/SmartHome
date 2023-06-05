@@ -23,19 +23,20 @@
                         <input type="text" class="register__input" name="username" placeholder="User name">
                     </div>
                     <div class="register__field">
-                        <i class="register__icon fas fa-lock"></i>
-                        <input type="text" class="register__input" name="gmail" placeholder="Gmail">
+                        <i class="register__icon fas fa-envelope"></i>
+                        <input type="text" class="register__input" name="email" placeholder="Email">
                     </div>
                     <div class="register__field">
-                        <i class="register__icon fas fa-user"></i>
+                        <i class="register__icon fas fa-key"></i>
                         <input type="password" class="register__input" name="pwd" placeholder="Password">
                     </div>
                     <div class="register__field">
-                        <i class="register__icon fas fa-lock"></i>
+                        <i class="register__icon fas fa-key"></i>
                         <input type="password" class="register__input" name="cfpwd" placeholder="Confirm Password">
                     </div>
                     <button class="button register__submit">
                         <span class="button__text">CONTINUE</span>
+                        <i class="button__icon fas fa-angle-double-right" style='font-size:24px'></i>
                     </button>
                 </form>               
             </div>

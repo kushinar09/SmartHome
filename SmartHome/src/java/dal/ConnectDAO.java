@@ -14,11 +14,11 @@ import model.Account;
  * @author FR
  */
 public class ConnectDAO extends DBContext {
-    public String getPwdByGmail(String gmail){
+    public String getPwdByEmail(String email){
         try{
-            String sql = "SELECT * FROM [Account] WHERE [gmail] = ?";
+            String sql = "SELECT * FROM [Account] WHERE [email] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, gmail);
+            statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
             if(rs.next()){              
                 return rs.getString("password");
@@ -31,9 +31,9 @@ public class ConnectDAO extends DBContext {
     
     public int checkAccount(Account a){
         try{
-            String sql = "SELECT * FROM [Account] WHERE [gmail] = ?";
+            String sql = "SELECT * FROM [Account] WHERE [email] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, a.getGmail());
+            statement.setString(1, a.getEmail());
             ResultSet rs = statement.executeQuery();
             if(rs.next()){
                 return rs.getInt("id");
@@ -53,7 +53,7 @@ public class ConnectDAO extends DBContext {
             if(rs.next()){
                 Account a = new Account();
                 a.setId(rs.getInt("id"));
-                a.setGmail(rs.getString("gmail"));
+                a.setEmail(rs.getString("email"));
                 a.setPassword(rs.getString("password"));
             }
         }catch(SQLException ex){
@@ -62,16 +62,16 @@ public class ConnectDAO extends DBContext {
         return null;
     }
     
-    public Account getAccountByGmail(String gmail){
+    public Account getAccountByEmail(String email){
         try{
-            String sql = "SELECT FROM [Account] WHERE [gmail] = ?";
+            String sql = "SELECT FROM [Account] WHERE [email] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, gmail);
+            statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
             if(rs.next()){
                 Account a = new Account();
                 a.setId(rs.getInt("id"));
-                a.setGmail(rs.getString("gmail"));
+                a.setEmail(rs.getString("email"));
                 a.setPassword(rs.getString("password"));
             }
         }catch(SQLException ex){
@@ -82,10 +82,10 @@ public class ConnectDAO extends DBContext {
     
     public void insertAccount(Account a){
         try{
-            String sql = "INSERT INTO [Account] ([gmail], [password])\n" +
+            String sql = "INSERT INTO [Account] ([email], [password])\n" +
                          "VALUES (?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, a.getGmail());
+            statement.setString(1, a.getEmail());
             statement.setString(2, a.getPassword());
             statement.executeUpdate();
         }catch(SQLException ex){

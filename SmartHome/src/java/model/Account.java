@@ -10,7 +10,7 @@ package model;
  */
 public class Account {
     private int id;
-    private String gmail;
+    private String email;
     private String password;
 
     public Account() {
@@ -24,12 +24,12 @@ public class Account {
         this.id = id;
     }
 
-    public String getGmail() {
-        return gmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setGmail(String gmail) {
-        this.gmail = gmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
