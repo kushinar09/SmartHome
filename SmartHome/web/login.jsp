@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>Branch - Sign in</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/logincss.css">
     </head>
@@ -28,8 +28,8 @@
                         </div>
                         <div>
                             <i style="color: red; font-size: 0.85rem;">
-                                <% if(request.getAttribute("error") != null){ %>
-                                <%= request.getAttribute("error").toString() %>
+                                <% if(request.getAttribute("errorLog") != null){ %>
+                                <%= request.getAttribute("errorLog").toString() %>
                                 <% } %>
                             </i>
                         </div>

@@ -5,7 +5,6 @@
 
 package controller;
 
-import dal.ConnectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Account;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name="RegisterServlet", urlPatterns={"/register"})
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name="GetInfoServlet", urlPatterns={"/getinfo"})
+public class GetInfoServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +35,10 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");  
+            out.println("<title>Servlet GetInfoServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet GetInfoServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,32 +68,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String user = request.getParameter("username");
-        String email = request.getParameter("email");
-        String pwd = request.getParameter("pwd");
-        String cfpwd = request.getParameter("cfpwd");
-        ConnectDAO cd = new ConnectDAO();
-        CheckValid cv = new CheckValid();
-        
-        if(!cv.checkEmail(email)){
-            request.setAttribute("errorReg", "Please re-enter a valid Email address");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }else if(cd.checkEmailExist(email)){
-            request.setAttribute("errorReg", "This Email already in use");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
-        else if(!cv.checkPwdAndCf(pwd, cfpwd)){
-            request.setAttribute("errorReg", "The Password confirmation does not match");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }else{
-            Account a = new Account();
-            a.setId(0);
-            a.setUsername(user);
-            a.setEmail(email);
-            a.setPassword(pwd);
-            request.setAttribute("Account", a);
-            request.getRequestDispatcher("getinfo.jsp").forward(request, response);
-        }
+        response.sendRedirect("home.jsp");
     }
 
     /** 

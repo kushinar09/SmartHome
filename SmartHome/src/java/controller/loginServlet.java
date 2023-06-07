@@ -76,19 +76,19 @@ public class LoginServlet extends HttpServlet {
         String pass = request.getParameter("pwd");
         ConnectDAO cd = new ConnectDAO();
         if (email.equals("")) {
-            request.setAttribute("error", "Enter your email and password");
+            request.setAttribute("errorLog", "Enter your email and password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         if (!cd.getPwdByEmail(email).equals("")) {
             if (pass.equals(cd.getPwdByEmail(email))) {
                 response.sendRedirect("home.jsp");
             } else {
-                request.setAttribute("error", "Password is incorrect");
+                request.setAttribute("errorLog", "Password is incorrect");
                 request.setAttribute("email", email);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } else {
-            request.setAttribute("error", "Email is incorrect");
+            request.setAttribute("errorLog", "Email is incorrect");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
