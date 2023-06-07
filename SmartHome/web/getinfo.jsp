@@ -36,16 +36,20 @@
                                 <input type="text" class="getinfo__input" name="lastname" placeholder="Last Name" required>
                             </div>
                         </div>
-                        <div class="getinfo__field">
+                        <div class="getinfo__field gender">
                             <i class="getinfo__icon fas fa-venus-mars"></i>
                             <div class="row">
-                                <div class="col-4 getinfo__field__gender">
+                                <div class="col-3 getinfo__field__gender">
                                     <input type="radio" class="getinfo__input input__radio" name="gender" id="male" value="male" checked>
-                                    <label for="male">Male</label>
+                                    <label for="male" class="label__gender">Male</label>
                                 </div>
-                                <div class="col-4 getinfo__field__gender">
+                                <div class="col-3 getinfo__field__gender">
                                     <input type="radio" class="getinfo__input input__radio" name="gender" id="female" value="female">
-                                    <label for="female">Female</label>
+                                    <label for="female" class="label__gender">Female</label>
+                                </div>
+                                <div class="col-3 getinfo__field__gender">
+                                    <input type="radio" class="getinfo__input input__radio" name="gender" id="other" value="other">
+                                    <label for="other" class="label__gender">Other</label>
                                 </div>
                             </div>
                         </div>
@@ -55,12 +59,18 @@
                         </div>
                         <div class="getinfo__field">
                             <i class="getinfo__icon fas fa-phone"></i>
-                            <input type="text" class="getinfo__input" name="phonenumber" placeholder="Phone Number"
-                                   required>
+                            <input type="text" class="getinfo__input" name="phonenumber" placeholder="Phone Number" required>
                         </div>
                         <div class="getinfo__field">
                             <i class="getinfo__icon fas fa-map-marker-alt"></i>
-                            <input type="text" class="getinfo__input" name="address" placeholder="Address" required>
+                            <input type="text" class="getinfo__input" name="address" placeholder="Address (Optional)">
+                        </div>
+                        <div style="width: 75%;">
+                            <i style="color: red; font-size: 0.9rem;">
+                                <% if(request.getAttribute("errorGi") != null){ %>
+                                <%= request.getAttribute("errorGi").toString() %>
+                                <% } %>
+                            </i>
                         </div>
                         <button class="button getinfo__submit">
                             <span class="button__text">REGISTER</span>

@@ -22,4 +22,15 @@ public class CheckValid {
     public boolean checkPwdAndCf(String pwd, String cfpwd){
         return pwd.equals(cfpwd);
     }
+    
+    public boolean checkPhone(String phone){
+        String EMAIL_REGEX = "^[(+84)(84)0]+[135789]+([0-9]{8})$";
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        Matcher match = pattern.matcher(phone);
+        return match.matches();
+    }
+    
+    public String fixString(String str){
+        return str.trim();
+    }
 }

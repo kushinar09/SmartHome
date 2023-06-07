@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Account;
+import model.Customer;
 
 /**
  *
@@ -30,6 +31,21 @@ public class ConnectDAO extends DBContext {
         return "";
     }
 
+    public boolean checkPhoneCusExist(String phone){
+        try {
+            String sql = "SELECT * FROM [Customer] WHERE [phone] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, phone);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+    
     public boolean checkEmailExist(String email) {
         try {
             String sql = "SELECT * FROM [Account] WHERE [email] = ?";
@@ -123,6 +139,22 @@ public class ConnectDAO extends DBContext {
             statement.setString(1, a.getUsername());
             statement.setString(2, a.getEmail());
             statement.setString(3, a.getPassword());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public void insertCustomer(Customer c) {
+        try {
+            String sql = "INSERT INTO Customer ([name], [gender], [dob], [phone], [address])\n" 
+                    + "VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, c.getName());
+            statement.setString(2, c.getGender());
+            statement.setDate(3, c.getDob());
+            statement.setString(4, c.getPhone());
+            statement.setString(5, c.getAddress());
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

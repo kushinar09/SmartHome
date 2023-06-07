@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Account;
 
 /**
@@ -70,12 +71,14 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String user = request.getParameter("username");
-        String email = request.getParameter("email");
-        String pwd = request.getParameter("pwd");
-        String cfpwd = request.getParameter("cfpwd");
         ConnectDAO cd = new ConnectDAO();
         CheckValid cv = new CheckValid();
+        
+        String user = cv.fixString(request.getParameter("username"));
+        String email = cv.fixString(request.getParameter("email"));
+        String pwd = request.getParameter("pwd");
+        String cfpwd = request.getParameter("cfpwd");
+        
         
         if(!cv.checkEmail(email)){
             request.setAttribute("errorReg", "Please re-enter a valid Email address");
@@ -93,8 +96,9 @@ public class RegisterServlet extends HttpServlet {
             a.setUsername(user);
             a.setEmail(email);
             a.setPassword(pwd);
-            request.setAttribute("Account", a);
-            request.getRequestDispatcher("getinfo.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            session.setAttribute("Account", a);
+            response.sendRedirect("getinfo.jsp");
         }
     }
 

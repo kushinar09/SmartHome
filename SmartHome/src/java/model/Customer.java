@@ -10,7 +10,7 @@ import java.sql.Date;
  *
  * @author FR
  */
-public class Info {
+public class Customer {
 
     private int id;
     private String name;
@@ -19,7 +19,7 @@ public class Info {
     private String phone;
     private String address;
 
-    public Info() {
+    public Customer() {
     }
 
     public int getId() {
