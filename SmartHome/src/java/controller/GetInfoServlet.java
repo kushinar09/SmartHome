@@ -68,7 +68,15 @@ public class GetInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.sendRedirect("home.jsp");
+        String fname = request.getParameter("firstname");
+        String lname = request.getParameter("lastname");
+        String name = fname + " " + lname;
+        
+        String dob = request.getParameter("dob");
+        String phone = request.getParameter("phonenumber");
+        String address = request.getParameter("address");
+        
+        
     }
 
     /** 

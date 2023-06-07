@@ -27,14 +27,26 @@
                 <div class="screen__content">
                     <form class="getinfo" action="getinfo" method="post">
                         <div class="row inputname">
-                            <div class="getinfo__field getinfo__inputname col-6">
+                            <div class="getinfo__field col-6" id="getinfo__inputname">
                                 <i class="getinfo__icon fas fa-address-book"></i>
-                                <input type="text" class="getinfo__input" name="firstname" placeholder="First Name"
-                                       required>
+                                <input type="text" class="getinfo__input" name="firstname" placeholder="First Name" required>
                             </div>
-                            <div class="getinfo__field getinfo__inputname col-6">
+                            <div class="getinfo__field col-6" id="getinfo__inputname">
                                 <i class="getinfo__icon far fa-address-book"></i>
                                 <input type="text" class="getinfo__input" name="lastname" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        <div class="getinfo__field">
+                            <i class="getinfo__icon fas fa-venus-mars"></i>
+                            <div class="row">
+                                <div class="col-4 getinfo__field__gender">
+                                    <input type="radio" class="getinfo__input input__radio" name="gender" id="male" value="male" checked>
+                                    <label for="male">Male</label>
+                                </div>
+                                <div class="col-4 getinfo__field__gender">
+                                    <input type="radio" class="getinfo__input input__radio" name="gender" id="female" value="female">
+                                    <label for="female">Female</label>
+                                </div>
                             </div>
                         </div>
                         <div class="getinfo__field">
