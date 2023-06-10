@@ -24,7 +24,8 @@
                         </div>
                         <div class="login__field">
                             <i class="login__icon fas fa-lock"></i>
-                            <input type="password" class="login__input" name="pwd" placeholder="Password">
+                            <input type="password" class="login__input" id="pwd" name="pwd" placeholder="Password">
+                            <i style="cursor: pointer; right: 64px" class="fas fa-eye" id="eye" onclick="show()"></i>
                         </div>
                         <div>
                             <i style="color: red; font-size: 0.85rem;">
@@ -37,7 +38,7 @@
                             <span class="button__text">Log In Now</span>
                             <i class="button__icon fas fa-sign-in-alt" style='font-size:24px'></i>
                         </button>
-                        <p class="login-callout">
+                        <p class="login__callout">
                             <a href="register.jsp">Create an account</a>.
                         </p>
                     </form>
@@ -57,5 +58,6 @@
                 </div>
             </div>
         </div>
+        <script src="js/myscript.js"></script>
     </body>
 </html>

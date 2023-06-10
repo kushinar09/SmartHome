@@ -133,8 +133,8 @@ body {
 .getinfo__field__gender{
    font-weight: bold;
    margin-top: 7px;
-   margin-left: 30px;
-   text-align: left;
+   margin-left: 20px;
+   text-align: center;
 }
 
 .gender{

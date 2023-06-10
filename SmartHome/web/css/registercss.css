@@ -160,6 +160,16 @@ body {
     color: #7875B5;
 }
 
+.register__callout a{
+    font-weight: bold;
+    color: #6848cc;
+    box-sizing: border-box;
+    font-size: 0.8rem;
+    position: relative;
+    top: 4px;
+    right: -8px;
+}
+
 .social-register {
     position: absolute;
     height: 140px;

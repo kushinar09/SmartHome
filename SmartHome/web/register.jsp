@@ -45,6 +45,9 @@
                             <span class="button__text">CONTINUE</span>
                             <i class="button__icon fas fa-angle-double-right" style='font-size:24px'></i>
                         </button>
+                        <p class="register__callout">
+                            <a href="login.jsp">Have an account?</a>.
+                        </p>
                     </form>               
                 </div>
                 <div class="screen__background">
@@ -55,5 +58,6 @@
                 </div>
             </div>
         </div>
+        <script src="js/myscript.js"></script>                    
     </body>
 </html>
