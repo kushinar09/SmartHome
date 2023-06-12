@@ -12,6 +12,6 @@
         <title>Branch</title>
     </head>
     <body>
-        <h1>Welcome bro!</h1>
+        <%@include file="header.jsp" %>
     </body>
 </html>
