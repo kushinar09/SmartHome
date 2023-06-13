@@ -79,8 +79,8 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("errorLog", "Enter your email and password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-        if (!cd.getPwdByEmail(email).equals("")) {
-            if (pass.equals(cd.getPwdByEmail(email))) {
+        if (!cd.getPwdByEmailCustomer(email).equals("")) {
+            if (pass.equals(cd.getPwdByEmailCustomer(email))) {
                 response.sendRedirect("home.jsp");
             } else {
                 request.setAttribute("errorLog", "Password is incorrect");

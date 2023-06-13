@@ -18,7 +18,7 @@
         <header id="header" class="container">
             <div class="main-header flex-row" style="height: 100px;">
                 <div class="main-left logo flex-row">
-                    <a href="#">
+                    <a href="home.jsp">
                         <img class="logo-img" src="img/logo/logo-no-background.png"
                              alt="Cung cấp Thiết bị điện nhà thông minh - WINDJUSTER Smart Home">
                     </a>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="main-right account flex-row">
                     <div class="content flex-row">
-                        <a href="#" class="login" style="color: white;">
+                        <a href="login.jsp" class="login" style="color: white;">
                             <i class="fas fa-user"></i>
                             <span> Đăng nhập / Đăng ký </span>
                         </a>

@@ -15,10 +15,10 @@ import model.Customer;
  * @author FR
  */
 public class ConnectDAO extends DBContext {
-
-    public String getPwdByEmail(String email) {
+    private int id_cus = 1;
+    public String getPwdByEmailCustomer(String email) {
         try {
-            String sql = "SELECT * FROM [Account] WHERE [email] = ?";
+            String sql = "SELECT * FROM [ACCOUNT_CUS] WHERE [email] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
@@ -31,9 +31,9 @@ public class ConnectDAO extends DBContext {
         return "";
     }
 
-    public boolean checkPhoneCusExist(String phone){
+    public boolean checkPhoneCustomerExist(String phone){
         try {
-            String sql = "SELECT * FROM [Customer] WHERE [phone] = ?";
+            String sql = "SELECT * FROM [CUSTOMER] WHERE [phoneNo] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, phone);
             ResultSet rs = statement.executeQuery();
@@ -46,9 +46,9 @@ public class ConnectDAO extends DBContext {
         return false;
     }
     
-    public boolean checkEmailExist(String email) {
+    public boolean checkEmailCustomerExist(String email) {
         try {
-            String sql = "SELECT * FROM [Account] WHERE [email] = ?";
+            String sql = "SELECT * FROM [ACCOUNT_CUS] WHERE [email] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
@@ -61,9 +61,9 @@ public class ConnectDAO extends DBContext {
         return false;
     }
 
-    public int checkAccount(Account a) {
+    public int getIdByAccountCustomer(Account a) {
         try {
-            String sql = "SELECT * FROM [Account] WHERE [email] = ?";
+            String sql = "SELECT * FROM [ACCOUNT_CUS] WHERE [email] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, a.getEmail());
             ResultSet rs = statement.executeQuery();
@@ -76,9 +76,9 @@ public class ConnectDAO extends DBContext {
         return -1;
     }
 
-    public Account getAccountById(int id) {
+    public Account getAccountCustomerById(int id) {
         try {
-            String sql = "SELECT FROM [Account] WHERE [id] = ?";
+            String sql = "SELECT FROM [ACCOUNT_CUS] WHERE [id] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -95,9 +95,9 @@ public class ConnectDAO extends DBContext {
         return null;
     }
 
-    public Account getAccountByEmail(String email) {
+    public Account getAccountCustomerByEmail(String email) {
         try {
-            String sql = "SELECT FROM [Account] WHERE [email] = ?";
+            String sql = "SELECT FROM [ACCOUNT_CUS] WHERE [email] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
@@ -114,9 +114,9 @@ public class ConnectDAO extends DBContext {
         return null;
     }
 
-    public int getLastId() {
+    public int getLastIdCustomer() {
         try {
-            String sql = "SELECT TOP 1 * FROM [Account] ORDER BY [id] DESC";
+            String sql = "SELECT TOP 1 * FROM [ACCOUNT_CUS] ORDER BY [id] DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
@@ -128,9 +128,9 @@ public class ConnectDAO extends DBContext {
         return 1;
     }
 
-    public void insertAccount(Account a) {
+    public void insertAccountCustomer(Account a) {
         try {
-            String sql = "INSERT INTO [Account] ([username], [email], [password])\n"
+            String sql = "INSERT INTO [ACCOUNT_CUS] ([username], [email], [password])\n"
                     + "VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
 //            int id = getLastId();
@@ -147,14 +147,19 @@ public class ConnectDAO extends DBContext {
     
     public void insertCustomer(Customer c) {
         try {
-            String sql = "INSERT INTO Customer ([name], [gender], [dob], [phone], [address])\n" 
-                    + "VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO CUSTOMER ([id_cus], [name], [gender], [dob], [phone], [address])\n" 
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, c.getName());
-            statement.setString(2, c.getGender());
-            statement.setDate(3, c.getDob());
-            statement.setString(4, c.getPhone());
-            statement.setString(5, c.getAddress());
+            String id_cust = "CUS" + id_cus;
+            statement.setString(1, id_cust);
+            statement.setString(2, c.getName());
+            statement.setString(3, c.getGender());
+            statement.setDate(4, c.getDob());
+            statement.setString(5, c.getPhone());
+            statement.setString(6, c.getAddress());
+            int id = getLastIdCustomer();
+            id++;
+            statement.setInt(7, id);
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

@@ -83,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
         if(!cv.checkEmail(email)){
             request.setAttribute("errorReg", "Please re-enter a valid Email address");
             request.getRequestDispatcher("register.jsp").forward(request, response);
-        }else if(cd.checkEmailExist(email)){
+        }else if(cd.checkEmailCustomerExist(email)){
             request.setAttribute("errorReg", "This Email already in use");
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }

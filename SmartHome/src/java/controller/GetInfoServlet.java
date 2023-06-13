@@ -99,7 +99,7 @@ public class GetInfoServlet extends HttpServlet {
                 Account a = (Account) session.getAttribute("Account");
                 ConnectDAO cd = new ConnectDAO();
                 try {
-                    cd.insertAccount(a);
+                    cd.insertAccountCustomer(a);
                     cd.insertCustomer(c);
                     response.sendRedirect("home.jsp");
                 } catch (IOException e) {
