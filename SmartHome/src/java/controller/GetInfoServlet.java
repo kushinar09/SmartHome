@@ -88,7 +88,7 @@ public class GetInfoServlet extends HttpServlet {
 
         if (cv.checkPhone(phone)) {
             Customer c = new Customer();
-            c.setId(0);
+            c.setId("");
             c.setName(name);
             c.setGender(gender);
             c.setDob(dob);
@@ -97,10 +97,12 @@ public class GetInfoServlet extends HttpServlet {
             HttpSession session = request.getSession(false);
             if (session != null) {
                 Account a = (Account) session.getAttribute("Account");
+                session.removeAttribute("Account");
                 ConnectDAO cd = new ConnectDAO();
                 try {
                     cd.insertAccountCustomer(a);
                     cd.insertCustomer(c);
+                    System.err.println("404");
                     response.sendRedirect("home.jsp");
                 } catch (IOException e) {
                     System.err.println(e.getMessage());

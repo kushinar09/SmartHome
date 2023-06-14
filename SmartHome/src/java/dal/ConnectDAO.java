@@ -15,7 +15,9 @@ import model.Customer;
  * @author FR
  */
 public class ConnectDAO extends DBContext {
+
     private int id_cus = 1;
+
     public String getPwdByEmailCustomer(String email) {
         try {
             String sql = "SELECT * FROM [ACCOUNT_CUS] WHERE [email] = ?";
@@ -31,7 +33,7 @@ public class ConnectDAO extends DBContext {
         return "";
     }
 
-    public boolean checkPhoneCustomerExist(String phone){
+    public boolean checkPhoneCustomerExist(String phone) {
         try {
             String sql = "SELECT * FROM [CUSTOMER] WHERE [phoneNo] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -45,7 +47,7 @@ public class ConnectDAO extends DBContext {
         }
         return false;
     }
-    
+
     public boolean checkEmailCustomerExist(String email) {
         try {
             String sql = "SELECT * FROM [ACCOUNT_CUS] WHERE [email] = ?";
@@ -144,22 +146,28 @@ public class ConnectDAO extends DBContext {
             System.err.println(ex.getMessage());
         }
     }
-    
+
     public void insertCustomer(Customer c) {
         try {
-            String sql = "INSERT INTO CUSTOMER ([id_cus], [name], [gender], [dob], [phone], [address])\n" 
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO [dbo].[CUSTOMER]([id_cus], [name], [gender], [dob], [phoneNo], [address], [id_acc])\n"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             String id_cust = "CUS" + id_cus;
+            id_cus++;
             statement.setString(1, id_cust);
             statement.setString(2, c.getName());
-            statement.setString(3, c.getGender());
+            String gen = c.getGender();
+            if (gen.equals("1")) {
+                statement.setString(3, "M");
+            } else {
+                statement.setString(3, "F");
+            }
             statement.setDate(4, c.getDob());
             statement.setString(5, c.getPhone());
             statement.setString(6, c.getAddress());
-            int id = getLastIdCustomer();
-            id++;
+            int id = getLastIdCustomer();        
             statement.setInt(7, id);
+            id++;
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
