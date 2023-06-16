@@ -173,4 +173,33 @@ public class ConnectDAO extends DBContext {
             System.err.println(ex.getMessage());
         }
     }
+    
+    public void testPost (String str){
+        try {
+            String sql = "INSERT INTO [dbo].[TEST]\n"
+                    + "VALUES (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);    
+            statement.setString(1, str);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public String testGet (int masp){
+        try {
+            String sql = "SELECT * FROM [dbo].[TEST]\n"
+                    + "WHERE masp = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);    
+            statement.setInt(1, masp);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()){
+                String s = rs.getString("string");
+                return s;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return "";
+    }
 }

@@ -8,17 +8,47 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html,
 body {
+    font-family: sans-serif;
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
+.head{
+    width: 100%
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 15, 2023, 3:25:20 AM
+    Author     : FR
+*/
+* {
+    box-sizing: border-box;
+}
+
 .header-inc {
+    position: sticky;
+    top: 0;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -29,114 +59,42 @@ body {
     color: white;
 }
 
-/*.slider-container {
-    height: 100%;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-}
-
-.menu {
-    position: absolute;
-    left: 0;
-    z-index: 900;
-    width: 100%;
-    bottom: 0;
-}
-
-.menu label {
-    cursor: pointer;
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: #fff;
-    border-radius: 50px;
-    margin: 0 .2em 1em;
-    transition: all .3s ease;
-
-    &:hover {
-        background: red;
-    }
-}
-
-.slide {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    z-index: 10;
-    padding: 8em 1em 0;
-    background-size: cover;
-    background-position: 50% 50%;
-    transition: left 0s .75s;
-}
-
-[id^="slide"]:checked+.slide {
-    left: 0;
-    z-index: 100;
-    transition: left .65s ease-out;
-}
-
-.slide-1 {
-    background-image: url("../img/ads-img/1.png");
-}
-
-.slide-2 {
-    background-image: url("../img/ads-img/2.jpg");
-}
-
-.slide-3 {
-    background-image: url("../img/ads-img/3.jpg");
-}
-
-.slide-4 {
-    background-image: url("../img/ads-img/4.jpg");
-}
-
-.slide-5 {
-    background-image: url("../img/ads-img/5.jpg");
-}
-
-.slide-6 {
-    background-image: url("../img/ads-img/6.jpg");
-}*/
-
-.slider{
+.slider {
     background-color: #D9DFEF;
     width: 100%;
     height: auto;
     /*border-radius: 10px;*/
     overflow: hidden;
+    padding: 10px 0 30px;
 }
 
-.slides{
+.slides {
     width: 500%;
     height: 500px;
     display: flex;
 }
 
-.slides input{
+.slides input {
     display: none;
 }
 
-.slide{
+.slide {
     width: 20%;
     transition: 1s;
     text-align: center;
 }
 
-.slide img{
+.slide img {
     height: 100%;
     width: auto;
-        
+
 }
 
 
 /*css for manual slide navigation*/
 
-.navigation-manual{
+.navigation-manual {
+    visibility: hidden;
     position: absolute;
     width: 100%;
     margin-top: -40px;
@@ -144,7 +102,7 @@ body {
     justify-content: center;
 }
 
-.manual-btn{
+.manual-btn {
     border: 2px solid #cc2f21;
     padding: 5px;
     border-radius: 10px;
@@ -152,34 +110,31 @@ body {
     transition: 1s;
 }
 
-.manual-btn:not(:last-child){
+.manual-btn:not(:last-child) {
     margin-right: 40px;
 }
 
-.manual-btn:hover{
+.manual-btn:hover {
     background: #e39c96;
 }
 
-#radio1:checked ~ .first{
-    margin-left: 105px;
+#radio1:checked~.first {
+    margin-left: 0;
 }
 
-#radio2:checked ~ .first{
+#radio2:checked~.first {
     margin-left: -20%;
 }
 
-#radio3:checked ~ .first{
+#radio3:checked~.first {
     margin-left: -40%;
 }
 
-#radio4:checked ~ .first{
+#radio4:checked~.first {
     margin-left: -60%;
 }
 
-#radio5:checked ~ .first{
+#radio5:checked~.first {
     margin-left: -80%;
 }
 
-#radio6:checked ~ .first{
-    margin-left: -100%;
-}
