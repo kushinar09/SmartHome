@@ -4,6 +4,7 @@
  */
 package dal;
 
+import dal.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,6 +34,21 @@ public class ConnectDAO extends DBContext {
         return "";
     }
 
+    public String getUserByEmail(String email){
+        try {
+            String sql = "SELECT * FROM [ACCOUNT_CUS] WHERE [email] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getString("username");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
+    
     public boolean checkPhoneCustomerExist(String phone) {
         try {
             String sql = "SELECT * FROM [CUSTOMER] WHERE [phoneNo] = ?";

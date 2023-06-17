@@ -29,11 +29,11 @@
                 </div>
                 <div class="main-right account flex-row">
                     <div class="content flex-row">
-                        <a href="login.jsp" class="login" style="color: white;">
+<!--                        <a href="login.jsp" class="login" style="color: white;">
                             <i class="fas fa-user"></i>
                             <span> Đăng nhập / Đăng ký </span>
-                        </a>
-                        <div class="shopping">
+                        </a>-->
+                        <div class="shopping" style="">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </div>
                     </div>

@@ -12,8 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="prod?name=<%="Camera IMOU Ranger RC 4MP/5MP Gọi Điện Một Chạm"%>">Click here to post</a>
-        <br>
-        <a href="prod?id=<%="1"%>">Click here to get</a>
+        <div class="head">
+            <%@include file="header.jsp" %>
+        </div>
     </body>
 </html>
