@@ -33,4 +33,10 @@ public class CheckValid {
     public String fixString(String str){
         return str.trim();
     }
+    
+    
+    
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
 }

@@ -12,7 +12,7 @@
         <title>JSP Page</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/headercss.css">
+        <link rel="stylesheet" href="css/headercss.css?version=51">
     </head>
     <body>
         <header id="header" class="container">
@@ -29,11 +29,11 @@
                 </div>
                 <div class="main-right account flex-row">
                     <div class="content flex-row">
-<!--                        <a href="login.jsp" class="login" style="color: white;">
+                        <div class="login" style="width:60%; color: white; visibility: hidden">
                             <i class="fas fa-user"></i>
-                            <span> Đăng nhập / Đăng ký </span>
-                        </a>-->
-                        <div class="shopping" style="">
+                            <span id="user"> Đăng nhập / Đăng ký </span>
+                        </div>
+                        <div class="shopping">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </div>
                     </div>

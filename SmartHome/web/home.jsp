@@ -129,6 +129,34 @@
             <!--manual navigation end-->
         </div>
         <!--image slider end-->
+        <%
+        String username = null;
+        Cookie[] cookies = request.getCookies();
+        if(cookies !=null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("user")) username = cookie.getValue();
+            }
+        }
+        if (username != null) {
+        %>
+        <div class="user" style="width:60%; color: white;">
+            <i class="fas fa-user"></i>
+            <span id="acc"><%=username%></span>
+            <form action="logout" method="post">
+
+            </form>
+        </div>
+        <% 
+            } else { 
+        %>
+        <a href="login.jsp" class="user" style="width:60%; color: white;">
+            <i class="fas fa-user"></i>
+            <span id="acc"> Đăng nhập / Đăng ký </span>
+        </a>
+        <% 
+            } 
+        %> 
+
         <script type="text/javascript">
             var counter = 1;
             document.getElementById('radio' + counter).checked = true;
