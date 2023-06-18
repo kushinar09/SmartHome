@@ -35,28 +35,27 @@ public class ShowProduct extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             ConnectDAO cd = new ConnectDAO();
-            String name = request.getParameter("name");
-            String id = request.getParameter("id");
-            if (id != null) {
-                int masp;
-                try {
-                    masp = Integer.parseInt(id);
-                } catch (NumberFormatException e) {
-                    masp = 0;
-                }
-                String str = cd.testGet(masp);
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet ShowProduct</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Name of product: " + str + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-            } else {
-                cd.testPost(name);
-            }
+            String type = request.getParameter("type");
+//            if (id != null) {
+//                int masp;
+//                try {
+//                    masp = Integer.parseInt(id);
+//                } catch (NumberFormatException e) {
+//                    masp = 0;
+//                }
+//                String str = cd.testGet(masp);
+//                out.println("<!DOCTYPE html>");
+//                out.println("<html>");
+//                out.println("<head>");
+//                out.println("<title>Servlet ShowProduct</title>");
+//                out.println("</head>");
+//                out.println("<body>");
+//                out.println("<h1>Name of product: " + str + "</h1>");
+//                out.println("</body>");
+//                out.println("</html>");
+//            } else {
+//                cd.testPost(name);
+//            }
 
         }
     }
