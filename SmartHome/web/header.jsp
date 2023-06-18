@@ -29,7 +29,7 @@
                 </div>
                 <div class="main-right account flex-row">
                     <div class="content flex-row">
-                        <a href="#" class="login" style="color: white;">
+                        <a href="login.jsp" class="login" style="color: white;">
                             <i class="fas fa-user"></i>
                             <span> Đăng nhập / Đăng ký </span>
                         </a>
@@ -57,19 +57,19 @@
                                     <div class="fly-content">
                                         <ul class="fly-content-list">
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="#" class="fly-link">An Ninh & Giám Sát</a>
+                                                <a href="ProductServlet?type=<%=1%>" class="fly-link">An Ninh & Giám Sát</a>
                                             </li>
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="#" class="fly-link">Thiết Bị Smart Home</a>
+                                                <a href="ProductServlet?type=<%=2%>" class="fly-link">Thiết Bị Smart Home</a>
                                             </li>
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="#" class="fly-link">Đèn thông minh</a>
+                                                <a href="ProductServlet?type=<%=3%>" class="fly-link">Đèn thông minh</a>
                                             </li>
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="#" class="fly-link">Gia Dụng</a>
+                                                <a href="ProductServlet?type=<%=4%>" class="fly-link">Gia Dụng</a>
                                             </li>
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="#" class="fly-link">Chăm Sóc Cá Nhân</a>
+                                                <a href="ProductServlet?type=<%=5%>" class="fly-link">Chăm Sóc Cá Nhân</a>
                                             </li>
                                         </ul>
                                     </div>

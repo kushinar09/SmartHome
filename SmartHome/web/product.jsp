@@ -11,6 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="css/product.css?version=51">
+        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+        <%@taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     </head>
     <body>
         <div class="head">
@@ -27,13 +29,67 @@
                     </div>
                 </div>
                 <div class="flex-col medium-text-center  form-flat">
-                    <form class="woocommerce-ordering" method="get">
-                        <select name="orderby" class="orderby" aria-label="Đơn hàng của cửa hàng">
-                            <option value="sale">Thứ tự mức độ ưu đãi</option>
+                    <form class="woocommerce-ordering" action="ProductServlet" method="get">
+
+                        <select name="orderby" class="orderby" aria-label="Đơn hàng của cửa hàng" onchange='this.form.submit()'>
+                            <option value="none">Sắp xếp ...</option>
                             <option value="price-asc">Thứ tự theo giá: thấp đến cao</option>
                             <option value="price-desc">Thứ tự theo giá: cao xuống thấp</option>
+                            <option value="sale">Thứ tự mức độ ưu đãi</option>
                         </select>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="container">
+                <div class="product-content flex-row" style="justify-content: left">
+                    <c:forEach items="${requestScope.list}" var="product">
+                        <div class="item-product">
+                            <div class="item-product-content">
+                                <a href="detail?id=${product.id_prod}" class="flex-col">
+                                    <div class="box-img">
+                                        <div class="prd-img">
+                                            <img width="300" height="300" src="img/product/Camera-wifi-Ezviz-C6W-4MP-SUPER-HD-2K.jpg" alt="${product.name}" sizes="(max-width: 300px) 100vw, 300px"/>
+                                        </div>
+                                        <c:if test="${product.name == 'Bóng Đèn Rọi Spotlight Tapo L630 RGB Chuôi GU10'}">
+                                            <div class="out-of-stock-label">Hết hàng</div>
+                                        </c:if>
+                                    </div>
+                                    <div class="box-text">
+                                        <div>
+                                            <h5 class="product-name">${product.name}</h5>
+                                        </div>
+
+                                        <div class="price-wrapper" style="height: 30px">
+                                            <span class="price">
+                                                <c:if test="${product.promopercent != 0}">
+                                                    <del aria-hidden="true">
+                                                        <span class="woocommerce-Price-amount amount">
+                                                            <bdi><fmt:formatNumber type = "number" 
+                                                                              maxFractionDigits = "0" value = "${product.price}" />
+                                                                <span class="woocommerce-Price-currencySymbol">
+                                                                    ₫
+                                                                </span>
+                                                            </bdi>
+                                                        </span>
+                                                    </del>
+                                                </c:if>
+                                                <span class="woocommerce-Price-amount amount">
+                                                    <bdi><fmt:formatNumber type = "number" 
+                                                                      maxFractionDigits = "0" value = "${(product.price * (100 - product.promopercent) / 100)}" />
+                                                        <span class="woocommerce-Price-currencySymbol">
+                                                            ₫
+                                                        </span>
+                                                    </bdi>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

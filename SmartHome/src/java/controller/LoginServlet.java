@@ -2,27 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.User;
+package controller;
 
 import dal.ConnectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import model.Account;
-import model.Customer;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "GetInfoServlet", urlPatterns = {"/getinfo"})
-public class GetInfoServlet extends HttpServlet {
+@WebServlet(name = "loginServlet", urlPatterns = {"/login"})
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +38,10 @@ public class GetInfoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GetInfoServlet</title>");
+            out.println("<title>Servlet loginServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GetInfoServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet loginServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +59,7 @@ public class GetInfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
@@ -76,44 +73,31 @@ public class GetInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CheckValid cv = new CheckValid();
-        
-        String fname = cv.fixString(request.getParameter("firstname"));
-        String lname = cv.fixString(request.getParameter("lastname"));
-        String name = fname + " " + lname;
-        String gender = request.getParameter("gender");
-        Date dob = Date.valueOf(request.getParameter("dob"));
-        String phone = cv.fixString(request.getParameter("phonenumber"));
-        String address = cv.fixString(request.getParameter("address"));
-
-        if (cv.checkPhone(phone)) {
-            Customer c = new Customer();
-            c.setId("");
-            c.setName(name);
-            c.setGender(gender);
-            c.setDob(dob);
-            c.setPhone(phone);
-            c.setAddress(address);
-            HttpSession session = request.getSession(false);
-            if (session != null) {
-                Account a = (Account) session.getAttribute("Account");
-                session.removeAttribute("Account");
-                ConnectDAO cd = new ConnectDAO();
-                try {
-                    cd.insertAccountCustomer(a);
-                    cd.insertCustomer(c);
-                    System.err.println("404");
-                    response.sendRedirect("home.jsp");
-                } catch (IOException e) {
-                    System.err.println(e.getMessage());
-                }
-            } else {
-                response.sendRedirect("register.jsp");
-            }
-        }else{
-            request.setAttribute("errorGi", "invalid phone number");
-            request.getRequestDispatcher("getinfo.jsp").forward(request, response);
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pwd");
+        ConnectDAO cd = new ConnectDAO();
+        if (email.equals("")) {
+            request.setAttribute("errorLog", "Enter your email and password");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+        if (!cd.getPwdByEmailCustomer(email).equals("")) {
+            if (pass.equals(cd.getPwdByEmailCustomer(email))) {
+                String user = cd.getUserByEmail(email);
+                System.out.println("user: " + user);
+                Cookie loginCookie = new Cookie("user", user);
+                loginCookie.setMaxAge(15 * 60);
+                response.addCookie(loginCookie);
+                response.sendRedirect("home.jsp");
+            } else {
+                request.setAttribute("errorLog", "Password is incorrect");
+                request.setAttribute("email", email);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("errorLog", "Email is incorrect");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+
     }
 
     /**
@@ -125,5 +109,4 @@ public class GetInfoServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
