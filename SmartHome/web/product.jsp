@@ -47,6 +47,15 @@
                     <c:forEach items="${requestScope.list}" var="product">
                         <div class="item-product">
                             <div class="item-product-content">
+                                <c:if test="${product.promopercent != 0}">
+                                    <div class="badge-container absolute left top z-1">
+                                        <div class="callout badge badge-circle">
+                                            <div class="badge-inner secondary on-sale">
+                                                <span class="onsale">-${product.promopercent}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>
                                 <a href="detail?id=${product.id_prod}" class="flex-col">
                                     <div class="box-img">
                                         <div class="prd-img">

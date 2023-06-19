@@ -116,6 +116,7 @@ a:hover{
     margin-left: 0;
     margin-right: auto;
     background-color: #fff;
+    position: relative;
 }
 
 .price{
@@ -199,4 +200,57 @@ del span.amount {
     text-align: center;
     text-transform: uppercase;
     top: 40%;
+}
+
+.z-1 {
+    z-index: 1;
+}
+.left {
+    left: 0;
+}
+.top {
+    top: 0;
+}
+.absolute {
+    position: absolute!important;
+}
+.badge-container {
+    margin: 30px 0 0;
+}
+
+.badge-circle, .badge-outline {
+    margin-left: -0.4em;
+}
+.badge {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: table;
+    height: 2.8em;
+    pointer-events: none;
+    width: 2.8em;
+    z-index: 20;
+}
+
+.badge-inner.on-sale {
+    background-color: #f94747;
+}
+
+.badge-circle .badge-inner{
+    border-radius: 999px;
+}
+
+.badge-inner {
+    background-color: #446084;
+    color: #fff;
+    display: table-cell;
+    font-weight: bolder;
+    height: 100%;
+    line-height: .85;
+    padding: 2px;
+    text-align: center;
+    transition: background-color .3s,color .3s,border .3s;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 100%;
+    pointer-events: none;
 }
