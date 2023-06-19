@@ -61,7 +61,25 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
+    public String getNameByType(int type) {
+        try {
+
+            String sql = "SELECT * FROM TYPE_OF_PRODUCT WHERE [id_type] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, type);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                String str = rs.getString("type");
+                return str;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         // TODO code application logic here
         ProductDAO pd = new ProductDAO();

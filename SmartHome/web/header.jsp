@@ -18,15 +18,15 @@
         <div class="header-inc">
             <div class="main-header flex-row container" style="height: 100px;">
                 <div class="main-left logo flex-row">
-                    <a href="#">
+                    <a href="home.jsp">
                         <img class="logo-img" src="img/logo/logo-no-background.png"
                              alt="Cung cấp Thiết bị điện nhà thông minh - WINDJUSTER Smart Home">
                     </a>
                 </div>
-                <div class="main-center search flex-row">
+                <form class="main-center search flex-row" action="login" method="get">
                     <input class="search-field" type="text" name="" id="" placeholder="Bạn muốn tìm gì?">
                     <i class="fas fa-search" id="search" style="cursor: pointer;"></i>
-                </div>
+                </form>
                 <div class="main-right account flex-row">
                     <div class="content flex-row">
                         <a href="login.jsp" class="login" style="color: white;">

@@ -24,7 +24,7 @@
                     <h1 class="title-name">An ninh & Giám sát</h1>
                     <div class="current-pos">
                         <nav class="dir-home breadcrumbs uppercase">
-                            <a href="home.jsp" style="color: #b8fffe">Trang chủ</a> <span class="divider">/</span> An ninh &amp; Giám sát
+                            <a href="home.jsp" style="color: #b8fffe">Trang chủ</a> <span class="divider">/</span> <%= (String) request.getAttribute("list-title") %>
                         </nav>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                                 <a href="detail?id=${product.id_prod}" class="flex-col">
                                     <div class="box-img">
                                         <div class="prd-img">
-                                            <img width="300" height="300" src="img/product/Camera-wifi-Ezviz-C6W-4MP-SUPER-HD-2K.jpg" alt="${product.name}" sizes="(max-width: 300px) 100vw, 300px"/>
+                                            <img width="300" height="300" src="img/product/${product.image}" alt="${product.name}" sizes="(max-width: 300px) 100vw, 300px"/>
                                         </div>
                                         <c:if test="${product.name == 'Bóng Đèn Rọi Spotlight Tapo L630 RGB Chuôi GU10'}">
                                             <div class="out-of-stock-label">Hết hàng</div>

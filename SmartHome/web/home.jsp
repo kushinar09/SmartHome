@@ -94,7 +94,9 @@
         <% 
             } 
         %> 
-
+        <div>
+            <img src="img/product/camera-4g-ezviz-eb8-2k-3mp-dung-pin-17.jpeg" alt="alt"/>
+        </div>
         <script type="text/javascript">
             var counter = 1;
             document.getElementById('radio' + counter).checked = true;

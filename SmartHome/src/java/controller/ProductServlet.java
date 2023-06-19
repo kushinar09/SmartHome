@@ -68,7 +68,7 @@ public class ProductServlet extends HttpServlet {
         String order = request.getParameter("orderby");
         ProductDAO pd = new ProductDAO();
         Action act = new Action();
-        
+        String title = "";
         if (type != null) {
             int ty;
             try {
@@ -77,14 +77,16 @@ public class ProductServlet extends HttpServlet {
                 ty = 0;
             }
             list = pd.getListProductByType(ty);
+            title = pd.getNameByType(ty);
         }
-
+        
         if (order != null) {
             act.sortList(list, order); 
             request.setAttribute("order", order);
         }
         
         request.setAttribute("list", list);
+        request.setAttribute("list-title", title);
         request.getRequestDispatcher("product.jsp").forward(request, response);
     }
 
