@@ -1,0 +1,205 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 19, 2023, 3:58:25 PM
+    Author     : FR
+*/
+
+#main{
+    background-color: #fff;
+    position: relative;
+}
+main{
+    display: block;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.page-wrapper {
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+div {
+    display: block;
+}
+
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: black;
+    scroll-behavior: smooth;
+}
+
+.container-width, .full-width .ubermenu-nav, .container, .row {
+    max-width: 1170px;
+}
+
+.row {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+@media screen and (min-width: 850px){
+    .large-12{
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 850px){
+    .col:first-child .col-inner {
+        margin-left: auto;
+        margin-right: 0;
+    }
+}
+
+.col-inner {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 100%;
+}
+
+#section_1563985420 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.row .section {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.section {
+    align-items: center;
+    display: flex;
+    flex-flow: row;
+    min-height: auto;
+    position: relative;
+    width: 100%;
+}
+
+.bg-fill {
+    background-position: 50% 50%;
+    background-repeat: no-repeat!important;
+    background-size: cover!important;
+}
+.fill {
+    height: 100%;
+    left: 0;
+    margin: 0!important;
+    padding: 0!important;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.bottom, .fill {
+    bottom: 0;
+}
+.section-bg, .section-content {
+    width: 100%;
+}
+.section-bg {
+    overflow: hidden;
+}
+.relative {
+    position: relative!important;
+}
+.section-content {
+    z-index: 1;
+}
+.row .row:not(.row-collapse) {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 0;
+    padding-right: 0;
+    width: auto;
+}
+.row {
+    max-width: 1170px;
+}
+
+.col{
+    margin: 0;
+    padding: 0 15px 30px;
+    position: relative;
+    width: 100%;
+}
+
+@media screen and (min-width: 850px){
+    .col:first-child .col-inner {
+        margin-left: auto;
+        margin-right: 0;
+    }
+}
+
+.col-inner {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, .heading-font {
+    color: #000;
+}
+.h1, .h2, h1, h2 {
+    line-height: 1.3;
+}
+.h1, h1 {
+    font-size: 2.2em;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeSpeed;
+    margin-bottom: 0.5em;
+    margin-top: 0;
+    width: 100%;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1.3em;
+}
+
+.h2, h2 {
+    font-size: 1.8em;
+}
+
+.list-intro{
+    margin-bottom: 1.3em;
+    margin-top: 0;
+    padding: 0;
+    list-style: disc;
+}
+
+.list-intro li{
+    margin-left: 1.3em;
+    margin-bottom: 0.6em;
+    list-style: disc;
+}
+
+.trang-chu{
+    color: #654995;
+}
+
+.trang-chu:hover{
+    color: green;
+}

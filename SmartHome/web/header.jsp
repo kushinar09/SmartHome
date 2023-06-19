@@ -12,7 +12,7 @@
         <title>JSP Page</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/headercss.css?version=51">
+        <link rel="stylesheet" href="css/headercss.css?version=52">
     </head>
     <body>
         <div class="header-inc">
@@ -76,7 +76,7 @@
                                 </div>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
-                                <a href="#" class="nav-top-link">GIỚI THIỆU</a>
+                                <a href="intro.jsp" class="nav-top-link">GIỚI THIỆU</a>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
                                 <a href="#" class="nav-top-link">TIN TỨC</a>

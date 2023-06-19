@@ -13,7 +13,7 @@
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="css/homecss.css?version=51">
+        <link rel="stylesheet" href="css/homecss.css?version=52">
     </head>
     <body>
         <div class="head">
