@@ -34,21 +34,6 @@ public class ConnectDAO extends DBContext {
         return "";
     }
 
-    public String getUserByEmail(String email){
-        try {
-            String sql = "SELECT * FROM [ACCOUNT_CUS] WHERE [email] = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, email);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                return rs.getString("username");
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return "";
-    }
-    
     public boolean checkPhoneCustomerExist(String phone) {
         try {
             String sql = "SELECT * FROM [CUSTOMER] WHERE [phoneNo] = ?";
@@ -96,7 +81,7 @@ public class ConnectDAO extends DBContext {
 
     public Account getAccountCustomerById(int id) {
         try {
-            String sql = "SELECT FROM [ACCOUNT_CUS] WHERE [id] = ?";
+            String sql = "SELECT * FROM [ACCOUNT_CUS] WHERE [id] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -115,16 +100,19 @@ public class ConnectDAO extends DBContext {
 
     public Account getAccountCustomerByEmail(String email) {
         try {
-            String sql = "SELECT FROM [ACCOUNT_CUS] WHERE [email] = ?";
+            String sql = "SELECT * FROM [ACCOUNT_CUS] WHERE [email] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 Account a = new Account();
                 a.setId(rs.getInt("id"));
-                a.setUsername("username");
+                a.setUsername(rs.getString("username"));
                 a.setEmail(rs.getString("email"));
                 a.setPassword(rs.getString("password"));
+                return a;
+            } else {
+                System.out.println("none2");
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -181,7 +169,7 @@ public class ConnectDAO extends DBContext {
             statement.setDate(4, c.getDob());
             statement.setString(5, c.getPhone());
             statement.setString(6, c.getAddress());
-            int id = getLastIdCustomer();        
+            int id = getLastIdCustomer();
             statement.setInt(7, id);
             id++;
             statement.executeUpdate();
@@ -189,27 +177,27 @@ public class ConnectDAO extends DBContext {
             System.err.println(ex.getMessage());
         }
     }
-    
-    public void testPost (String str){
+
+    public void testPost(String str) {
         try {
             String sql = "INSERT INTO [dbo].[TEST]\n"
                     + "VALUES (?)";
-            PreparedStatement statement = connection.prepareStatement(sql);    
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, str);
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
-    
-    public String testGet (int masp){
+
+    public String testGet(int masp) {
         try {
             String sql = "SELECT * FROM [dbo].[TEST]\n"
                     + "WHERE masp = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);    
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, masp);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 String s = rs.getString("string");
                 return s;
             }
@@ -217,5 +205,37 @@ public class ConnectDAO extends DBContext {
             System.err.println(ex.getMessage());
         }
         return "";
+    }
+
+    public Customer getCustomerByAccount(Account a) {
+        try {
+            String sql = "SELECT * FROM [CUSTOMER] WHERE [id_acc] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, a.getId());
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                Customer c = new Customer();
+                c.setId(rs.getString("id_cus"));
+                c.setName(rs.getString("name"));
+                c.setGender(rs.getString("gender"));
+                c.setDob(rs.getDate("dob"));
+                c.setPhone(rs.getString("phoneNo"));
+                c.setAddress(rs.getString("address"));
+                c.setId_acc(rs.getInt("id_acc"));
+                return c;
+            } else {
+                System.out.println("none2");
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        ConnectDAO cd = new ConnectDAO();
+        Account a = cd.getAccountCustomerByEmail("phong@gmail.com");
+        System.out.println(a.getUsername());
     }
 }

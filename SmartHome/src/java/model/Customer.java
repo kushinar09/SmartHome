@@ -18,6 +18,7 @@ public class Customer {
     private Date dob;
     private String phone;
     private String address;
+    private int id_acc;
 
     public Customer() {
     }
@@ -68,6 +69,14 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getId_acc() {
+        return id_acc;
+    }
+
+    public void setId_acc(int id_acc) {
+        this.id_acc = id_acc;
     }
 
 }

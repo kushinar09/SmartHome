@@ -21,7 +21,8 @@ public class ProductDAO extends DBContext {
         List<Product> list = new ArrayList<>();
         try {
             if (type != 0) {
-                String sql = "SELECT * FROM PRODUCT WHERE [type] = ?";
+                String sql = "SELECT * FROM PRODUCT P LEFT JOIN STORAGE S ON P.id_prod = S.id_prod\n"
+                        + "WHERE [type] = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setInt(1, type);
                 ResultSet rs = statement.executeQuery();
@@ -35,10 +36,12 @@ public class ProductDAO extends DBContext {
                     p.setPromopercent(rs.getInt("promopercent"));
                     p.setPromostart(rs.getDate("promostart"));
                     p.setPromoend(rs.getDate("promoend"));
+                    p.setQuatity(rs.getInt("quantity"));
                     list.add(p);
                 }
             } else {
-                String sql = "SELECT * FROM [PRODUCT]";
+                String sql = "SELECT * FROM PRODUCT P LEFT JOIN STORAGE S ON P.id_prod = S.id_prod\n"
+                        + "WHERE [type] = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setInt(1, type);
                 ResultSet rs = statement.executeQuery();
@@ -52,6 +55,7 @@ public class ProductDAO extends DBContext {
                     p.setPromopercent(rs.getInt("promopercent"));
                     p.setPromostart(rs.getDate("promostart"));
                     p.setPromoend(rs.getDate("promoend"));
+                    p.setQuatity(rs.getInt("quantity"));
                     list.add(p);
                 }
             }

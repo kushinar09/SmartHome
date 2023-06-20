@@ -34,6 +34,15 @@ public class CheckValid {
         return str.trim();
     }
     
+    public boolean checkSpace(String str){
+        char[] split = str.toCharArray();
+        for (char c : split) {
+            if(c == ' '){
+                return true;
+            }
+        }
+        return false;
+    }
     
     
     public static void main(String[] args) {

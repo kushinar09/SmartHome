@@ -53,14 +53,19 @@ body {
     justify-content: flex-end;
 }
 
-.shopping {
+/*.shopping {
     margin-left: 100px;
+}*/
+
+.login{
+    width: 50%; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .shopping i {
     font-size: 2em;
-    position: relative;
-    bottom: 10px;
 }
 
 .flex-row {

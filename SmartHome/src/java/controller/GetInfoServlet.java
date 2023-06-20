@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -78,7 +79,7 @@ public class GetInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CheckValid cv = new CheckValid();
-        
+
         String fname = cv.fixString(request.getParameter("firstname"));
         String lname = cv.fixString(request.getParameter("lastname"));
         String name = fname + " " + lname;
@@ -103,7 +104,9 @@ public class GetInfoServlet extends HttpServlet {
                 try {
                     cd.insertAccountCustomer(a);
                     cd.insertCustomer(c);
-                    System.err.println("404");
+                    Cookie loginCookie = new Cookie("user", a.getUsername());
+                    loginCookie.setMaxAge(15 * 60);
+                    response.addCookie(loginCookie);
                     response.sendRedirect("home.jsp");
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
@@ -111,7 +114,7 @@ public class GetInfoServlet extends HttpServlet {
             } else {
                 response.sendRedirect("register.jsp");
             }
-        }else{
+        } else {
             request.setAttribute("errorGi", "invalid phone number");
             request.getRequestDispatcher("getinfo.jsp").forward(request, response);
         }

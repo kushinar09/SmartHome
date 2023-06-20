@@ -11,6 +11,7 @@ import java.sql.Date;
  * @author FR
  */
 public class Product {
+
     private String id_prod;
     private String image;
     private String name;
@@ -19,6 +20,7 @@ public class Product {
     private int promopercent;
     private Date promostart;
     private Date promoend;
+    private int quatity;
 
     public Product() {
     }
@@ -85,5 +87,14 @@ public class Product {
 
     public void setPromoend(Date promoend) {
         this.promoend = promoend;
-    } 
+    }
+
+    public int getQuatity() {
+        return quatity;
+    }
+
+    public void setQuatity(int quatity) {
+        this.quatity = quatity;
+    }
+
 }

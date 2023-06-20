@@ -68,18 +68,6 @@
             <!--manual navigation end-->
         </div>
         <!--image slider end-->
-        <c:forEach var="cookies" items="${cookie}">
-            <c:if test="${cookies.value.value == 'user'}">
-                <c:set var="user" value="${cookies.value}"></c:set>
-            </c:if>
-        </c:forEach> 
-        <c:if test="${user == null}">
-            <c:set var="user" value="Đăng nhập"></c:set>
-        </c:if>
-        <a href="login.jsp" class="user" style="width:60%; color: white;">
-            <i class="fas fa-user"></i>
-            <span id="acc">${user}</span>
-        </a>     
         <script type="text/javascript">
             var counter = 1;
             document.getElementById('radio' + counter).checked = true;

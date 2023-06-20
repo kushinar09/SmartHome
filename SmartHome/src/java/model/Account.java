@@ -9,12 +9,20 @@ package model;
  * @author FR
  */
 public class Account {
+
     private int id;
     private String username;
     private String email;
     private String password;
 
     public Account() {
+    }
+
+    public Account(int id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public int getId() {
@@ -31,8 +39,8 @@ public class Account {
 
     public void setUsername(String username) {
         this.username = username;
-    }  
-    
+    }
+
     public String getEmail() {
         return email;
     }
@@ -47,5 +55,5 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
-    }   
+    }
 }

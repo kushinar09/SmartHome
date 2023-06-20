@@ -3,7 +3,7 @@
     Created on : Jun 12, 2023, 7:47:14 AM
     Author     : FR
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,11 +12,18 @@
         <title>JSP Page</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/headercss.css?version=52">
+        <link rel="stylesheet" href="css/headercss.css?version=51">
     </head>
     <body>
+        <c:forEach var="cookies" items="${pageContext.request.cookies}">
+            <c:if test="${cookies.name == 'user'}">
+                <c:set var="user" value="${cookies.value}"></c:set>
+            </c:if>
+        </c:forEach> 
+
+
         <div class="header-inc">
-            <div class="main-header flex-row container" style="height: 100px;">
+            <div class="main-header flex-row container" style="height: 100px; padding-right: 50px;">
                 <div class="main-left logo flex-row">
                     <a href="home.jsp">
                         <img class="logo-img" src="img/logo/logo-no-background.png"
@@ -29,11 +36,22 @@
                 </form>
                 <div class="main-right account flex-row">
                     <div class="content flex-row">
-                        <a href="login.jsp" class="login" style="color: white;">
-                            <i class="fas fa-user"></i>
-                            <span> Đăng nhập / Đăng ký </span>
-                        </a>
-                        <div class="shopping">
+                        <c:if test="${user == null}">
+                            <a href="login.jsp" class="login" style="color: white; width: 50%">
+                                <i class="fas fa-user"></i>
+                                <span id="user">Đăng nhập / Đăng ký</span>
+                            </a>
+                        </c:if>
+                        <c:if test="${user != null}">
+                            <div class="login">
+                                <i class="fas fa-user"></i>
+                                <a href="profile.jsp" style="color: green; font-weight: 700; text-transform: uppercase">${user}</a>
+                                <form action="logout" method="post" style="margin-left: 10px;">
+                                    <input type="submit" value="Logout" style="cursor: pointer">
+                                </form>
+                            </div>
+                        </c:if>
+                        <div class="shopping" style="width: 40%">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </div>
                     </div>

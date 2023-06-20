@@ -13,6 +13,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
+import model.Customer;
 
 /**
  *
@@ -82,12 +85,19 @@ public class LoginServlet extends HttpServlet {
         }
         if (!cd.getPwdByEmailCustomer(email).equals("")) {
             if (pass.equals(cd.getPwdByEmailCustomer(email))) {
-                String user = cd.getUserByEmail(email);
-                System.out.println("user: " + user);
-                Cookie loginCookie = new Cookie("user", user);
+                Account a = cd.getAccountCustomerByEmail(email);
+                Customer c = cd.getCustomerByAccount(a);
+                //add session
+                HttpSession session = request.getSession();
+                session.setAttribute("customer", c);
+                session.setMaxInactiveInterval(15 * 60);
+                //add cookie
+                Cookie loginCookie = new Cookie("user", a.getUsername());
                 loginCookie.setMaxAge(15 * 60);
                 response.addCookie(loginCookie);
+
                 response.sendRedirect("home.jsp");
+
             } else {
                 request.setAttribute("errorLog", "Password is incorrect");
                 request.setAttribute("email", email);
