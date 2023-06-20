@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Product;
@@ -34,7 +35,7 @@ public class ProductServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     static List<Product> list = new ArrayList<>();
-
+    String title = "";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -68,7 +69,7 @@ public class ProductServlet extends HttpServlet {
         String order = request.getParameter("orderby");
         ProductDAO pd = new ProductDAO();
         Action act = new Action();
-        String title = "";
+        
         if (type != null) {
             int ty;
             try {
@@ -79,14 +80,22 @@ public class ProductServlet extends HttpServlet {
             list = pd.getListProductByType(ty);
             title = pd.getNameByType(ty);
         }
-        
+
         if (order != null) {
-            act.sortList(list, order); 
+            act.sortList(list, order);
             request.setAttribute("order", order);
         }
-        
+
+        HttpSession session = request.getSession();
+        if (session.getAttribute("title") == null) {
+            session.setAttribute("title", title);
+        } else {
+            String titleC = (String) session.getAttribute("title");
+            if (!titleC.equals(title)) {
+                session.setAttribute("title", title);
+            }
+        }
         request.setAttribute("list", list);
-        request.setAttribute("list-title", title);
         request.getRequestDispatcher("product.jsp").forward(request, response);
     }
 
@@ -113,8 +122,7 @@ public class ProductServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
+
     public static void main(String[] args) {
         // TODO code application logic here
         for (Product product : list) {

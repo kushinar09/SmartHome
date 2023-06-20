@@ -24,13 +24,13 @@
                     <h1 class="title-name">An ninh & Giám sát</h1>
                     <div class="current-pos">
                         <nav class="dir-home breadcrumbs uppercase">
-                            <a href="home.jsp" style="color: #b8fffe">Trang chủ</a> <span class="divider">/</span> <%= (String) request.getAttribute("list-title") %>
+                            <c:set var="title" value="${sessionScope.title}"></c:set>
+                            <a href="home.jsp" style="color: #b8fffe">Trang chủ</a> <span class="divider">/</span> ${title}
                         </nav>
                     </div>
                 </div>
                 <div class="flex-col medium-text-center  form-flat">
-                    <form class="woocommerce-ordering" action="ProductServlet" method="get">
-
+                    <form class="woocommerce-ordering" action="ProductServlet?title=${title}" method="get">
                         <select name="orderby" class="orderby" aria-label="Đơn hàng của cửa hàng" onchange='this.form.submit()'>
                             <option value="none">Sắp xếp ...</option>
                             <option value="price-asc">Thứ tự theo giá: thấp đến cao</option>

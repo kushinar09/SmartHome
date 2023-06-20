@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -67,36 +68,18 @@
             <!--manual navigation end-->
         </div>
         <!--image slider end-->
-        <%
-        String username = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies !=null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("user")) username = cookie.getValue();
-            }
-        }
-        if (username != null) {
-        %>
-        <div class="user" style="width:60%; color: white;">
-            <i class="fas fa-user"></i>
-            <span id="acc"><%=username%></span>
-            <form action="logout" method="post">
-
-            </form>
-        </div>
-        <% 
-            } else { 
-        %>
+        <c:forEach var="cookies" items="${cookie}">
+            <c:if test="${cookies.value.value == 'user'}">
+                <c:set var="user" value="${cookies.value}"></c:set>
+            </c:if>
+        </c:forEach> 
+        <c:if test="${user == null}">
+            <c:set var="user" value="Đăng nhập"></c:set>
+        </c:if>
         <a href="login.jsp" class="user" style="width:60%; color: white;">
             <i class="fas fa-user"></i>
-            <span id="acc"> Đăng nhập / Đăng ký </span>
-        </a>
-        <% 
-            } 
-        %> 
-        <div>
-            <img src="img/product/camera-4g-ezviz-eb8-2k-3mp-dung-pin-17.jpeg" alt="alt"/>
-        </div>
+            <span id="acc">${user}</span>
+        </a>     
         <script type="text/javascript">
             var counter = 1;
             document.getElementById('radio' + counter).checked = true;
