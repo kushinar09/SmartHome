@@ -96,7 +96,7 @@ public class GetInfoServlet extends HttpServlet {
             c.setPhone(phone);
             c.setAddress(address);
             HttpSession session = request.getSession(false);
-            if (session != null) {
+            if (session != null && session.getAttribute("Account") != null) {
                 Account a = (Account) session.getAttribute("Account");
                 session.removeAttribute("Account");
                 ConnectDAO cd = new ConnectDAO();

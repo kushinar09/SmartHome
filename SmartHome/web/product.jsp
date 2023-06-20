@@ -66,11 +66,11 @@
                                         </c:if>
                                     </div>
                                     <div class="box-text">
-                                        <div>
+                                        <div style="height: 50px">
                                             <h5 class="product-name">${product.name}</h5>
                                         </div>
 
-                                        <div class="price-wrapper" style="height: 30px">
+                                        <div class="price-wrapper">
                                             <span class="price">
                                                 <c:if test="${product.promopercent != 0}">
                                                     <del aria-hidden="true">

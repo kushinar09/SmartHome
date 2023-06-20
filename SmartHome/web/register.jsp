@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Branch - Sign up</title>
+        <title>WINDJUSTER - Đăng ký</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
         <link rel="stylesheet" href="css/registercss.css">
