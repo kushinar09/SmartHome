@@ -45,9 +45,12 @@
                         <c:if test="${user != null}">
                             <div class="login">
                                 <i class="fas fa-user"></i>
-                                <a href="profile.jsp" style="color: green; font-weight: 700; text-transform: uppercase">${user}</a>
+                                <a href="profile.jsp" style="color: white; font-weight: 700; text-transform: uppercase">${user}</a>
                                 <form action="logout" method="post" style="margin-left: 10px;">
-                                    <input type="submit" value="Logout" style="cursor: pointer">
+                                    <div style="border-radius: 20px; background-color: #f5743bd4; padding: 4px 10px;">
+                                        <i class="fas fa-sign-out"></i>
+                                        <input type="submit" value="Logout" style="color: white; background: none; border: none; cursor: pointer">
+                                    </div>
                                 </form>
                             </div>
                         </c:if>
@@ -97,16 +100,16 @@
                                 <a href="intro.jsp" class="nav-top-link">GIỚI THIỆU</a>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
-                                <a href="#" class="nav-top-link">TIN TỨC</a>
+                                <a href="pagenotfound.html" class="nav-top-link">TIN TỨC</a>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
-                                <a href="#" class="nav-top-link">TƯ VẤN</a>
+                                <a href="pagenotfound.html" class="nav-top-link">TƯ VẤN</a>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
-                                <a href="#" class="nav-top-link">HỖ TRỢ</a>
+                                <a href="pagenotfound.html" class="nav-top-link">HỖ TRỢ</a>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
-                                <a href="#" class="nav-top-link">LIÊN HỆ</a>
+                                <a href="pagenotfound.html" class="nav-top-link">LIÊN HỆ</a>
                             </li>
                         </ul>
                     </div>
