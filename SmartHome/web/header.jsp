@@ -12,7 +12,7 @@
         <title>JSP Page</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/headercss.css?version=51">
+        <link rel="stylesheet" href="css/headercss.css?version=2">
     </head>
     <body>
         <c:forEach var="cookies" items="${pageContext.request.cookies}">
@@ -26,7 +26,7 @@
             <div class="main-header flex-row container" style="height: 100px; padding-right: 50px;">
                 <div class="main-left logo flex-row">
                     <a href="home.jsp">
-                        <img class="logo-img" src="img/logo/logo-no-background.png"
+                        <img class="logo-img" src="img/logo/logo-no-background-white.png"
                              alt="Cung cấp Thiết bị điện nhà thông minh - WINDJUSTER Smart Home">
                     </a>
                 </div>

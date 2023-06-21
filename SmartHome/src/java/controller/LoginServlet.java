@@ -90,6 +90,7 @@ public class LoginServlet extends HttpServlet {
                 //add session
                 HttpSession session = request.getSession();
                 session.setAttribute("customer", c);
+                session.setAttribute("account", a);
                 session.setMaxInactiveInterval(15 * 60);
                 //add cookie
                 Cookie loginCookie = new Cookie("user", a.getUsername());

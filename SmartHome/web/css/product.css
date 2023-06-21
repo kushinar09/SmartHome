@@ -34,7 +34,7 @@ body {
 }
 
 .page-title {
-    background-color: #2d1b6a;
+    background-color: rgba(55,55,55);
     z-index: 1;
     margin-top: 150px;
 }
