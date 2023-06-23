@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.AccountDAO;
 import utils.CheckValid;
 import dal.ConnectDAO;
 import dal.CustomerDAO;
@@ -76,7 +77,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CustomerDAO cd = new CustomerDAO();
+        AccountDAO ad = new AccountDAO();
         CheckValid cv = new CheckValid();
 
         String user = cv.fixString(request.getParameter("username"));
@@ -90,7 +91,7 @@ public class RegisterServlet extends HttpServlet {
         } else if (!cv.checkEmail(email)) {
             request.setAttribute("errorReg", "Please re-enter a valid Email address");
             request.getRequestDispatcher("register.jsp").forward(request, response);
-        } else if (cd.checkEmailCustomerExist(email)) {
+        } else if (ad.checkEmailCustomerExist(email)) {
             request.setAttribute("errorReg", "This Email already in use");
             request.getRequestDispatcher("register.jsp").forward(request, response);
         } else if (!cv.checkPwdAndCf(pwd, cfpwd)) {
@@ -108,7 +109,7 @@ public class RegisterServlet extends HttpServlet {
             } else {
                 session = request.getSession();
             }
-            session.setAttribute("Account", a);
+            session.setAttribute("account", a);
             response.sendRedirect("getinfo.jsp");
         }
     }

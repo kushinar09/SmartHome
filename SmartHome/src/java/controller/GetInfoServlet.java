@@ -6,13 +6,11 @@ package controller;
 
 import dal.AccountDAO;
 import utils.CheckValid;
-import dal.ConnectDAO;
 import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -83,7 +81,7 @@ public class GetInfoServlet extends HttpServlet {
         CheckValid cv = new CheckValid();
         CustomerDAO cd = new CustomerDAO();
         AccountDAO ad = new AccountDAO();
-        
+
         String fname = cv.fixString(request.getParameter("firstname"));
         String lname = cv.fixString(request.getParameter("lastname"));
         String name = fname + " " + lname;
@@ -94,18 +92,17 @@ public class GetInfoServlet extends HttpServlet {
 
         if (cv.checkPhone(phone)) {
             Customer c = new Customer();
-            c.setId("CUS" + (cd.getLastIdentity("ACCOUNT_CUS")+1));
+            c.setId("CUS" + (cd.getLastIdentity("ACCOUNT_CUS") + 1));
             c.setName(name);
             c.setGender(gender);
             c.setDob(dob);
             c.setPhone(phone);
             c.setAddress(address);
-            c.setId_acc(cd.getLastIdentity("ACCOUNT_CUS")+1);
+            c.setId_acc(cd.getLastIdentity("ACCOUNT_CUS") + 1);
             HttpSession session = request.getSession(false);
-            if (session != null && session.getAttribute("Account") != null) {
-                Account a = (Account) session.getAttribute("Account");
-                session.removeAttribute("Account");
-
+            if (session != null && session.getAttribute("account") != null) {
+                Account a = (Account) session.getAttribute("account");
+                session.removeAttribute("account");
                 try {
                     ad.insertAccountCustomer(a);
                     cd.insertCustomer(c);

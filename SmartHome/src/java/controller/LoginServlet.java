@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.AccountDAO;
 import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -78,15 +79,18 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String pass = request.getParameter("pwd");
+        String check = request.getParameter("check");
         CustomerDAO cd = new CustomerDAO();
+        AccountDAO ad = new AccountDAO();
 
         if (email.equals("") || pass.equals("")) {
             request.setAttribute("errorLog", "Enter your email and password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-        if (!cd.getPwdByEmailCustomer(email).equals("")) {
-            if (pass.equals(cd.getPwdByEmailCustomer(email))) {
-                Account a = cd.getAccountCustomerByEmail(email);
+        if (!ad.getPwdByEmailCustomer(email).equals("")) {
+            if (pass.equals(ad.getPwdByEmailCustomer(email))) {
+                Account a = ad.getAccountCustomerByEmail(email);
+                System.out.println("account id: " + a.getId());
                 Customer c = cd.getCustomerByAccount(a);
                 //add session
                 HttpSession session = request.getSession(false);
@@ -105,14 +109,28 @@ public class LoginServlet extends HttpServlet {
 //                System.out.println(c.getName());
 //                System.out.println(a.getUsername());
                 //add cookie if check remember
-                Cookie emailCookie = new Cookie("email", a.getUsername());
-                Cookie pwdCookie = new Cookie("pwd", a.getPassword());
-                emailCookie.setMaxAge(15 * 60);
-                pwdCookie.setMaxAge(15 * 60);
-                response.addCookie(emailCookie);
-                response.addCookie(pwdCookie);
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("email")) {
+                            cookie.setMaxAge(0);
+                            response.addCookie(cookie);
+                        }
+                        if (cookie.getName().equals("pwd")) {
+                            cookie.setMaxAge(0);
+                            response.addCookie(cookie);
+                        }
+                    }
+                }
+                if (check != null) {                  
+                    Cookie emailCookie = new Cookie("email", a.getEmail());
+                    Cookie pwdCookie = new Cookie("pwd", a.getPassword());
+                    emailCookie.setMaxAge(15 * 60);
+                    pwdCookie.setMaxAge(15 * 60);
+                    response.addCookie(emailCookie);
+                    response.addCookie(pwdCookie);
+                }
                 response.sendRedirect("home.jsp");
-
             } else {
                 request.setAttribute("errorLog", "Password is incorrect");
                 request.setAttribute("email", email);
