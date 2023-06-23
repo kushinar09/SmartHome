@@ -6,6 +6,7 @@ package controller;
 
 import utils.CheckValid;
 import dal.ConnectDAO;
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -75,7 +76,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ConnectDAO cd = new ConnectDAO();
+        CustomerDAO cd = new CustomerDAO();
         CheckValid cv = new CheckValid();
 
         String user = cv.fixString(request.getParameter("username"));
@@ -101,7 +102,12 @@ public class RegisterServlet extends HttpServlet {
             a.setUsername(user);
             a.setEmail(email);
             a.setPassword(pwd);
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.removeAttribute("account");
+            } else {
+                session = request.getSession();
+            }
             session.setAttribute("Account", a);
             response.sendRedirect("getinfo.jsp");
         }

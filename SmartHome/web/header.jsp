@@ -12,16 +12,9 @@
         <title>JSP Page</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/headercss.css?version=2">
+        <link rel="stylesheet" href="css/headercss.css?version=4">
     </head>
     <body>
-        <c:forEach var="cookies" items="${pageContext.request.cookies}">
-            <c:if test="${cookies.name == 'user'}">
-                <c:set var="user" value="${cookies.value}"></c:set>
-            </c:if>
-        </c:forEach> 
-
-
         <div class="header-inc">
             <div class="main-header flex-row container" style="height: 100px; padding-right: 50px;">
                 <div class="main-left logo flex-row">
@@ -36,16 +29,16 @@
                 </form>
                 <div class="main-right account flex-row">
                     <div class="content flex-row">
-                        <c:if test="${user == null}">
-                            <a href="login.jsp" class="login" style="color: white; width: 50%">
-                                <i class="fas fa-user"></i>
+                        <c:if test="${sessionScope.account == null}">
+                            <a href="login.jsp" class="login a-login">
+                                <i class="fas fa-user" style="margin: 5px;"></i>
                                 <span id="user">Đăng nhập / Đăng ký</span>
                             </a>
                         </c:if>
-                        <c:if test="${user != null}">
+                        <c:if test="${sessionScope.account != null}">
                             <div class="login">
-                                <i class="fas fa-user"></i>
-                                <a href="profile.jsp" style="color: white; font-weight: 700; text-transform: uppercase">${user}</a>
+                                <i class="fas fa-user" style="margin: 5px;"></i>
+                                <a href="profile.jsp" style="color: white; font-weight: 700; text-transform: uppercase">${sessionScope.account.username}</a>
                                 <form action="logout" method="post" style="margin-left: 10px;">
                                     <div style="border-radius: 20px; background-color: #f5743bd4; padding: 4px 10px;">
                                         <i class="fas fa-sign-out"></i>
@@ -54,7 +47,7 @@
                                 </form>
                             </div>
                         </c:if>
-                        <div class="shopping" style="width: 40%">
+                        <div class="shopping">
                             <i class="fa-solid fa-basket-shopping"></i>
                         </div>
                     </div>

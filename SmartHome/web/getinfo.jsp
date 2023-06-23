@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>WINDJUSTER - Đăng ký</title>
-        <link rel="stylesheet" href="css/getinfo.css">
+        <link rel="stylesheet" href="css/getinfo.css?v=2">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
@@ -36,11 +36,11 @@
                             <i class="getinfo__icon fas fa-venus-mars"></i>
                             <div class="row">
                                 <div class="col-4 getinfo__field__gender">
-                                    <input type="radio" class="getinfo__input input__radio" name="gender" id="male" value="1" checked>
+                                    <input type="radio" class="getinfo__input input__radio" name="gender" id="male" value="M" checked>
                                     <label for="male" class="label__gender">Male</label>
                                 </div>
                                 <div class="col-4 getinfo__field__gender">
-                                    <input type="radio" class="getinfo__input input__radio" name="gender" id="female" value="0">
+                                    <input type="radio" class="getinfo__input input__radio" name="gender" id="female" value="F">
                                     <label for="female" class="label__gender">Female</label>
                                 </div>                               
                             </div>

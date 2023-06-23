@@ -70,23 +70,28 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        Cookie loginCookie = null;
-        HttpSession session = request.getSession();
-        session.removeAttribute("account");
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("user")) {
-                    loginCookie = cookie;
-                    break;
-                }
-            }
+        
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.removeAttribute("account");
+            session.removeAttribute("customer");
         }
-        if (loginCookie != null) {
-            loginCookie.setMaxAge(0);
-            response.addCookie(loginCookie);
-        }
-        response.sendRedirect("login.jsp");
+        
+//        Cookie loginCookie = null;
+//        Cookie[] cookies = request.getCookies();
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if (cookie.getName().equals("user")) {
+//                    loginCookie = cookie;
+//                    break;
+//                }
+//            }
+//        }
+//        if (loginCookie != null) {
+//            loginCookie.setMaxAge(0);
+//            response.addCookie(loginCookie);
+//        }
+        response.sendRedirect("home.jsp");
     }
 
     /** 

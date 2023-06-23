@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.ConnectDAO;
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -78,8 +78,9 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String pass = request.getParameter("pwd");
-        ConnectDAO cd = new ConnectDAO();
-        if (email.equals("")) {
+        CustomerDAO cd = new CustomerDAO();
+
+        if (email.equals("") || pass.equals("")) {
             request.setAttribute("errorLog", "Enter your email and password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
@@ -88,15 +89,28 @@ public class LoginServlet extends HttpServlet {
                 Account a = cd.getAccountCustomerByEmail(email);
                 Customer c = cd.getCustomerByAccount(a);
                 //add session
-                HttpSession session = request.getSession();
+                HttpSession session = request.getSession(false);
+
+                if (session != null) {
+                    session.removeAttribute("customer");
+                    session.removeAttribute("account");
+                } else {
+                    session = request.getSession();
+                }
+
                 session.setAttribute("customer", c);
                 session.setAttribute("account", a);
                 session.setMaxInactiveInterval(15 * 60);
-                //add cookie
-                Cookie loginCookie = new Cookie("user", a.getUsername());
-                loginCookie.setMaxAge(15 * 60);
-                response.addCookie(loginCookie);
 
+//                System.out.println(c.getName());
+//                System.out.println(a.getUsername());
+                //add cookie if check remember
+                Cookie emailCookie = new Cookie("email", a.getUsername());
+                Cookie pwdCookie = new Cookie("pwd", a.getPassword());
+                emailCookie.setMaxAge(15 * 60);
+                pwdCookie.setMaxAge(15 * 60);
+                response.addCookie(emailCookie);
+                response.addCookie(pwdCookie);
                 response.sendRedirect("home.jsp");
 
             } else {

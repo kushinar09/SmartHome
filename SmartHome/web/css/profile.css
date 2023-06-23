@@ -57,6 +57,7 @@ html {
 }
 
 .ftco-section {
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(22,44,176,1) 0%, rgba(22,114,176,1) 50%, rgba(22,150,176,1) 100%);
     padding: 1em 0;
     display: block;
 }
@@ -172,13 +173,13 @@ html {
 }
 
 .contact-wrap {
-    background: #272a34;
+    background: white;
     padding: 3rem !important;
     width: 100% !important;
 }
 
 .mb-41 {
-    color: #fff;
+    color: black;
     margin-bottom: 1.5rem !important;
     line-height: 1.5;
     font-weight: 400;
@@ -224,12 +225,12 @@ form {
 .form-controlnew {
     font-size: 16px;
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid black;
     padding: 0;
     padding: 0 10px;
     height: 52px;
     background: transparent;
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: black;
     border-radius: 0px;
     box-shadow: none !important;
     display: block;
@@ -244,12 +245,12 @@ form {
     font-size: 16px;
     resize: vertical;
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid black;
     padding: 0;
     padding: 0 10px;
     height: inherit !important;
     background: transparent;
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: black;
     border-radius: 0px;
     box-shadow: none !important;
     display: block;
@@ -267,7 +268,7 @@ form {
     background: #f39422 !important;
     border-color: #f39422 !important;
     color: #fff;
-    padding: 12px 16px;
+    /*    padding: 12px 16px;*/
     border-width: 1px;
     border-radius: 2px;
     font-size: 14px;
@@ -301,7 +302,7 @@ form {
 }
 
 .info-wrap {
-    background: #1c1e25;
+    background: linear-gradient(90deg, #5D54A4, #7C78B8);
     padding: 3rem !important;
     width: 100% !important;
 }
@@ -318,7 +319,7 @@ form {
 }
 
 .info-wrap p {
-    margin-bottom: 1.5rem !important;
+    /*    margin-bottom: 1.5rem !important;*/
     margin-top: 0;
 }
 
@@ -356,7 +357,7 @@ form {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.02);
+    background: white;
     -webkit-box-align: center !important;
     -ms-flex-align: center !important;
     align-items: center !important;
@@ -369,7 +370,7 @@ form {
 
 .icon-fa {
     font-size: 20px;
-    color: #fff;
+    color: gray;
     display: inline-block;
     /*    text-rendering: auto;*/
     -webkit-font-smoothing: antialiased;
@@ -379,6 +380,15 @@ form {
 .info-wrap .dbox .text {
     width: calc(100% - 50px);
     padding-left: 1rem !important;
+    color: #18ddd5;
+}
+
+.info-wrap .dbox .text.pwd{
+    width: 50%;
+}
+
+#pwd{
+    color: #18ddd5
 }
 
 .info-wrap .dbox p {
@@ -401,9 +411,9 @@ form {
 .form-controlnew:focus,
 .form-controlnew:active {
     background: transparent;
-    border-color: rgba(255, 255, 255, 0.5) !important;
+    border-color: blue;
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid #cccccc;
 }
 
 .btn:hover,
@@ -492,4 +502,130 @@ form {
     left: 0;
     top: 0;
     border-radius: 10px;
+}
+
+.btn-edit{
+    margin-left: 10px;
+    margin-right: 5px;
+    color: #3149d6;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.btn-edit:hover{
+    color: #4097f4;
+}
+
+.btn-edit:focus{
+    outline: none;
+}
+
+#address:focus{
+    outline: none;
+    background: transparent;
+    border-color: #cccccc !important;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+}
+
+input:focus{
+    outline: none;
+}
+
+.mainDiv {
+    width: 80%;
+    display: none;
+    margin: auto;
+    /*    min-height: 100%;*/
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    font-family: 'Open Sans', sans-serif;
+}
+.cardStyle {
+    width: 100%;
+    border-color: white;
+    background: #fff;
+    padding-bottom: 10px;
+    /*    padding: 36px 0;*/
+    border-radius: 4px;
+    /*    margin: 30px 0;*/
+    box-shadow: 0px 0 2px 0 rgba(0,0,0,0.25);
+}
+
+.inputLabel {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 6px;
+    margin-top: 15px;
+}
+.inputDiv {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+input {
+    height: 32px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: none;
+    border: solid 1px #ccc;
+    padding: 0 11px;
+}
+input:disabled {
+    cursor: not-allowed;
+    border: solid 1px #eee;
+}
+.buttonWrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.submitButton {
+    width: 30%;
+    height: 40px;
+    margin: auto;
+    display: block;
+    color: #fff;
+    background-color: #065492;
+    border-color: #065492;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.035);
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.submitButton:disabled,
+button[disabled] {
+    border: 1px solid #cccccc;
+    background-color: #cccccc;
+    color: #666666;
+}
+
+.error{
+    color: red;
+    display: none;
+    margin-bottom: 1.5rem !important;
+}
+
+.change{
+    width: 30%;
+}
+
+.btn-pwd{
+    width: 100%;
+    color: #d2e1ff;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.btn-pwd:hover{
+    color: #f9f9f9;
+}
+
+.btn-pwd:focus{
+    outline: none;
 }

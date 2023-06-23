@@ -12,7 +12,7 @@
         <title>WINDJUSTER - Đăng nhập</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/logincss.css">
+        <link rel="stylesheet" href="css/logincss.css?v=3">
     </head>
     <body>
         <div class="container">
@@ -27,6 +27,10 @@
                             <i class="login__icon fas fa-lock"></i>
                             <input type="password" class="login__input" id="pwd" name="pwd" placeholder="Password">
                             <i style="cursor: pointer; right: 64px" class="fas fa-eye" id="eye" onclick="show()"></i>
+                        </div>
+                        <div class="login__field remember">                         
+                            <input type="checkbox" class="check__remember" id="check" name="check">
+                            <label for="check">Remember</label>
                         </div>
                         <div>
                             <i style="color: red; font-size: 0.85rem;">

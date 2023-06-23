@@ -17,7 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 body {
-    background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(22,44,176,1) 0%, rgba(22,114,176,1) 50%, rgba(22,150,176,1) 100%);
     overflow: hidden;
 }
 
@@ -29,7 +29,7 @@ body {
 }
 
 .screen {
-    background: linear-gradient(90deg, #5D54A4, #7C78B8);
+    background: linear-gradient(90deg, #2f1cc8, #615bc8);
     position: relative;
     height: 600px;
     width: 600px;
@@ -70,7 +70,7 @@ body {
 .screen__background__shape2 {
     height: 220px;
     width: 220px;
-    background: #6C63AC;
+    background: #443dc5;
     top: -172px;
     right: 0;
     border-radius: 32px;
@@ -79,7 +79,7 @@ body {
 .screen__background__shape3 {
     height: 540px;
     width: 190px;
-    background: linear-gradient(270deg, #5D54A4, #6A679E);
+    background: linear-gradient(270deg, #392c99, #4a4fb3);
     top: -24px;
     right: 0;
     border-radius: 32px;
@@ -88,7 +88,7 @@ body {
 .screen__background__shape4 {
     height: 400px;
     width: 200px;
-    background: #7E7BB9;
+    background: #342cc3;
     top: 420px;
     right: 50px;
     border-radius: 60px;

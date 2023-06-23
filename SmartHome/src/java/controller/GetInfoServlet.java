@@ -4,8 +4,10 @@
  */
 package controller;
 
+import dal.AccountDAO;
 import utils.CheckValid;
 import dal.ConnectDAO;
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -79,7 +81,9 @@ public class GetInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CheckValid cv = new CheckValid();
-
+        CustomerDAO cd = new CustomerDAO();
+        AccountDAO ad = new AccountDAO();
+        
         String fname = cv.fixString(request.getParameter("firstname"));
         String lname = cv.fixString(request.getParameter("lastname"));
         String name = fname + " " + lname;
@@ -90,23 +94,29 @@ public class GetInfoServlet extends HttpServlet {
 
         if (cv.checkPhone(phone)) {
             Customer c = new Customer();
-            c.setId("");
+            c.setId("CUS" + (cd.getLastIdentity("ACCOUNT_CUS")+1));
             c.setName(name);
             c.setGender(gender);
             c.setDob(dob);
             c.setPhone(phone);
             c.setAddress(address);
+            c.setId_acc(cd.getLastIdentity("ACCOUNT_CUS")+1);
             HttpSession session = request.getSession(false);
             if (session != null && session.getAttribute("Account") != null) {
                 Account a = (Account) session.getAttribute("Account");
                 session.removeAttribute("Account");
-                ConnectDAO cd = new ConnectDAO();
+
                 try {
-                    cd.insertAccountCustomer(a);
+                    ad.insertAccountCustomer(a);
                     cd.insertCustomer(c);
-                    Cookie loginCookie = new Cookie("user", a.getUsername());
-                    loginCookie.setMaxAge(15 * 60);
-                    response.addCookie(loginCookie);
+
+                    session.setAttribute("customer", c);
+                    session.setAttribute("account", a);
+                    session.setMaxInactiveInterval(15 * 60);
+
+//                    Cookie loginCookie = new Cookie("user", a.getUsername());
+//                    loginCookie.setMaxAge(15 * 60);
+//                    response.addCookie(loginCookie);
                     response.sendRedirect("home.jsp");
                 } catch (IOException e) {
                     System.err.println(e.getMessage());

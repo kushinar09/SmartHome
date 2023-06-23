@@ -4,53 +4,46 @@
  */
 package dal;
 
-import dal.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Account;
-import model.Customer;
 
 /**
  *
  * @author FR
  */
-public class ConnectDAO extends DBContext {
+public class AccountDAO extends DBContext {
 
-    public void testPost(String str) {
+    public void insertAccountCustomer(Account a) {
         try {
-            String sql = "INSERT INTO [dbo].[TEST]\n"
-                    + "VALUES (?)";
+            String sql = "INSERT INTO [ACCOUNT_CUS] ([username], [email], [password])\n"
+                    + "VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, str);
+//            int id = getLastId();
+//            String user = a.getUsername() + "#" + id;
+//            statement.setString(1, user);
+            statement.setString(1, a.getUsername());
+            statement.setString(2, a.getEmail());
+            statement.setString(3, a.getPassword());
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
-    public String testGet(int masp) {
+    public int getLastIdentity(String tablename) {
         try {
-            String sql = "SELECT * FROM [dbo].[TEST]\n"
-                    + "WHERE masp = ?";
+            String sql = "SELECT IDENT_CURRENT('?') AS [current_identity]";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, masp);
+            statement.setString(1, tablename);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                String s = rs.getString("string");
-                return s;
+                return rs.getInt("current_identity");
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        return "";
+        return 0;
     }
-    
-//
-//    public static void main(String[] args) {
-//        // TODO code application logic here
-//        ConnectDAO cd = new ConnectDAO();
-//        Account a = cd.getAccountCustomerByEmail("phong@gmail.com");
-//        System.out.println(a.getUsername());
-//    }
 }
