@@ -65,7 +65,7 @@
                                 <% } %>
                             </i>
                         </div>
-                        <button class="button login__submit">
+                            <button class="button login__submit" autofocus>
                             <span class="button__text">Log In Now</span>
                             <i class="button__icon fas fa-sign-in-alt" style='font-size:24px'></i>
                         </button>

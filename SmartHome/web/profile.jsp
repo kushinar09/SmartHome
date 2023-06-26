@@ -33,7 +33,7 @@
                                         <h3 class="mb-41">Thông tin khách hàng</h3>
                                         <div id="form-message-warning" class="mb-42"></div>
                                         <div id="form-message-success" class="mb-43">Lưu thành công!</div>
-                                        <form action="home.jsp" method="post" id="contactForm" name="contactForm" class="contactForm">
+                                        <form action="changeInfo" method="post" id="contactForm" name="contactForm" class="contactForm">
                                             <div class="row">
                                                 <div class="col-md-12 input-content">
                                                     <div class="form-group">
@@ -135,28 +135,29 @@
                                     </div> 
                                     <div class="mainDiv" id="mainDiv">
                                         <div class="cardStyle">
-                                            <form action="changepwd" method="post" name="signupForm" id="signupForm">
+                                            <form action="changepwd" method="post" name="signupForm" id="signupForm" onsubmit="return checkafter()">
                                                 <div class="inputDiv">
-                                                    <label class="inputLabel" for="password">Old Password</label>
-                                                    <input type="password" id="oldpassword" name="oldpassword">
+                                                    <label class="inputLabel" for="oldPassword">Old Password</label>
+                                                    <input type="password" id="oldPassword" name="oldPassword" required>
                                                 </div>
 
                                                 <div class="inputDiv">
                                                     <label class="inputLabel" for="password">New Password</label>
-                                                    <input type="password" id="password" name="password">
+                                                    <input type="password" id="password" name="password" required>
                                                 </div>
 
                                                 <div class="inputDiv">
                                                     <label class="inputLabel" for="confirmPassword">Confirm Password</label>
-                                                    <input type="password" id="confirmPassword" name="confirmPassword">
+                                                    <input type="password" id="confirmPassword" name="confirmPassword" required>
                                                 </div>
                                                 <div class="warning">
-                                                    <p id="warning"></p>
+                                                    <p id="warning" style="font-size: 0.9rem;width: 70%;margin: auto;margin-top: 5px;color: red;"></p>
                                                 </div>
                                                 <div class="success">
                                                     <p id="success"></p>
-                                                </div>                                                <div class="buttonWrapper">
-                                                    <button type="submit" id="submitButton" onclick="redirect()" class="submitButton pure-button pure-button-primary">
+                                                </div>
+                                                <div class="buttonWrapper">
+                                                    <button type="submit" id="submitButton" class="submitButton pure-button pure-button-primary" disabled>
                                                         <span>Done</span>
                                                     </button>
                                                 </div>
@@ -182,13 +183,76 @@
             document.getElementById("genderselect").style.display = "block";
         }
 
+        function enableSubmitButton() {
+            document.getElementById('submitButton').disabled = false;
+        }
+
+        function disableSubmitButton() {
+            document.getElementById('submitButton').disabled = true;
+        }
+
+
         function changePwd(element) {
             element.classList.toggle("active");
             var content = document.getElementById("mainDiv");
             if (content.style.display === "block") {
                 content.style.display = "none";
             } else {
+                document.getElementById("oldPassword").value = "";
+                document.getElementById("password").value = "";
+                document.getElementById("confirmPassword").value = "";
                 content.style.display = "block";
+            }
+        }
+
+        var oldpwd = document.getElementById("oldPassword"),
+                pwd = document.getElementById("password"),
+                cfpwd = document.getElementById("confirmPassword");
+        oldpwd.onchange = validatePassword;
+        pwd.onchange = validatePassword;
+        cfpwd.onchange = validatePassword;
+
+
+        function validateSignupForm() {
+            var form = document.getElementById('signupForm');
+
+            for (var i = 0; i < form.elements.length; i++) {
+                if (form.elements[i].value === '' && form.elements[i].hasAttribute('required')) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function validatePassword() {
+            document.getElementById("warning").innerHTML = "";
+            if (validateSignupForm()) {
+                enableSubmitButton();
+            } else {
+                disableSubmitButton();
+            }
+        }
+
+        function checkafter() {
+            var old = document.getElementById("oldPassword").value;
+            var newp = document.getElementById("password").value;
+            var cfp = document.getElementById("confirmPassword").value;           
+            var getpwd = "${a.password}";
+            
+            var errorck = "";
+            if (old !== getpwd) {
+                errorck = "Old password is incorrect";
+            } else if (newp !== cfp) {
+                errorck = "Confirm password does not match";
+            } else if (newp === old) {
+                errorck = "Please enter new password";
+            }
+
+            if (errorck !== "") {
+                document.getElementById("warning").innerHTML = errorck;
+                return false;
+            } else {
+                return true;
             }
         }
     </script>

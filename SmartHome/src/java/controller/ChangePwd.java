@@ -5,8 +5,6 @@
 package controller;
 
 import dal.AccountDAO;
-import utils.CheckValid;
-import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,16 +13,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
 import model.Account;
-import model.Customer;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "GetInfoServlet", urlPatterns = {"/getinfo"})
-public class GetInfoServlet extends HttpServlet {
+@WebServlet(name = "ChangePwd", urlPatterns = {"/changepwd"})
+public class ChangePwd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +39,10 @@ public class GetInfoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GetInfoServlet</title>");
+            out.println("<title>Servlet ChangePwd</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GetInfoServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangePwd at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -78,54 +74,19 @@ public class GetInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CheckValid cv = new CheckValid();
-        CustomerDAO cd = new CustomerDAO();
+        String newpwd = request.getParameter("password");
         AccountDAO ad = new AccountDAO();
 
-        String fname = cv.fixString(request.getParameter("firstname"));
-        String lname = cv.fixString(request.getParameter("lastname"));
-        String name = fname + " " + lname;
-        String gender = request.getParameter("gender");
-        Date dob = Date.valueOf(request.getParameter("dob"));
-        String phone = cv.fixString(request.getParameter("phonenumber"));
-        String address = cv.fixString(request.getParameter("address"));
-
-        if (cv.checkPhone(phone)) {
-            Customer c = new Customer();
-            c.setId("");
-            c.setName(name);
-            c.setGender(gender);
-            c.setDob(dob);
-            c.setPhone(phone);
-            c.setAddress(address);
-            c.setId_acc(0);
-            HttpSession session = request.getSession(false);
-            if (session != null && session.getAttribute("account") != null) {
-                Account a = (Account) session.getAttribute("account");
-                session.removeAttribute("account");
-                try {
-                    int id = ad.insertAccountCustomer(a);
-                    c.setId("CUS" + id);
-                    c.setId_acc(id);
-                    cd.insertCustomer(c);
-
-                    session.setAttribute("customer", c);
-                    session.setAttribute("account", a);
-                    session.setMaxInactiveInterval(15 * 60);
-
-//                    Cookie loginCookie = new Cookie("user", a.getUsername());
-//                    loginCookie.setMaxAge(15 * 60);
-//                    response.addCookie(loginCookie);
-                    response.sendRedirect("home.jsp");
-                } catch (IOException e) {
-                    System.err.println(e.getMessage());
-                }
-            } else {
-                response.sendRedirect("register.jsp");
-            }
-        } else {
-            request.setAttribute("errorGi", "invalid phone number");
-            request.getRequestDispatcher("getinfo.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("account") != null) {
+            Account a = (Account) session.getAttribute("account");
+            ad.changePwd(a, newpwd);
+            Account anew = ad.getAccountCustomerByEmail(a.getEmail());
+            session.removeAttribute("account");
+            session.setAttribute("account", anew);
+            response.sendRedirect("profile.jsp");
+        }else{
+            response.sendRedirect("home.jsp");
         }
     }
 

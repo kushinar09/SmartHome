@@ -4,9 +4,6 @@
  */
 package controller;
 
-import dal.AccountDAO;
-import utils.CheckValid;
-import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,16 +12,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import model.Account;
 import model.Customer;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "GetInfoServlet", urlPatterns = {"/getinfo"})
-public class GetInfoServlet extends HttpServlet {
+@WebServlet(name = "ChangeInfomation", urlPatterns = {"/changeInfo"})
+public class ChangeInfomation extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +38,10 @@ public class GetInfoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GetInfoServlet</title>");
+            out.println("<title>Servlet ChangeInfomation</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GetInfoServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangeInfomation at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -78,54 +73,22 @@ public class GetInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CheckValid cv = new CheckValid();
-        CustomerDAO cd = new CustomerDAO();
-        AccountDAO ad = new AccountDAO();
+        String name = request.getParameter("name");
+        String date = request.getParameter("dob");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
 
-        String fname = cv.fixString(request.getParameter("firstname"));
-        String lname = cv.fixString(request.getParameter("lastname"));
-        String name = fname + " " + lname;
-        String gender = request.getParameter("gender");
-        Date dob = Date.valueOf(request.getParameter("dob"));
-        String phone = cv.fixString(request.getParameter("phonenumber"));
-        String address = cv.fixString(request.getParameter("address"));
-
-        if (cv.checkPhone(phone)) {
-            Customer c = new Customer();
-            c.setId("");
-            c.setName(name);
-            c.setGender(gender);
-            c.setDob(dob);
-            c.setPhone(phone);
-            c.setAddress(address);
-            c.setId_acc(0);
-            HttpSession session = request.getSession(false);
-            if (session != null && session.getAttribute("account") != null) {
-                Account a = (Account) session.getAttribute("account");
-                session.removeAttribute("account");
-                try {
-                    int id = ad.insertAccountCustomer(a);
-                    c.setId("CUS" + id);
-                    c.setId_acc(id);
-                    cd.insertCustomer(c);
-
-                    session.setAttribute("customer", c);
-                    session.setAttribute("account", a);
-                    session.setMaxInactiveInterval(15 * 60);
-
-//                    Cookie loginCookie = new Cookie("user", a.getUsername());
-//                    loginCookie.setMaxAge(15 * 60);
-//                    response.addCookie(loginCookie);
-                    response.sendRedirect("home.jsp");
-                } catch (IOException e) {
-                    System.err.println(e.getMessage());
-                }
-            } else {
-                response.sendRedirect("register.jsp");
-            }
+        if (name == null || date == null || phone == null || address == null) {
+            response.sendRedirect("home.jsp");
         } else {
-            request.setAttribute("errorGi", "invalid phone number");
-            request.getRequestDispatcher("getinfo.jsp").forward(request, response);
+            HttpSession session = request.getSession(false);
+            if (session != null && session.getAttribute("customer") != null) {
+                Customer c = (Customer) session.getAttribute("customer");
+                String id = c.getId();
+                
+            } else {
+                response.sendRedirect("home.jsp");
+            }
         }
     }
 

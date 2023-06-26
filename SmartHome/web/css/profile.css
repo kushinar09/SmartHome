@@ -629,3 +629,8 @@ button[disabled] {
 .btn-pwd:focus{
     outline: none;
 }
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}

@@ -7,6 +7,7 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import model.Account;
 
 /**
@@ -15,31 +16,21 @@ import model.Account;
  */
 public class AccountDAO extends DBContext {
 
-    public void insertAccountCustomer(Account a) {
+    public int insertAccountCustomer(Account a) {
         try {
             String sql = "INSERT INTO [ACCOUNT_CUS] ([username], [email], [password])\n"
                     + "VALUES (?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 //            int id = getLastId();
 //            String user = a.getUsername() + "#" + id;
 //            statement.setString(1, user);
             statement.setString(1, a.getUsername());
             statement.setString(2, a.getEmail());
             statement.setString(3, a.getPassword());
-            statement.executeUpdate();
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-    }
-
-    public int getLastIdentity(String tablename) {
-        try {
-            String sql = "SELECT IDENT_CURRENT('?') AS [current_identity]";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, tablename);
-            ResultSet rs = statement.executeQuery();
+            statement.execute();
+            ResultSet rs = statement.getGeneratedKeys();
             if (rs.next()) {
-                return rs.getInt("current_identity");
+                return (rs.getInt(1));
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -132,6 +123,20 @@ public class AccountDAO extends DBContext {
             System.err.println(ex.getMessage());
         }
         return null;
+    }
+
+    public void changePwd(Account a, String newpwd) {
+        try {
+            String sql = "UPDATE [ACCOUNT_CUS]\n"
+                    + "SET [password] = ? WHERE [email] = ? AND [password] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, newpwd);
+            statement.setString(2, a.getEmail());
+            statement.setString(3, a.getPassword());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
 }

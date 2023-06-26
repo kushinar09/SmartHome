@@ -7,6 +7,7 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Account;
@@ -103,29 +104,27 @@ public class CustomerDAO extends DBContext {
         }
     }
 
-    public void getLastIdentity(String tablename) {
+    public void updateCustomer(Customer c, String id) {
         try {
-            String sql = "SELECT IDENT_CURRENT(?) AS [stt]";
+            String sql = "UPDATE [dbo].[CUSTOMER]\n"
+                    + "SET [name] = ?, [gender] = ?, [dob] = ?, [phoneNo] = ?, [address] = ?, [id_acc] = ?\n"
+                    + "WHERE [id_cus] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, tablename);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                if(rs.getString("stt") == null){
-                    System.out.println("null");
-                }else{
-                    System.out.println(rs.getString("stt"));
-                }
-//                return rs.getInt("stt");
-            }
+            statement.setString(1, c.getName());
+            statement.setString(2, c.getGender());
+            statement.setDate(3, c.getDob());
+            statement.setString(4, c.getPhone());
+            statement.setString(5, c.getAddress());
+            statement.setString(6, id);
+            statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-//        return 0;
     }
 
-    public static void main(String[] args) {
-        // TODO code application logic here
-        CustomerDAO cd = new CustomerDAO();
-        cd.getLastIdentity("ACCOUNT_CUS");
-    }
+//    public static void main(String[] args) {
+//        // TODO code application logic here
+//        CustomerDAO cd = new CustomerDAO();
+//        cd.getLastIdentity("ACCOUNT_CUS");
+//    }
 }

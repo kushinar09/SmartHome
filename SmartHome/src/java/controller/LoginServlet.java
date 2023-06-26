@@ -90,7 +90,6 @@ public class LoginServlet extends HttpServlet {
         if (!ad.getPwdByEmailCustomer(email).equals("")) {
             if (pass.equals(ad.getPwdByEmailCustomer(email))) {
                 Account a = ad.getAccountCustomerByEmail(email);
-                System.out.println("account id: " + a.getId());
                 Customer c = cd.getCustomerByAccount(a);
                 //add session
                 HttpSession session = request.getSession(false);
