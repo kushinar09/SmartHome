@@ -7,7 +7,6 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Account;
@@ -85,6 +84,31 @@ public class CustomerDAO extends DBContext {
         }
         return null;
     }
+    
+    public Customer getCustomerById(String id) {
+        try {
+            String sql = "SELECT * FROM [CUSTOMER] WHERE [id_cus] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                Customer c = new Customer();
+                c.setId(rs.getString("id_cus"));
+                c.setName(rs.getString("name"));
+                c.setGender(rs.getString("gender"));
+                c.setDob(rs.getDate("dob"));
+                c.setPhone(rs.getString("phoneNo"));
+                c.setAddress(rs.getString("address"));
+                c.setId_acc(rs.getInt("id_acc"));
+                return c;
+            } else {
+                System.out.println("Can not find customer by this id (Pos: CustomerDAO)");
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return null;
+    }
 
     public void insertCustomer(Customer c) {
         try {
@@ -107,7 +131,7 @@ public class CustomerDAO extends DBContext {
     public void updateCustomer(Customer c, String id) {
         try {
             String sql = "UPDATE [dbo].[CUSTOMER]\n"
-                    + "SET [name] = ?, [gender] = ?, [dob] = ?, [phoneNo] = ?, [address] = ?, [id_acc] = ?\n"
+                    + "SET [name] = ?, [gender] = ?, [dob] = ?, [phoneNo] = ?, [address] = ?\n"
                     + "WHERE [id_cus] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, c.getName());

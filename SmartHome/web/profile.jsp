@@ -45,16 +45,16 @@
                                             <div class="col-md-12 input-content">
                                                 <div class="form-group">
                                                     <p style="color: #7e8287; font-size: 1rem; margin: 0">Giới tính: </p>
-                                                    <input type="text" class="form-controlnew" name="gender" id="gender"
+                                                    <input type="text" class="form-controlnew" name="genderI" id="gender"
                                                            placeholder="Gender" value="${c.gender == "M" ? "Nam" : "Nữ"}" readonly>
-                                                    <select class="form-controlnew hidden-select" name="gender" id="genderselect" style="display: none;">
+                                                    <select class="form-controlnew hidden-select" name="genderS" id="genderselect" style="display: none;">
                                                         <c:if test="${c.gender == 'M'}">
-                                                            <option value="male" style="background-color:#fff; color: #000000;" selected>Nam</option>
-                                                            <option value="female" style="background-color:#fff; color: #000000;">Nữ</option>
+                                                            <option value="Nam" style="background-color:#fff; color: #000000;" selected>Nam</option>
+                                                            <option value="Nữ" style="background-color:#fff; color: #000000;">Nữ</option>
                                                         </c:if>
                                                         <c:if test="${c.gender == 'F'}">
-                                                            <option value="male" style="background-color:#fff; color: #000000;">Nam</option>
-                                                            <option value="female" style="background-color:#fff; color: #000000;" selected>Nữ</option>
+                                                            <option value="Nam" style="background-color:#fff; color: #000000;">Nam</option>
+                                                            <option value="Nữ" style="background-color:#fff; color: #000000;" selected>Nữ</option>
                                                         </c:if>
                                                     </select>
                                                 </div>
