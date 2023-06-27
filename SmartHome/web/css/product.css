@@ -172,6 +172,7 @@ del span.amount {
 }
 
 .product-name{
+    font-size: 1.1rem;
     color: #22417b;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -185,7 +186,7 @@ del span.amount {
     height: auto;
     margin: 0 auto;
     overflow: hidden;
-    position: relative; 
+    position: relative;
 }
 
 .out-of-stock-label {
@@ -254,4 +255,71 @@ del span.amount {
     white-space: nowrap;
     width: 100%;
     pointer-events: none;
+}
+
+.update-label{
+    opacity: 0;
+    visibility: hidden;
+    background: #fff;
+    background: #e83d0f;
+    color: #333;
+    font-weight: 700;
+    left: 0;
+    padding: 20px 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+    top: 50%;
+}
+
+.update-label:hover .update-link{
+    color: black;
+}
+
+.item-product-content:hover .update-label{
+    opacity: 1;
+    visibility: visible;
+}
+
+.update-link{
+    color: #fff;
+}
+
+.add-product{
+    margin-top: 10px;
+}
+
+.btn-add:hover{
+    /*    opacity: 1;
+        visibility: visible;*/
+    top: -10px;
+}
+
+.btn-add{
+    position: relative;
+    top: 0;
+    transition: top ease 0.3s;
+    /*    opacity: 0;
+        visibility: hidden;*/
+    margin: 0 auto;
+    background: #ffcc33;
+    /*    border: 2px black solid;*/
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4vw;
+    height: 4vw;
+    box-shadow: 0 1px 3px -2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+}
+
+.add-link{
+    color: #fff;
+    font-size: 2rem;
+    margin: auto;
+}
+
+.btn-add:hover{
+    background: #ff9933;
 }

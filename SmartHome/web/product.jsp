@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="css/product.css?version=2">
+        <link rel="stylesheet" href="css/product.css?version=6">
         <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     </head>
@@ -63,7 +63,7 @@
                                         </div>
                                         <c:if test="${product.quatity == 0}">
                                             <div class="out-of-stock-label">Hết hàng</div>
-                                        </c:if>
+                                        </c:if>                                        
                                     </div>
                                     <div class="box-text">
                                         <div style="height: 50px">
@@ -96,11 +96,25 @@
                                         </div>
                                     </div>
                                 </a>
+                                <a class="update-label" href="update?id=${product.id_prod}">
+                                    <div class="update-link-content">
+                                        <span  class="update-link">Update</span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
+
+                <div class="add-product">
+                    <a class="btn-add" href="addProduct.jsp">
+                        <span class="add-link">+</span>
+                    </a>
+                </div>
             </div>
+        </div>
+        <div class="foot">
+            <%@include file="footer.jsp" %>
         </div>
     </body>
 </html>

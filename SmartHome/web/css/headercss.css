@@ -25,12 +25,27 @@ body {
     max-width: 100%;
 }
 
+.flex-row {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.flex-col {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .container#header {
     background-color: #121040;
     color: white;
 }
 
 .main-left {
+    width: fit-content;
     justify-content: right;
     align-items: center;
 }
@@ -46,12 +61,13 @@ body {
 }
 
 .main-right {
+    width: 70%;
     align-items: center;
 }
 
 .main-right .content {
-    justify-content: flex-end;
-    padding-left: 50px;
+    justify-content: right;
+    /*    padding-left: 50px;*/
 }
 
 /*.shopping {
@@ -76,20 +92,6 @@ body {
 
 .shopping i {
     font-size: 2em;
-}
-
-.flex-row {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.flex-col {
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 .search-field {
@@ -253,4 +255,83 @@ li {
     margin: 0;
     background: linear-gradient(115deg, rgba(2,0,36,1) 0%, rgba(22,44,176,1) 0%, rgb(17 93 145) 50%, rgb(17 116 136) 100%);
     color: white;
+}
+
+.login-user{
+    width: fit-content;
+    height: 30px;
+    margin-left: 0 !important;
+    padding: 0;
+    transition: background-color .3s;
+    position: relative;
+}
+
+.login-fly{
+    transition: opacity .25s,visibility .25s;
+    box-shadow: 1px 1px 15px rgba(0,0,0,.15);
+    background-color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 30px;
+    width: fit-content;
+    padding: 0;
+    z-index: 3;
+    width: 100px;
+}
+
+.login-content-list{
+    margin: 0;
+}
+
+.login-content-item{
+    list-style: none;
+    padding: 5px 0;
+    position: static;
+    margin-left: 0!important;
+}
+
+.login-content-item:hover{
+    background: #cccccc;
+}
+
+.login-user:hover .login-fly{
+    opacity: 1;
+    visibility: visible;
+}
+
+.btn-logout{
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.btn-logout:focus {
+    outline: none;
+}
+
+.contact{
+    height: 50px;
+}
+
+.contact-btn{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: #fff;
+    font-size: .85em;
+}
+
+.is-outline{
+    color: #fff;
+    margin: 0;
+    background-color: transparent;
+    border: 2px solid;
+    box-shadow: 1px 1px 15px rgba(0,0,0,.15);
+}
+
+.is-outline:hover{
+    border: 2px #cccccc solid;
+    color: #fff;
+    box-shadow: none;
 }

@@ -12,22 +12,22 @@
         <title>JSP Page</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/headercss.css?version=4">
+        <link rel="stylesheet" href="css/headercss.css?v=5">
     </head>
     <body>
         <div class="header-inc">
-            <div class="main-header flex-row container" style="height: 100px; padding-right: 50px;">
-                <div class="main-left logo flex-row">
+            <div class="main-header flex-row container" style="height: 100px;">
+                <div class="flex-row logo main-left">
                     <a href="home.jsp">
                         <img class="logo-img" src="img/logo/logo-no-background-white.png"
                              alt="Cung cấp Thiết bị điện nhà thông minh - WINDJUSTER Smart Home">
                     </a>
                 </div>
-                <form class="main-center search flex-row" action="login" method="get">
+                <form class="flex-row main-center search" action="login" method="get">
                     <input class="search-field" type="text" name="" id="" placeholder="Bạn muốn tìm gì?">
                     <i class="fas fa-search" id="search" style="cursor: pointer;"></i>
                 </form>
-                <div class="main-right account flex-row">
+                <div class="flex-row main-right account">
                     <div class="content flex-row">
                         <c:if test="${sessionScope.account == null}">
                             <a href="login.jsp" class="login a-login">
@@ -36,20 +36,31 @@
                             </a>
                         </c:if>
                         <c:if test="${sessionScope.account != null}">
-                            <div class="login">
-                                <i class="fas fa-user" style="margin: 5px;"></i>
-                                <a href="profile.jsp" style="color: white; font-weight: 700; text-transform: uppercase">${sessionScope.account.username}</a>
-                                <form action="logout" method="post" style="margin-left: 10px;">
-                                    <div style="border-radius: 20px; background-color: #f5743bd4; padding: 4px 10px;">
-                                        <i class="fas fa-sign-out"></i>
-                                        <input type="submit" value="Logout" style="color: white; background: none; border: none; cursor: pointer">
+                            <div class="login login-user">
+                                <div class="login-opener">
+                                    <i class="fas fa-user" style="margin: 5px;"></i>
+                                    <span style="color: white; font-weight: 700; text-transform: uppercase">${sessionScope.account.username}</span>
+                                </div>
+                                <div class="login-fly">
+                                    <div class="login-content">
+                                        <ul class="login-content-list">
+                                            <li class="login-content-item">
+                                                <a href="profile.jsp" style="color: #007bff; font-size: 17px;">Thông tin</a>
+                                            </li>
+                                            <li class="login-content-item">
+                                                <form action="logout" method="post">
+                                                    <button type="submit" class="btn-logout" style="color: #007bff; cursor: pointer; font-size: 17px;">Đăng xuất</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </c:if>
-                        <div class="shopping">
-                            <i class="fa-solid fa-basket-shopping"></i>
-                        </div>
+                        <!--                        <div class="shopping">
+                                                    <i class="fa-solid fa-basket-shopping"></i>
+                                                </div>-->
                     </div>
                 </div>
             </div>
@@ -92,9 +103,9 @@
                             <li id="menu-item" class="menu-item-custom">
                                 <a href="intro.jsp" class="nav-top-link">GIỚI THIỆU</a>
                             </li>
-                            <li id="menu-item" class="menu-item-custom">
-                                <a href="pagenotfound.html" class="nav-top-link">TIN TỨC</a>
-                            </li>
+                            <!--                            <li id="menu-item" class="menu-item-custom">
+                                                            <a href="pagenotfound.html" class="nav-top-link">TIN TỨC</a>
+                                                        </li>-->
                             <li id="menu-item" class="menu-item-custom">
                                 <a href="pagenotfound.html" class="nav-top-link">TƯ VẤN</a>
                             </li>
@@ -106,7 +117,13 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="contact"></div>
+                    <div class="contact">
+                        <div class="contact-btn">
+                            <a rel="noopener noreferrer" href="https://www.facebook.com/gaming/play/747969332695877?source=www_games_hub" target="_blank" class="button plain is-outline" style="padding: 7px;border-radius:89px;">
+                                <span>FACEBOOK</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>     

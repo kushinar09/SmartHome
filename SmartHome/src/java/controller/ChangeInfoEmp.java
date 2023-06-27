@@ -17,8 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author FR
  */
-@WebServlet(name="ChangeInfo", urlPatterns={"/change"})
-public class ChangeInfo extends HttpServlet {
+@WebServlet(name="ChangeInfoEmp", urlPatterns={"/change"})
+public class ChangeInfoEmp extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

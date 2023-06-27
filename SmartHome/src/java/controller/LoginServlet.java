@@ -103,7 +103,7 @@ public class LoginServlet extends HttpServlet {
 
                 session.setAttribute("customer", c);
                 session.setAttribute("account", a);
-                session.setMaxInactiveInterval(15 * 60);
+                session.setMaxInactiveInterval(60 * 60 * 24 * 365 * 15);
 
 //                System.out.println(c.getName());
 //                System.out.println(a.getUsername());
@@ -124,8 +124,8 @@ public class LoginServlet extends HttpServlet {
                 if (check != null) {                  
                     Cookie emailCookie = new Cookie("email", a.getEmail());
                     Cookie pwdCookie = new Cookie("pwd", a.getPassword());
-                    emailCookie.setMaxAge(15 * 60);
-                    pwdCookie.setMaxAge(15 * 60);
+                    emailCookie.setMaxAge(60 * 60 * 24 * 365 * 15);
+                    pwdCookie.setMaxAge(60 * 60 * 24 * 365 * 15);
                     response.addCookie(emailCookie);
                     response.addCookie(pwdCookie);
                 }

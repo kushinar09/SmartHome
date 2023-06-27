@@ -6,8 +6,6 @@ package controller;
 
 import dal.AccountDAO;
 import utils.CheckValid;
-import dal.ConnectDAO;
-import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;

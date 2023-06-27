@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="css/profile.css?v=2">
+        <link rel="stylesheet" href="css/profile.css?v=3">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="fontawesome/css/all.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
@@ -27,6 +27,12 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10 content">
                         <div class="wrapper">
+                            <div class="back-btn">
+                                <a href="home.jsp">
+                                    <i class="fas fa-angle-left"></i>
+                                    Back to homepage
+                                </a>
+                            </div>
                             <div class="row no-gutters">
                                 <div class="col-md-6 d-flex align-items-stretch">
                                     <div class="contact-wrap w-100 p-md-5 p-4 py-5">
@@ -236,9 +242,9 @@
         function checkafter() {
             var old = document.getElementById("oldPassword").value;
             var newp = document.getElementById("password").value;
-            var cfp = document.getElementById("confirmPassword").value;           
+            var cfp = document.getElementById("confirmPassword").value;
             var getpwd = "${a.password}";
-            
+
             var errorck = "";
             if (old !== getpwd) {
                 errorck = "Old password is incorrect";

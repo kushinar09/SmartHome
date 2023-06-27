@@ -21,7 +21,7 @@ import model.Customer;
  * @author FR
  */
 @WebServlet(name = "ChangeInfomation", urlPatterns = {"/changeInfo"})
-public class ChangeInfomation extends HttpServlet {
+public class ChangeInfoCus extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

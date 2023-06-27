@@ -1,3 +1,12 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 26, 2023, 11:05:17 PM
+    Author     : FR
+*/
+
 :root {
     --blue: #007bff;
     --indigo: #6610f2;
@@ -222,7 +231,7 @@ form {
     margin-bottom: 1rem;
 }
 
-.form-controlnew {
+.form-controlnew-w{
     font-size: 16px;
     border: none;
     border-bottom: 1px solid black;
@@ -231,6 +240,30 @@ form {
     height: 52px;
     background: transparent;
     color: black;
+    border-radius: 0px;
+    box-shadow: none !important;
+    display: block;
+    width: 100%;
+    font-weight: 400;
+    line-height: 1.5;
+    -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.form-controlnew-w::placeholder {
+    color: #cccccc;
+    opacity: 1; /* Firefox */
+}
+
+.form-controlnew {
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 0;
+    padding: 0 10px;
+    height: 52px;
+    background: transparent;
+    color: #ffffff;
     border-radius: 0px;
     box-shadow: none !important;
     display: block;
@@ -636,9 +669,18 @@ button:disabled {
 }
 
 .back-btn{
-    font-size: 1.1rem;
     position: absolute;
     top: 10px;
     left: 50px;
     z-index: 3;
+}
+
+::placeholder {
+    color: #ffffff87;
+    opacity: 1; /* Firefox */
+}
+
+.img-emp{
+    width: 70%;
+    height: auto;
 }

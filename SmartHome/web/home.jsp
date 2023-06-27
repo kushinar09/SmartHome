@@ -67,6 +67,9 @@
             </div>
             <!--manual navigation end-->
         </div>
+        <div class="foot">
+            <%@include file="footer.jsp" %>
+        </div>
         <!--image slider end-->
         <script type="text/javascript">
             var counter = 1;

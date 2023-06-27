@@ -69,9 +69,9 @@
                             <span class="button__text">Log In Now</span>
                             <i class="button__icon fas fa-sign-in-alt" style='font-size:24px'></i>
                         </button>
-                        <p class="login__callout">
+<!--                        <p class="login__callout">
                             <a href="register.jsp">Create an account</a>.
-                        </p>
+                        </p>-->
                     </form>
                     <div class="social-login">
                         <div class="social-icons">
