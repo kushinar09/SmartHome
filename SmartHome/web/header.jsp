@@ -12,7 +12,7 @@
         <title>JSP Page</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/headercss.css?v=5">
+        <link rel="stylesheet" href="css/headercss.css?v=4">
     </head>
     <body>
         <div class="header-inc">
@@ -101,26 +101,23 @@
                                 </div>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
-                                <a href="intro.jsp" class="nav-top-link">GIỚI THIỆU</a>
+                                <a href="intro.jsp" class="nav-top-link">KHÁCH HÀNG</a>
                             </li>
                             <!--                            <li id="menu-item" class="menu-item-custom">
                                                             <a href="pagenotfound.html" class="nav-top-link">TIN TỨC</a>
                                                         </li>-->
                             <li id="menu-item" class="menu-item-custom">
+                                <a href="pagenotfound.html" class="nav-top-link">ĐƠN HÀNG</a>
+                            </li>
+                            <li id="menu-item" class="menu-item-custom">
                                 <a href="pagenotfound.html" class="nav-top-link">TƯ VẤN</a>
-                            </li>
-                            <li id="menu-item" class="menu-item-custom">
-                                <a href="pagenotfound.html" class="nav-top-link">HỖ TRỢ</a>
-                            </li>
-                            <li id="menu-item" class="menu-item-custom">
-                                <a href="pagenotfound.html" class="nav-top-link">LIÊN HỆ</a>
                             </li>
                         </ul>
                     </div>
                     <div class="contact">
                         <div class="contact-btn">
-                            <a rel="noopener noreferrer" href="https://www.facebook.com/gaming/play/747969332695877?source=www_games_hub" target="_blank" class="button plain is-outline" style="padding: 7px;border-radius:89px;">
-                                <span>FACEBOOK</span>
+                            <a rel="noopener noreferrer" href="#" target="_blank" class="button plain is-outline" style="padding: 7px;border-radius:89px;">
+                                <span>BÁO LỖI</span>
                             </a>
                         </div>
                     </div>
