@@ -6,6 +6,7 @@ package controller;
 
 import dal.AccountDAO;
 import dal.CustomerDAO;
+import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Account;
 import model.Customer;
+import model.Employee;
 
 /**
  *
@@ -80,28 +82,28 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("pwd");
         String check = request.getParameter("check");
-        CustomerDAO cd = new CustomerDAO();
-        AccountDAO ad = new AccountDAO();
+        EmployeeDAO ed = new EmployeeDAO();
+//        AccountDAO ad = new AccountDAO();
 
         if (email.equals("") || pass.equals("")) {
             request.setAttribute("errorLog", "Enter your email and password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-        if (!ad.getPwdByEmailCustomer(email).equals("")) {
-            if (pass.equals(ad.getPwdByEmailCustomer(email))) {
-                Account a = ad.getAccountCustomerByEmail(email);
-                Customer c = cd.getCustomerByAccount(a);
+        if (!ed.getPwdByEmail(email).equals("")) {
+            if (pass.equals(ed.getPwdByEmail(email))) {
+                Account a = ed.getAccountByEmail(email);
+                Employee e = ed.getEmployeeByAccount(a);
                 //add session
                 HttpSession session = request.getSession(false);
 
                 if (session != null) {
-                    session.removeAttribute("customer");
+                    session.removeAttribute("employee");
                     session.removeAttribute("account");
                 } else {
                     session = request.getSession();
                 }
 
-                session.setAttribute("customer", c);
+                session.setAttribute("employee", e);
                 session.setAttribute("account", a);
                 session.setMaxInactiveInterval(60 * 60 * 24 * 365 * 15);
 

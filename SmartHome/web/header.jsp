@@ -12,7 +12,7 @@
         <title>JSP Page</title>
         <script src="https://kit.fontawesome.com/cf1c65ad6d.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/headercss.css?v=4">
+        <link rel="stylesheet" href="css/headercss.css?v=5">
     </head>
     <body>
         <div class="header-inc">
@@ -23,16 +23,16 @@
                              alt="Cung cấp Thiết bị điện nhà thông minh - WINDJUSTER Smart Home">
                     </a>
                 </div>
-                <form class="flex-row main-center search" action="login" method="get">
-                    <input class="search-field" type="text" name="" id="" placeholder="Bạn muốn tìm gì?">
-                    <i class="fas fa-search" id="search" style="cursor: pointer;"></i>
+                <form class="flex-row main-center search" action="ProductServlet" method="get" id="searchFrom">
+                    <input class="search-field" type="text" name="search" id="search" placeholder="Bạn muốn tìm gì?">
+                    <i class="fas fa-search" id="searchIcon" style="cursor: pointer;" onclick="document.getElementById('searchFrom').submit();"></i>
                 </form>
                 <div class="flex-row main-right account">
                     <div class="content flex-row">
                         <c:if test="${sessionScope.account == null}">
                             <a href="login.jsp" class="login a-login">
                                 <i class="fas fa-user" style="margin: 5px;"></i>
-                                <span id="user">Đăng nhập / Đăng ký</span>
+                                <span id="user">Đăng nhập</span>
                             </a>
                         </c:if>
                         <c:if test="${sessionScope.account != null}">
@@ -82,19 +82,19 @@
                                     <div class="fly-content">
                                         <ul class="fly-content-list">
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="ProductServlet?type=<%=1%>" class="fly-link">An Ninh & Giám Sát</a>
+                                                <a href="ProductServlet?type=1" class="fly-link">An Ninh & Giám Sát</a>
                                             </li>
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="ProductServlet?type=<%=2%>" class="fly-link">Thiết Bị Smart Home</a>
+                                                <a href="ProductServlet?type=2" class="fly-link">Thiết Bị Smart Home</a>
                                             </li>
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="ProductServlet?type=<%=3%>" class="fly-link">Đèn thông minh</a>
+                                                <a href="ProductServlet?type=3" class="fly-link">Đèn thông minh</a>
                                             </li>
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="ProductServlet?type=<%=4%>" class="fly-link">Gia Dụng</a>
+                                                <a href="ProductServlet?type=4" class="fly-link">Gia Dụng</a>
                                             </li>
                                             <li id="fly-item" class="menu-fly-item">
-                                                <a href="ProductServlet?type=<%=5%>" class="fly-link">Chăm Sóc Cá Nhân</a>
+                                                <a href="ProductServlet?type=5" class="fly-link">Chăm Sóc Cá Nhân</a>
                                             </li>
                                         </ul>
                                     </div>

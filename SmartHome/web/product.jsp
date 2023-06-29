@@ -21,7 +21,7 @@
         <div class="page-title">
             <div class="page-title-content flex-row container">
                 <div class="flex-col flex-grow">
-                    <h1 class="title-name">An ninh & Giám sát</h1>
+                    <h1 class="title-name">${sessionScope.title}</h1>
                     <div class="current-pos">
                         <nav class="dir-home breadcrumbs uppercase">
                             <c:set var="title" value="${sessionScope.title}"></c:set>
@@ -61,7 +61,7 @@
                                         <div class="prd-img">
                                             <img width="300" height="300" src="img/product/${product.image}" alt="${product.name}" sizes="(max-width: 300px) 100vw, 300px"/>
                                         </div>
-                                        <c:if test="${product.quatity == 0}">
+                                        <c:if test="${product.quantity == 0}">
                                             <div class="out-of-stock-label">Hết hàng</div>
                                         </c:if>                                        
                                     </div>
@@ -113,8 +113,12 @@
                 </div>
             </div>
         </div>
-        <div class="foot">
-            <%@include file="footer.jsp" %>
+        <div class="footer" style="background: linear-gradient(to right, #181717, #293035);">
+            <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50" style="height: 110px;">
+                <div class="container text-center" style="height: 100%; justify-content: center;">
+                    <small style="color: white; font-size: 15px;">Copyright &copy; <a href="intro.jsp" style="color: #007bff;">WINDJUSTER</a></small>
+                </div>
+            </footer>
         </div>
     </body>
 </html>

@@ -18,10 +18,8 @@ public class Employee {
     private String gender;
     private Date dob;
     private String phone;
-    private String workDept;
     private Date hireDate;
     private String job;
-    private int edlevel;
     private String id_empm;
     private int id_acc;
 
@@ -76,14 +74,6 @@ public class Employee {
         this.phone = phone;
     }
 
-    public String getWorkDept() {
-        return workDept;
-    }
-
-    public void setWorkDept(String workDept) {
-        this.workDept = workDept;
-    }
-
     public Date getHireDate() {
         return hireDate;
     }
@@ -98,14 +88,6 @@ public class Employee {
 
     public void setJob(String job) {
         this.job = job;
-    }
-
-    public int getEdlevel() {
-        return edlevel;
-    }
-
-    public void setEdlevel(int edlevel) {
-        this.edlevel = edlevel;
     }
 
     public String getId_empm() {

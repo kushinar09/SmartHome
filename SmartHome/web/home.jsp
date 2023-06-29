@@ -80,7 +80,7 @@
                 if (counter > 5) {
                     counter = 1;
                 }
-            }, 5000);
+            }, 3000);
         </script>
         <script src="bootstrap/js/bootstrap.js"></script>
     </body>

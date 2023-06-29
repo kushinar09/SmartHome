@@ -18,7 +18,7 @@
         </div>
         <main id="main" class="" style="margin-top: 150px;">
             <div id="content" class="content-area page-wrapper" role="main">
-                <div class="row row-main">
+                <div class="row row-main" style="margin: 0 auto;">
                     <div class="large-12 col">
                         <div class="col-inner">
                             <section class="section" id="section_1563985420">
@@ -83,5 +83,8 @@
                 </div>
             </div>
         </main>
+        <div>
+            <%@include file="footer.jsp" %>
+        </div>
     </body>
 </html>

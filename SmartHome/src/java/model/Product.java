@@ -20,7 +20,7 @@ public class Product {
     private int promopercent;
     private Date promostart;
     private Date promoend;
-    private int quatity;
+    private int quantity;
 
     public Product() {
     }
@@ -89,12 +89,12 @@ public class Product {
         this.promoend = promoend;
     }
 
-    public int getQuatity() {
-        return quatity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setQuatity(int quatity) {
-        this.quatity = quatity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
 }

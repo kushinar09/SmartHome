@@ -14,49 +14,21 @@
         <link rel="stylesheet" href="fontawesome/css/all.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <link rel="stylesheet" href="css/footercss.css?v=4"/>
+        <!--        <link rel="stylesheet" href="css/footercss.css?v=1"/>-->
+        <style>
+            a:hover{
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
-        <footer class="footer">
-            <div class="container container-div">
-                <div class="row-flex">
-                    <div class="footer-col">
-                        <h4>company</h4>
-                        <ul>
-                            <li><a href="http://localhost:9999/SmartHome/intro.jsp">Giới thiệu</a></li>
-                            <li><a href="#">Liên hệ</a></li>
-                            <li><a href="#">Chính sách bảo mật</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>get help</h4>
-                        <ul>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Tư vấn</a></li>
-                            <li><a href="#">Hỗ trợ</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>shop</h4>
-                        <ul>
-                            <li><a href="http://localhost:9999/SmartHome/ProductServlet?type=1">An Ninh & Giám Sát</a></li>
-                            <li><a href="http://localhost:9999/SmartHome/ProductServlet?type=2">Thiết Bị Smart Home</a></li>
-                            <li><a href="http://localhost:9999/SmartHome/ProductServlet?type=3">Đèn thông minh</a></li>
-                            <li><a href="http://localhost:9999/SmartHome/ProductServlet?type=4">Gia Dụng</a></li>
-                            <li><a href="http://localhost:9999/SmartHome/ProductServlet?type=5">Chăm Sóc Cá Nhân</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>follow us</h4>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
+        <div class="footer" style="background: linear-gradient(to right, #181717, #293035);">
+            <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50" style="height: 110px;">
+                <div class="container text-center" style="height: 100%; justify-content: center;">
+                    <small style="color: white; font-size: 15px;">Copyright &copy; <a href="intro.jsp">WINDJUSTER</a></small>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     </body>
+
 </html>

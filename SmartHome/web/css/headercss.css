@@ -75,7 +75,7 @@ body {
 }*/
 
 .login{
-    width: 75%;
+    width: fit-content;
     color: white;
     display: flex;
     justify-content: left;
@@ -84,6 +84,7 @@ body {
 
 .a-login:hover{
     color: #99ffff;
+    text-decoration: none;
 }
 
 .shopping{
@@ -100,7 +101,7 @@ body {
     padding: 5px;
 }
 
-#search {
+#searchIcon {
     position: relative;
     right: 25px;
     color: black;
@@ -122,7 +123,7 @@ a {
     text-decoration: none;
 }
 
-a:hover{
+a:hover {
     text-decoration: none;
 }
 
@@ -207,7 +208,7 @@ li {
 
 .menu-item-custom{
     height: 50px;
-    width: 90px;
+    width: 125px;
     margin: 0 0.7em;
     display: inline-block;
     list-style: none;
@@ -228,10 +229,12 @@ li {
 .header-menu-fly a:hover {
     background-color: #776BCC;
     color: white;
+    text-decoration: none;
 }
 
 #menu-item:hover a{
     color: white;
+    text-decoration: none;
 }
 
 .nav-top-link{
@@ -334,4 +337,5 @@ li {
     border: 2px #cccccc solid;
     color: #fff;
     box-shadow: none;
+    text-decoration: none;
 }

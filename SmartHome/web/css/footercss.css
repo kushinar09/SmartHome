@@ -20,14 +20,14 @@ a:hover{
     text-decoration: none;
 }
 .container-div{
-/*    max-width: 1170px;*/
-    /*    margin:auto;*/
+    max-width: 1170px;
+    margin:auto;
 }
 .row-flex{
     display: flex;
     flex-wrap: wrap;
 }
-ul{
+.ul{
     list-style: none;
     padding: 0;
 }
