@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
                         <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-                            <a href="#" class="row link-back">
+                            <a href="product.jsp" class="row link-back">
                                 <i class="fas fa-arrow-alt-circle-left" style="margin-right: 4px;"></i>
                                 Back
                             </a>

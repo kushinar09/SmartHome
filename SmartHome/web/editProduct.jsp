@@ -12,12 +12,12 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="fontawesome/css/all.css" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/mo-style.css?v=3">
+        <link rel="stylesheet" href="css/mo-style.css?v=12">
 
     </head>
     <body>
-        <c:if test="${requestScope.product != null}">
-            <c:set var="p" value="${requestScope.product}"></c:set>
+        <c:if test="${sessionScope.productEdit != null}">
+            <c:set var="p" value="${sessionScope.productEdit}"></c:set>
         </c:if>
 
         <div class="container tm-mt-big tm-mb-big">
@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="description">Mô tả</label>
-                                        <textarea class="form-control validate" rows="5" style="min-height: 86px;" required >${p.description}</textarea>
+                                        <textarea class="form-control validate" rows="5" style="min-height: 86px;">${p.description}</textarea>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="category">Loại sản phẩm</label>
@@ -79,9 +79,9 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                                 <div class="tm-product-img-dummy mx-auto">
-                                    <img width="240" height="240" src="" alt="Image preview..." id="preview-img" style="display: none;">
+                                    <img width="240" height="240" src="img/product/${p.image}" alt="Image preview..." id="preview-img">
                                     <i class="fas fa-cloud-upload-alt tm-upload-icon"
-                                       onclick="document.getElementById('fileInput').click();" style="position: absolute;"></i>
+                                       onclick="document.getElementById('fileInput').click();"></i>
                                 </div>
                                 <div class="custom-file mt-3 mb-3">
                                     <input id="fileInput" type="file" onchange="previewFile()" style="display:none;" required/>
@@ -113,9 +113,15 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block text-uppercase">Thêm</button>
+                                <!--<button type="button" class="btn btn-primary btn-block text-uppercase">Cập nhật</button>-->
+                                <input type="submit" class="btn btn-primary btn-block text-uppercase" value="Cập nhật">
                             </div>
                         </form>
+                        <div class="col-12" style="margin-top: 30px; padding: 0">
+                            <a href="deleteProduct?id=${p.id_prod}">
+                                <div class="btn btn-primary btn-block text-uppercase">Xóa sản phẩm</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

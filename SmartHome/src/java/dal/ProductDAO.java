@@ -174,6 +174,7 @@ public class ProductDAO extends DBContext {
         try {
             String sql = "SELECT * FROM PRODUCT P LEFT JOIN STORAGE S ON P.id_prod = S.id_prod WHERE P.[id_prod] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 Product p = new Product();

@@ -427,6 +427,7 @@ thead {
     font-weight: 600;
 }
 
+
 .btn-primary:active,
 .btn-primary:hover {
     color: #f5a623;
@@ -630,6 +631,11 @@ input[type="checkbox"]:focus {
     background: #aaa;
 }
 
+.tm-product-img-dummy:hover .tm-upload-icon{
+    opacity: 1;
+    visibility: visible;
+}
+
 .tm-product-img-edit {
     max-width: 100%;
     position: relative;
@@ -645,6 +651,9 @@ input[type="checkbox"]:focus {
 }
 
 .tm-upload-icon {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
     cursor: pointer;
     background: #455c71;
     width: 55px;
