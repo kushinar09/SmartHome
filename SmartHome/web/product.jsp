@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a class="update-label" href="update?id=${product.id_prod}">
+                                <a class="update-label" href="editProduct?id=${product.id_prod}">
                                     <div class="update-link-content">
                                         <span  class="update-link">Update</span>
                                     </div>

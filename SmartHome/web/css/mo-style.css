@@ -22,7 +22,7 @@ html {
 
 body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
-    background-color: #4e657a;
+    background-color: #4e657ac9;
     overflow-x: hidden;
 }
 
@@ -464,7 +464,7 @@ thead {
 }
 
 .tm-bg-primary-dark {
-    background-color: #435c70;
+    background-color: #133754;
 }
 
 .tm-bg-gray {

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : addProduct
-    Created on : Jun 27, 2023, 5:33:29 PM
+    Document   : editProduct
+    Created on : Jun 29, 2023, 9:00:19 PM
     Author     : FR
 --%>
 
@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="fontawesome/css/all.css" />
+    <link rel="stylesheet" href="fontawesome/css/all.css" />
         <!-- https://fontawesome.com/ -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
         <!-- https://getbootstrap.com/ -->
@@ -104,7 +104,7 @@
                                             <div class="mb-2 col-xs-2 col-sm-2" style="padding-left: 0;">
                                                 <select class="custom-select tm-select-accounts" id="category">
                                                     <option value="kg" selected>Kg</option>
-<!--                                                    <option value="lb">Lb</option>-->
+                                                    <option value="lb">Lb</option>
                                                 </select>
                                             </div>
                                         </div>

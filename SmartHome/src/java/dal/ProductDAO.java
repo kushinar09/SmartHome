@@ -161,6 +161,30 @@ public class ProductDAO extends DBContext {
         }
         return sb.toString();
     }
+    
+    public Product getProductById(String id){
+        try {
+            String sql = "SELECT * FROM PRODUCT P LEFT JOIN STORAGE S ON P.id_prod = S.id_prod WHERE P.[id_prod] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                Product p = new Product();
+                p.setId_prod(rs.getString("id_prod"));
+                p.setImage(rs.getString("image"));
+                p.setName(rs.getString("name"));
+                p.setType(rs.getInt("type"));
+                p.setPrice(rs.getDouble("price"));
+                p.setPromopercent(rs.getInt("promopercent"));
+                p.setPromostart(rs.getDate("promostart"));
+                p.setPromoend(rs.getDate("promoend"));
+                p.setQuantity(rs.getInt("in_stock"));
+                return p;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
 
 //    public static void main(String[] args) {
 //        // TODO code application logic here

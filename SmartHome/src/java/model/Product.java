@@ -20,6 +20,7 @@ public class Product {
     private int promopercent;
     private Date promostart;
     private Date promoend;
+    private String description;
     private int quantity;
 
     public Product() {
@@ -95,6 +96,14 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }
