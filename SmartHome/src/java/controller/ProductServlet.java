@@ -4,7 +4,6 @@
  */
 package controller;
 
-import static controller.Search.list;
 import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -103,7 +102,8 @@ public class ProductServlet extends HttpServlet {
                 session.setAttribute("title", title);
             }
         }
-        request.setAttribute("list", list);
+        session.removeAttribute("list");
+        session.setAttribute("list", list);
         request.getRequestDispatcher("product.jsp").forward(request, response);
     }
 

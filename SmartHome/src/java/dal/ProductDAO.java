@@ -4,7 +4,6 @@
  */
 package dal;
 
-import com.sun.xml.internal.ws.util.xml.CDATA;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,6 +33,9 @@ public class ProductDAO extends DBContext {
                     p.setImage(rs.getString("image"));
                     p.setName(rs.getString("name"));
                     p.setType(rs.getInt("type"));
+                    p.setYear(rs.getInt("year"));
+                    p.setBrand(rs.getString("brand"));
+                    p.setWeight(rs.getDouble("weight"));
                     p.setPrice(rs.getDouble("price"));
                     p.setPromopercent(rs.getInt("promopercent"));
                     p.setPromostart(rs.getDate("promostart"));
@@ -53,6 +55,9 @@ public class ProductDAO extends DBContext {
                     p.setImage(rs.getString("image"));
                     p.setName(rs.getString("name"));
                     p.setType(rs.getInt("type"));
+                    p.setYear(rs.getInt("year"));
+                    p.setBrand(rs.getString("brand"));
+                    p.setWeight(rs.getDouble("weight"));
                     p.setPrice(rs.getDouble("price"));
                     p.setPromopercent(rs.getInt("promopercent"));
                     p.setPromostart(rs.getDate("promostart"));
@@ -98,6 +103,9 @@ public class ProductDAO extends DBContext {
                 p.setImage(rs.getString("image"));
                 p.setName(rs.getString("name"));
                 p.setType(rs.getInt("type"));
+                p.setYear(rs.getInt("year"));
+                p.setBrand(rs.getString("brand"));
+                p.setWeight(rs.getDouble("weight"));
                 p.setPrice(rs.getDouble("price"));
                 p.setPromopercent(rs.getInt("promopercent"));
                 p.setPromostart(rs.getDate("promostart"));
@@ -161,8 +169,8 @@ public class ProductDAO extends DBContext {
         }
         return sb.toString();
     }
-    
-    public Product getProductById(String id){
+
+    public Product getProductById(String id) {
         try {
             String sql = "SELECT * FROM PRODUCT P LEFT JOIN STORAGE S ON P.id_prod = S.id_prod WHERE P.[id_prod] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -173,6 +181,9 @@ public class ProductDAO extends DBContext {
                 p.setImage(rs.getString("image"));
                 p.setName(rs.getString("name"));
                 p.setType(rs.getInt("type"));
+                p.setYear(rs.getInt("year"));
+                p.setBrand(rs.getString("brand"));
+                p.setWeight(rs.getDouble("weight"));
                 p.setPrice(rs.getDouble("price"));
                 p.setPromopercent(rs.getInt("promopercent"));
                 p.setPromostart(rs.getDate("promostart"));
@@ -194,6 +205,9 @@ public class ProductDAO extends DBContext {
 ////            System.out.println(product.getName());
 ////        }
 //        
-//        System.out.println(pd.removeAccent("năm quý mão mệnh gì"));
+//        List<Product> list = pd.getListBySearch("cam");
+//        for (Product product : list) {
+//            System.out.println(product.getPromopercent());
+//        }
 //    }
 }

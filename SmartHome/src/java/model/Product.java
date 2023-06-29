@@ -16,6 +16,9 @@ public class Product {
     private String image;
     private String name;
     private int type;
+    private int year;
+    private String brand;
+    private double weight;
     private double price;
     private int promopercent;
     private Date promostart;
@@ -56,6 +59,30 @@ public class Product {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public double getPrice() {

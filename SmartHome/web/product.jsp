@@ -44,7 +44,7 @@
         <div class="page-content">
             <div class="container">
                 <div class="product-content flex-row" style="justify-content: left">
-                    <c:forEach items="${requestScope.list}" var="product">
+                    <c:forEach items="${sessionScope.list}" var="product">
                         <div class="item-product">
                             <div class="item-product-content">
                                 <c:if test="${product.promopercent != 0}">

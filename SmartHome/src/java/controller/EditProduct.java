@@ -6,7 +6,6 @@ package controller;
 
 import dal.ProductDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,17 +32,14 @@ public class EditProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditProduct</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditProduct at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        ProductDAO pd = new ProductDAO();
+        String id = request.getParameter("id");
+        if (request.getParameter("id") == null) {
+            response.sendRedirect("pagenotfound.html");
+        }else{
+            Product p = pd.getProductById(id);
+            request.setAttribute("product", p);
+            request.getRequestDispatcher("editProduct.jsp").forward(request, response);
         }
     }
 
@@ -62,6 +58,8 @@ public class EditProduct extends HttpServlet {
 //        processRequest(request, response);
         if (request.getParameter("id") == null) {
             response.sendRedirect("pagenotfound.html");
+        }else{
+            processRequest(request, response);
         }
     }
 
@@ -76,12 +74,10 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDAO pd = new ProductDAO();
-        String id = request.getParameter("id");
         if (request.getParameter("id") == null) {
             response.sendRedirect("pagenotfound.html");
         }else{
-            Product p = pd.getProductById(id);
+            processRequest(request, response);
         }
     }
 
