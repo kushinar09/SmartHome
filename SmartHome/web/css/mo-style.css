@@ -901,6 +901,16 @@ input[type="checkbox"]:focus {
     width: 100%;
 }
 
+.snippets-add{
+    display: none;
+    margin-top: 10px;
+    background: #ffffff;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+}
+
 
 p {
     margin-top: 0;
