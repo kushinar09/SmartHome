@@ -62,6 +62,7 @@ public class ProductDAO extends DBContext {
                     p.setPromopercent(rs.getInt("promopercent"));
                     p.setPromostart(rs.getDate("promostart"));
                     p.setPromoend(rs.getDate("promoend"));
+                    p.setDescription(rs.getString("description"));
                     p.setQuantity(rs.getInt("in_stock"));
                     list.add(p);
                 }
@@ -110,6 +111,7 @@ public class ProductDAO extends DBContext {
                 p.setPromopercent(rs.getInt("promopercent"));
                 p.setPromostart(rs.getDate("promostart"));
                 p.setPromoend(rs.getDate("promoend"));
+                p.setDescription(rs.getString("description"));
                 p.setQuantity(rs.getInt("in_stock"));
                 list.add(p);
             }
@@ -189,6 +191,7 @@ public class ProductDAO extends DBContext {
                 p.setPromopercent(rs.getInt("promopercent"));
                 p.setPromostart(rs.getDate("promostart"));
                 p.setPromoend(rs.getDate("promoend"));
+                p.setDescription(rs.getString("description"));
                 p.setQuantity(rs.getInt("in_stock"));
                 return p;
             }

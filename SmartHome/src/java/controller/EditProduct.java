@@ -34,18 +34,19 @@ public class EditProduct extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO pd = new ProductDAO();
-        HttpSession session = request.getSession();
-        
+
         String id = request.getParameter("id");
         if (request.getParameter("id") == null) {
             response.sendRedirect("pagenotfound.html");
         } else {
             Product p = pd.getProductById(id);
-            session.removeAttribute("productEdit");
-            session.setAttribute("productEdit", p);
-//            request.setAttribute("productEdit", p);
-//            request.getRequestDispatcher("editProduct.jsp").forward(request, response);
-            response.sendRedirect("editProduct.jsp");
+//        HttpSession session = request.getSession();
+//            session.removeAttribute("productEdit");
+//            session.setAttribute("productEdit", p);
+//            response.sendRedirect("editProduct.jsp");
+            request.setAttribute("productEdit", p);
+            request.getRequestDispatcher("editProduct.jsp").forward(request, response);
+
         }
     }
 
@@ -80,7 +81,7 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("okok");
+        String name = request.getParameter("name");
     }
 
     /**

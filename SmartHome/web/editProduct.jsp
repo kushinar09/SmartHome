@@ -12,12 +12,12 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="fontawesome/css/all.css" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/mo-style.css?v=12">
+        <link rel="stylesheet" href="css/mo-style.css?v=1">
 
     </head>
     <body>
-        <c:if test="${sessionScope.productEdit != null}">
-            <c:set var="p" value="${sessionScope.productEdit}"></c:set>
+        <c:if test="${requestScope.productEdit != null}">
+            <c:set var="p" value="${requestScope.productEdit}"></c:set>
         </c:if>
 
         <div class="container tm-mt-big tm-mb-big">
@@ -33,7 +33,7 @@
                                 <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
                             </div>
                         </div>
-                        <form action="" class="row tm-edit-product-row">
+                        <form action="editProduct" method="post" class="row tm-edit-product-row">
                             <div class="col-xl-6 col-lg-6 col-md-12">
                                 <div class="tm-edit-product-form" style="display: block; margin-top: 0em;">
                                     <div class="form-group mb-3">
@@ -43,7 +43,10 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="description">Mô tả</label>
-                                        <textarea class="form-control validate" rows="5" style="min-height: 86px;">${p.description}</textarea>
+                                        <textarea class="form-control validate" id="description" name="description" rows="5" style="min-height: 86px;">${p.description}</textarea>
+                                        <div class="snippets">
+                                            ${p.description}
+                                        </div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="category">Loại sản phẩm</label>
@@ -84,7 +87,7 @@
                                        onclick="document.getElementById('fileInput').click();"></i>
                                 </div>
                                 <div class="custom-file mt-3 mb-3">
-                                    <input id="fileInput" type="file" onchange="previewFile()" style="display:none;" required/>
+                                    <input id="fileInput" type="file" onchange="previewFile()" style="display:none;"/>
                                     <input type="button" class="btn btn-primary btn-block mx-auto"
                                            value="UPLOAD PRODUCT IMAGE"
                                            onclick="document.getElementById('fileInput').click();" />
@@ -113,15 +116,15 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <!--<button type="button" class="btn btn-primary btn-block text-uppercase">Cập nhật</button>-->
-                                <input type="submit" class="btn btn-primary btn-block text-uppercase" value="Cập nhật">
+                                <button type="submit" class="btn btn-primary btn-block text-uppercase">Cập nhật</button>
+                            </div>
+                                                  
+                            <div class="col-12" style="margin-top: 30px;">
+                                <a href="deleteProduct?id=${p.id_prod}">
+                                    <div class="btn btn-primary btn-block text-uppercase">Xóa sản phẩm</div>
+                                </a>
                             </div>
                         </form>
-                        <div class="col-12" style="margin-top: 30px; padding: 0">
-                            <a href="deleteProduct?id=${p.id_prod}">
-                                <div class="btn btn-primary btn-block text-uppercase">Xóa sản phẩm</div>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,498 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jul 1, 2023, 10:51:57 PM
+    Author     : FR
+*/
+
+body{
+    font-size: 1rem;
+}
+
+.img-zone {
+    display: flex;
+    justify-content: center;
+}
+
+.img-zone img {
+    width: 60%;
+    height: auto;
+}
+
+.list-unstyled li{
+    width: 100%;
+}
+
+.list-unstyled{
+    font-size: 1.2rem;
+}
+
+.bullet-checkmark {
+    padding: 0;
+    border-bottom: 0px;
+    font-size: 95%;
+    list-style: none;
+    margin: 0;
+    position: relative;
+}
+
+.bullet-checkmark i {
+    color: #2eb20d;
+    margin-right: 5px;
+}
+
+.col-inner {
+    background-color: rgb(250, 250, 250);
+    padding: 15px 20px 20px 20px;
+    margin-left: 0;
+    margin-right: auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex: 1 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 100%;
+}
+
+.featured-box {
+    border-radius: 999px !important;
+    -o-object-fit: cover;
+    object-fit: cover;
+    text-align: left;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+
+.icon-box-img {
+    flex: 0 0 auto;
+    margin-bottom: 0;
+    max-width: 200px;
+    position: relative;
+}
+
+.icon-box-text {
+    padding-left: 1em;
+    flex: 1 1 0px;
+}
+
+#gap-813078090 {
+    padding-top: 10px;
+}
+
+#text-4143460046 {
+    line-height: 0.75;
+    text-align: center;
+}
+
+.para {
+    margin-top: 0;
+    margin-bottom: 1.3em;
+}
+
+.content-item {
+    padding: 30px 0;
+    background-color: #FFFFFF;
+}
+
+.content-item.grey {
+    background-color: #F0F0F0;
+    padding: 50px 0;
+    height: 100%;
+}
+
+.content-item h2 {
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 45px;
+    text-transform: uppercase;
+    margin: 20px 0;
+}
+
+.content-item h3 {
+    font-weight: 400;
+    font-size: 20px;
+    color: #555555;
+    margin: 10px 0 15px;
+    padding: 0;
+}
+
+.content-headline {
+    height: 1px;
+    text-align: center;
+    margin: 20px 0 70px;
+}
+
+.content-headline h2 {
+    background-color: #FFFFFF;
+    display: inline-block;
+    margin: -20px auto 0;
+    padding: 0 20px;
+}
+
+.grey .content-headline h2 {
+    background-color: #F0F0F0;
+}
+
+.content-headline h3 {
+    font-size: 14px;
+    color: #AAAAAA;
+    display: block;
+}
+
+.comment-zone{
+    margin-top: 30px;
+}
+
+#comments {
+    box-shadow: 0 -1px 6px 1px rgba(0, 0, 0, 0.1);
+    background-color: #FFFFFF;
+}
+
+#comments form {
+    margin-bottom: 30px;
+}
+
+#comments .btn {
+    margin-top: 7px;
+}
+
+#comments form fieldset {
+    clear: both;
+}
+
+#comments form textarea {
+    height: 100px;
+}
+
+#comments .media {
+    border-top: 1px dashed #DDDDDD;
+    padding: 20px 10px;
+    margin: 0;
+}
+
+.comment-field{
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+#comments .media>.pull-left {
+    margin-right: 20px;
+}
+
+#comments .media img {
+    max-width: 100px;
+}
+
+#comments .media h4 {
+    margin: 0 0 10px;
+}
+
+#comments .media h4 span {
+    font-size: 14px;
+    float: right;
+    color: #999999;
+}
+
+#comments .media p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+#comments .media-detail {
+    margin: 0;
+}
+
+#comments .media-detail li {
+    color: #AAAAAA;
+    font-size: 12px;
+    padding-right: 10px;
+    font-weight: 600;
+}
+
+#comments .media-detail a:hover {
+    text-decoration: underline;
+}
+
+#comments .media-detail li:last-child {
+    padding-right: 0;
+}
+
+#comments .media-detail li i {
+    color: #666666;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.price {
+    font-size: 0;
+    line-height: 1;
+    display: block;
+}
+
+.price del {
+    display: block;
+}
+
+.price del span.amount {
+    color: #777;
+}
+
+.price span.amount {
+    color: #f00;
+    font-weight: 700;
+    white-space: nowrap;
+    display: block;
+    font-size: 25px;
+}
+
+del span.amount {
+    font-weight: 400;
+    margin-right: 0.3em;
+    opacity: .6;
+}
+
+.comment-field::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.comment-field::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.comment-field::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.comment-field::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.detail-basix{
+    color: #3536ac;
+    font-weight: 640;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1.3em;
+    line-height: 1.6em
+}
+
+#ftwp-postcontent h2 {
+    font-size: 1.5em;
+}
+
+#ftwp-postcontent li{
+    margin-left: 1.3em;
+    list-style: disc;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading-font {
+    color: #000000;
+}
+
+.h2,
+h2 {
+    font-size: 1.6em;
+}
+
+.h3,
+h3 {
+    font-size: 1.25em;
+}
+
+.h1,
+.h2,
+h1,
+h2 {
+    line-height: 1.3;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-rendering: optimizeSpeed;
+    color: #555;
+    margin-bottom: 0.5em;
+    margin-top: 0;
+    width: 100%;
+}
+
+ul {
+    list-style: disc;
+}
+
+img {
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+img {
+    display: inline-block;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+img {
+    border-style: none;
+}
+
+.ftwp-in-post#ftwp-container-outer.ftwp-float-none,
+.ftwp-in-post#ftwp-container-outer.ftwp-float-none #ftwp-contents {
+    width: 100%;
+}
+
+.ftwp-in-post#ftwp-container-outer {
+    height: auto;
+}
+
+.ftwp-in-post#ftwp-container-outer,
+.ftwp-in-post#ftwp-container-outer #ftwp-contents {
+    height: auto;
+    overflow-y: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.ftwp-in-post#ftwp-container-outer {
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+blockquote,
+dl,
+figure,
+form,
+ol,
+p,
+pre,
+ul {
+    margin-bottom: 1.3em;
+}
+
+ol,
+ul {
+    margin-top: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: disc;
+}
+
+.col-inner ol li,
+.col-inner ul li,
+.entry-content ol li,
+.entry-content ul li,
+.entry-summary ol li,
+.entry-summary ul li {
+    margin-left: 1.3em;
+}
+
+li {
+    margin-bottom: 0.6em;
+}
+
+.wp-caption {
+    margin-bottom: 2em;
+    max-width: 100%;
+}
+
+@media (min-width: 850px) {
+    .aligncenter {
+        clear: both;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+.aligncenter {
+    clear: both;
+}
+
+blockquote,
+dl,
+figure,
+form,
+ol,
+p,
+pre,
+ul {
+    margin-bottom: 1.3em;
+}
+
+figure {
+    margin: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+figure {
+    margin: 0 0 1em;
+}
+
+.wp-caption .wp-caption-text {
+    background: rgba(0,0,0,.05);
+    font-size: .9em;
+    font-style: italic;
+    padding: 0.4em;
+}
+.wp-caption-text {
+    text-align: center;
+}
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    display: block;
+}
+
+#ftwp-postcontent td, #ftwp-postcontent th {
+    padding: 5px;
+}
+td:first-child, th:first-child {
+    padding-left: 0;
+}
+table, td, th {
+    border-color: #333;
+    color: inherit;
+}
+td {
+    color: #666;
+}
+td, th {
+    border-bottom: 1px solid #ececec;
+    font-size: .9em;
+    line-height: 1.3;
+    padding: 0.5em;
+    text-align: left;
+}
+
