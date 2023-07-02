@@ -142,10 +142,10 @@
                                             </div>
                                         </li>
                                         <li class="list-item list-inline-item">
-                                            <strong>Thương hiệu: </strong><span class="detail-basix">${p.brand}</span>
+                                            <strong>Thương hiệu: </strong><span class="detail-basix">${p.brand != null ? p.brand : "chưa rõ"}</span>
                                         </li>
                                         <li class="list-item list-inline-item">
-                                            <strong>Năm sản xuất: </strong><span class="detail-basix">${p.year}</span>
+                                            <strong>Năm sản xuất: </strong><span class="detail-basix">${p.year != null ? p.year : "chưa rõ"}</span>
                                         </li>
                                         <li class="list-item list-inline-item">
                                             <strong>Khối lượng: </strong><span class="detail-basix">${p.weight} Kg</span>
@@ -191,9 +191,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-block btn-md btn-success" style="padding: 15px;">
-                                        Thêm vào giỏ hàng
-                                    </button>
+                                    <c:if test="${p.quantity != 0}">
+                                        <button type="button" class="btn btn-block btn-md btn-success" style="padding: 15px;">
+                                            Thêm vào giỏ hàng
+                                        </button>
+                                    </c:if>
+                                    <c:if test="${p.quantity == 0}">
+                                        <button type="button" class="btn btn-block btn-md btn-success" style="padding: 15px;" disabled>
+                                            Hết hàng
+                                        </button>
+                                    </c:if>   
                                 </div>
                             </div>
                         </div>

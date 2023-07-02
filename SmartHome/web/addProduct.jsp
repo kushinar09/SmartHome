@@ -42,9 +42,7 @@
                                     <div class="form-group mb-3">
                                         <label for="description">Mô tả</label>
                                         <textarea class="form-control validate" rows="5" style="min-height: 86px;" id="description" onchange="showSnip()" required ></textarea>
-                                        <div class="snippets-add">
-                                            
-                                        </div>
+                                        <div class="snippets-add" id="snippets-add"></div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="category">Loại sản phẩm</label>

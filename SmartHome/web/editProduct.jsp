@@ -118,7 +118,7 @@
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary btn-block text-uppercase">Cập nhật</button>
                             </div>
-                                                  
+
                             <div class="col-12" style="margin-top: 30px;">
                                 <a href="deleteProduct?id=${p.id_prod}">
                                     <div class="btn btn-primary btn-block text-uppercase">Xóa sản phẩm</div>
