@@ -7,11 +7,19 @@ package controller;
 import dal.ProductDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import model.Product;
 
 /**
@@ -19,6 +27,9 @@ import model.Product;
  * @author FR
  */
 @WebServlet(name = "EditProduct", urlPatterns = {"/editProduct"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 5,
+        maxRequestSize = 1024 * 1024 * 5 * 5)
 public class EditProduct extends HttpServlet {
 
     /**
@@ -81,7 +92,90 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ProductDAO pd = new ProductDAO();
+        String id_prod = request.getParameter("id");
         String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        
+        String type_text = request.getParameter("type");
+        int type = Integer.parseInt(type_text);
+        
+        String price_text = request.getParameter("price");
+        Double price = Double.parseDouble(price_text);
+        
+        String brand = request.getParameter("brand");
+        
+        String quantity_text = request.getParameter("stock");
+        int quantity = Integer.parseInt(quantity_text);
+        
+        String year_text = request.getParameter("year");
+        int year = Integer.parseInt(year_text);
+        
+        String weight_text = request.getParameter("weight");
+        Double weight = Double.parseDouble(weight_text);
+        
+        Product p = new Product();
+        p.setId_prod(id_prod);
+        p.setName(name);
+        p.setDescription(description);
+        p.setType(type);
+        p.setPrice(price);
+        p.setYear(year);
+        p.setWeight(weight);
+        p.setBrand(brand);
+        p.setQuantity(quantity);
+        
+        String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\product";
+        Part filePart = request.getPart("fileInput");
+        String image = getFileName(filePart);
+        if (!image.equals("")) {
+            String ori_image = pd.getImageById(id_prod);
+            String filePath = uploadDirectory + File.separator + ori_image;
+            System.out.println("1");
+            File file = new File(filePath);
+            file.delete();
+            System.out.println("2");
+            OutputStream out = null;
+            InputStream fileContent = null;
+            final PrintWriter writer = response.getWriter();
+            System.out.println("3");
+            try {
+                out = new FileOutputStream(file);
+                fileContent = filePart.getInputStream();
+                System.out.println("3.5");
+                int read;
+                final byte[] bytes = new byte[1024];
+
+                while ((read = fileContent.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+            } catch (FileNotFoundException fne) {
+                System.out.println("3.9");
+                System.out.println(fne.getMessage());
+            } finally {
+                if (out != null) {
+                    out.close();
+                }
+                if (fileContent != null) {
+                    fileContent.close();
+                }
+                if (writer != null) {
+                    writer.close();
+                }
+            }
+        }
+        pd.updateProduct(p);
+        response.sendRedirect("product.jsp");
+    }
+
+    private String getFileName(final Part part) {
+        final String partHeader = part.getHeader("content-disposition");
+        for (String content : partHeader.split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
     }
 
     /**

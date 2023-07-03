@@ -38,8 +38,8 @@ public class ProductDAO extends DBContext {
                     p.setWeight(rs.getDouble("weight"));
                     p.setPrice(rs.getDouble("price"));
                     p.setPromopercent(rs.getInt("promopercent"));
-                    p.setPromostart(rs.getDate("promostart"));
-                    p.setPromoend(rs.getDate("promoend"));
+//                    p.setPromostart(rs.getDate("promostart"));
+//                    p.setPromoend(rs.getDate("promoend"));
                     p.setQuantity(rs.getInt("in_stock"));
                     list.add(p);
                 }
@@ -60,8 +60,8 @@ public class ProductDAO extends DBContext {
                     p.setWeight(rs.getDouble("weight"));
                     p.setPrice(rs.getDouble("price"));
                     p.setPromopercent(rs.getInt("promopercent"));
-                    p.setPromostart(rs.getDate("promostart"));
-                    p.setPromoend(rs.getDate("promoend"));
+//                    p.setPromostart(rs.getDate("promostart"));
+//                    p.setPromoend(rs.getDate("promoend"));
                     p.setDescription(rs.getString("description"));
                     p.setQuantity(rs.getInt("in_stock"));
                     list.add(p);
@@ -109,8 +109,8 @@ public class ProductDAO extends DBContext {
                 p.setWeight(rs.getDouble("weight"));
                 p.setPrice(rs.getDouble("price"));
                 p.setPromopercent(rs.getInt("promopercent"));
-                p.setPromostart(rs.getDate("promostart"));
-                p.setPromoend(rs.getDate("promoend"));
+//                p.setPromostart(rs.getDate("promostart"));
+//                p.setPromoend(rs.getDate("promoend"));
                 p.setDescription(rs.getString("description"));
                 p.setQuantity(rs.getInt("in_stock"));
                 list.add(p);
@@ -189,8 +189,8 @@ public class ProductDAO extends DBContext {
                 p.setWeight(rs.getDouble("weight"));
                 p.setPrice(rs.getDouble("price"));
                 p.setPromopercent(rs.getInt("promopercent"));
-                p.setPromostart(rs.getDate("promostart"));
-                p.setPromoend(rs.getDate("promoend"));
+//                p.setPromostart(rs.getDate("promostart"));
+//                p.setPromoend(rs.getDate("promoend"));
                 p.setDescription(rs.getString("description"));
                 p.setQuantity(rs.getInt("in_stock"));
                 return p;
@@ -199,6 +199,49 @@ public class ProductDAO extends DBContext {
             System.out.println(ex.getMessage());
         }
         return null;
+    }
+
+    public String getImageById(String id) {
+        try {
+            String sql = "SELECT * FROM PRODUCT WHERE id_prod = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getString("image");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    public void updateProduct(Product p) {
+        try {
+            String sql = "UPDATE [dbo].[PRODUCT]\n"
+                    + "SET [name] = ?,[type] = ?,[year] = ?,[brand] = ?,[weight] = ?,[price] = ?,[description] = ?\n"
+                    + "WHERE [id_prod] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, p.getName());
+            statement.setInt(2, p.getType());
+            statement.setInt(3, p.getYear());
+            statement.setString(4, p.getBrand());
+            statement.setDouble(5, p.getWeight());
+            statement.setDouble(6, p.getPrice());
+            statement.setString(7, p.getDescription());
+            statement.setString(8, p.getId_prod());
+            statement.executeUpdate();
+
+            sql = "UPDATE [dbo].[STORAGE]\n"
+                    + "SET [in_stock] = ?\n"
+                    + "WHERE [id_prod] = ?";
+            PreparedStatement statement2 = connection.prepareStatement(sql);
+            statement2.setInt(1, p.getQuantity());
+            statement2.setString(2, p.getId_prod());
+            statement2.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
 //    public static void main(String[] args) {

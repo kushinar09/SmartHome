@@ -12,16 +12,16 @@ import java.sql.Date;
  */
 public class Employee {
 
-    private String id;
-    private String image;
-    private String name;
-    private String gender;
-    private Date dob;
-    private String phone;
-    private Date hireDate;
-    private String job;
-    private String id_empm;
-    private int id_acc;
+    String id;
+    String image;
+    String name;
+    String gender;
+    Date dob;
+    String phone;
+    Date hireDate;
+    String job;
+    String id_empm;
+    int id_acc;
 
     public Employee() {
     }

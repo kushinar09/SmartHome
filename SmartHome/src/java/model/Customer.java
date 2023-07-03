@@ -12,13 +12,13 @@ import java.sql.Date;
  */
 public class Customer {
 
-    private String id;
-    private String name;
-    private String gender;
-    private Date dob;
-    private String phone;
-    private String address;
-    private int id_acc;
+    String id;
+    String name;
+    String gender;
+    Date dob;
+    String phone;
+    String address;
+    int id_acc;
 
     public Customer() {
     }

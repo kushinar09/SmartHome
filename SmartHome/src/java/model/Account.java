@@ -10,10 +10,10 @@ package model;
  */
 public class Account {
 
-    private int id;
-    private String username;
-    private String email;
-    private String password;
+    int id;
+    String username;
+    String email;
+    String password;
 
     public Account() {
     }

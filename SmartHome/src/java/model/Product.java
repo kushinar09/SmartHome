@@ -21,8 +21,8 @@ public class Product {
     private double weight;
     private double price;
     private int promopercent;
-    private Date promostart;
-    private Date promoend;
+//    private Date promostart;
+//    private Date promoend;
     private String description;
     private int quantity;
 
@@ -101,21 +101,21 @@ public class Product {
         this.promopercent = promopercent;
     }
 
-    public Date getPromostart() {
-        return promostart;
-    }
-
-    public void setPromostart(Date promostart) {
-        this.promostart = promostart;
-    }
-
-    public Date getPromoend() {
-        return promoend;
-    }
-
-    public void setPromoend(Date promoend) {
-        this.promoend = promoend;
-    }
+//    public Date getPromostart() {
+//        return promostart;
+//    }
+//
+//    public void setPromostart(Date promostart) {
+//        this.promostart = promostart;
+//    }
+//
+//    public Date getPromoend() {
+//        return promoend;
+//    }
+//
+//    public void setPromoend(Date promoend) {
+//        this.promoend = promoend;
+//    }
 
     public int getQuantity() {
         return quantity;

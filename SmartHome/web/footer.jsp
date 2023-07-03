@@ -24,7 +24,7 @@
     <body>
         <div class="footer" style="background: linear-gradient(to right, #181717, #293035);">
             <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50" style="height: 110px;">
-                <div class="container text-center" style="height: 100%; justify-content: center;">
+                <div class="container text-center" style="height: 100%; justify-content: center; align-items: center;">
                     <small style="color: white; font-size: 15px;">Copyright &copy; <a href="intro.jsp">WINDJUSTER</a></small>
                 </div>
             </footer>

@@ -19,6 +19,7 @@
         <c:if test="${requestScope.productEdit != null}">
             <c:set var="p" value="${requestScope.productEdit}"></c:set>
         </c:if>
+        <input type="text" name="id" readonly value="${p.id_prod}" style="display: none;">
 
         <div class="container tm-mt-big tm-mb-big">
             <div class="row">
@@ -33,7 +34,7 @@
                                 <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
                             </div>
                         </div>
-                        <form action="editProduct" method="post" class="row tm-edit-product-row">
+                        <form action="editProduct" method="post" enctype="multipart/form-data" class="row tm-edit-product-row">
                             <div class="col-xl-6 col-lg-6 col-md-12">
                                 <div class="tm-edit-product-form" style="display: block; margin-top: 0em;">
                                     <div class="form-group mb-3">
@@ -50,8 +51,8 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="category">Loại sản phẩm</label>
-                                        <select class="custom-select tm-select-accounts" id="category">
-                                            <option selected>Chọn loại sản phẩm ...</option>
+                                        <select class="custom-select tm-select-accounts" id="type" name="type" required>
+                                            <option value="" selected>Chọn loại sản phẩm ...</option>
                                             <option value="1" ${p.type == "1" ? "selected" : ""}>An ninh & Giám sát</option>
                                             <option value="2" ${p.type == "2" ? "selected" : ""}>Thiết bị Smarthome</option>
                                             <option value="3" ${p.type == "3" ? "selected" : ""}>Đèn thông minh</option>
@@ -66,9 +67,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                            <label for="branch">Thương hiệu
+                                            <label for="brand">Thương hiệu
                                             </label>
-                                            <input id="branch" name="branch" type="text" class="form-control validate"
+                                            <input id="brand" name="brand" type="text" class="form-control validate"
                                                    data-large-mode="true" value="${p.brand}" required />
                                         </div>
                                         <div class="form-group mb-3 col-xs-12 col-sm-6">
@@ -87,7 +88,7 @@
                                        onclick="document.getElementById('fileInput').click();"></i>
                                 </div>
                                 <div class="custom-file mt-3 mb-3">
-                                    <input id="fileInput" type="file" onchange="previewFile()" style="display:none;"/>
+                                    <input id="fileInput" name="fileInput" type="file" onchange="previewFile()" style="display:none;"/>
                                     <input type="button" class="btn btn-primary btn-block mx-auto"
                                            value="UPLOAD PRODUCT IMAGE"
                                            onclick="document.getElementById('fileInput').click();" />
