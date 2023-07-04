@@ -60,7 +60,6 @@ public class EmployeeDAO extends DBContext {
                 e.setDob(rs.getDate("dob"));
                 e.setPhone(rs.getString("phoneNo"));
                 e.setHireDate(rs.getDate("hiredate"));
-                e.setJob(rs.getString("descript"));
                 e.setId_empm(rs.getString("id_empm"));
                 e.setId_acc(rs.getInt("id_acc"));
                 return e;
@@ -75,7 +74,7 @@ public class EmployeeDAO extends DBContext {
 
     public Employee getEmployeeById(String id) {
         try {
-            String sql = "SELECT * FROM [EMPLOYEE] E INNER JOIN [JOB] J ON E.job = J.job WHERE [id_emp] = ?";
+            String sql = "SELECT * FROM [EMPLOYEE] WHERE [id_emp] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
@@ -93,7 +92,7 @@ public class EmployeeDAO extends DBContext {
                 e.setId_acc(rs.getInt("id_acc"));
                 return e;
             } else {
-                System.out.println("Can not find customer by this account (Pos: CustomerDAO)");
+                System.out.println("Can not find employee by this account (Pos: AccountDAO)");
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -125,19 +124,14 @@ public class EmployeeDAO extends DBContext {
     public void updateEmployee(Employee e, String id) {
         try {
             String sql = "UPDATE [dbo].[EMPLOYEE]\n"
-                    + "SET [image] = ?, [name] = ?, [gender] = ?, [dob] = ?, [phoneNo] = ?, [hiredate] = ?, [job] = ?, [id_empm] = ?, [id_acc] = ?\n"
+                    + "SET [name] = ?, [gender] = ?, [dob] = ?, [phoneNo] = ?\n"
                     + "WHERE [id_emp] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, e.getImage());
-            statement.setString(2, e.getName());
-            statement.setString(3, e.getGender());
-            statement.setDate(4, e.getDob());
-            statement.setString(5, e.getPhone());
-            statement.setDate(6, e.getHireDate());
-            statement.setString(7, e.getJob());
-            statement.setString(8, e.getId_empm());
-            statement.setInt(9, e.getId_acc());
-            statement.setString(10, id);
+            statement.setString(1, e.getName());
+            statement.setString(2, e.getGender());
+            statement.setDate(3, e.getDob());
+            statement.setString(4, e.getPhone());
+            statement.setString(5, id);
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

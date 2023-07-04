@@ -20,6 +20,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import model.Product;
 
 /**
@@ -45,13 +47,12 @@ public class EditProduct extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO pd = new ProductDAO();
-
+        HttpSession session = request.getSession();
         String id = request.getParameter("id");
         if (request.getParameter("id") == null) {
             response.sendRedirect("pagenotfound.html");
         } else {
             Product p = pd.getProductById(id);
-            HttpSession session = request.getSession();
             session.removeAttribute("productEdit");
             session.setAttribute("productEdit", p);
             response.sendRedirect("editProduct.jsp");
@@ -74,7 +75,10 @@ public class EditProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        if (request.getParameter("id") == null) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("account") == null) {
+            response.sendRedirect("login.jsp");
+        } else if (request.getParameter("id") == null) {
             response.sendRedirect("pagenotfound.html");
         } else {
             processRequest(request, response);
@@ -93,88 +97,99 @@ public class EditProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductDAO pd = new ProductDAO();
-        String id_prod = request.getParameter("id");
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
+        HttpSession session = request.getSession();
+        if (session.getAttribute("account") == null) {
+            response.sendRedirect("login.jsp");
+        } else {
 
-        String type_text = request.getParameter("type");
-        int type = Integer.parseInt(type_text);
+            String id_prod = request.getParameter("id");
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
 
-        String price_text = request.getParameter("price");
-        Double price = Double.parseDouble(price_text);
+            String type_text = request.getParameter("type");
+            int type = Integer.parseInt(type_text);
 
-        String brand = request.getParameter("brand");
+            String price_text = request.getParameter("price");
+            Double price = Double.parseDouble(price_text);
 
-        String quantity_text = request.getParameter("stock");
-        int quantity = Integer.parseInt(quantity_text);
+            String brand = request.getParameter("brand");
 
-        String year_text = request.getParameter("year");
-        int year = Integer.parseInt(year_text);
+            String quantity_text = request.getParameter("stock");
+            int quantity = Integer.parseInt(quantity_text);
 
-        String weight_text = request.getParameter("weight");
-        Double weight = Double.parseDouble(weight_text);
+            String year_text = request.getParameter("year");
+            int year = Integer.parseInt(year_text);
 
-        Product p = new Product();
-        p.setId_prod(id_prod);
-        p.setName(name);
-        p.setDescription(description);
-        p.setType(type);
-        p.setPrice(price);
-        p.setYear(year);
-        p.setWeight(weight);
-        p.setBrand(brand);
-        p.setQuantity(quantity);
+            String weight_text = request.getParameter("weight");
+            Double weight = Double.parseDouble(weight_text);
 
-        String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\product";
-        Part filePart = request.getPart("fileInput");
-        String image = getFileName(filePart);
-        System.out.println(image);
-        if (!image.equals("")) {
-// Tạo tên file mới
-            String newFileName = pd.getImageById(id_prod);
-            System.out.println(newFileName);
-            String filePath = uploadDirectory + File.separator + newFileName;
-            File file = new File(filePath);
+            Product p = new Product();
+            p.setId_prod(id_prod);
+            p.setName(name);
+            p.setDescription(description);
+            p.setType(type);
+            p.setPrice(price);
+            p.setYear(year);
+            p.setWeight(weight);
+            p.setBrand(brand);
+            p.setQuantity(quantity);
 
-// Kiểm tra nếu file đã tồn tại
-            if (file.exists()) {
-                // Xóa file cũ trước khi lưu file mới
-                file.delete();
-            }
+            String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\product";
+            Part filePart = request.getPart("fileInput");
+            String image = getFileName(filePart);
+            System.out.println(image);
+            if (!image.equals("")) {
+                String olfFileName = pd.getImageById(id_prod);
+                String filePath = uploadDirectory + File.separator + olfFileName;
+                File file = new File(filePath);
 
-// Lưu file mới lên server
-            OutputStream out = null;
-            InputStream fileContent = null;
-            final PrintWriter writer = response.getWriter();
-
-            try {
-                out = new FileOutputStream(file);
-                fileContent = filePart.getInputStream();
-
-                int read;
-                final byte[] bytes = new byte[1024];
-
-                while ((read = fileContent.read(bytes)) != -1) {
-                    out.write(bytes, 0, read);
+                if (file.exists()) {
+                    file.delete();
                 }
+
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmssyyyyMMdd");
+                LocalDateTime now = LocalDateTime.now();
+                String timenow = dtf.format(now);
+
+                String newFileName = timenow + ".png";
+                p.setImage(newFileName);
+                filePath = uploadDirectory + File.separator + newFileName;
+                file = new File(filePath);
+
+                OutputStream out = null;
+                InputStream fileContent = null;
+                final PrintWriter writer = response.getWriter();
+
+                try {
+                    out = new FileOutputStream(file);
+                    fileContent = filePart.getInputStream();
+
+                    int read;
+                    final byte[] bytes = new byte[1024];
+
+                    while ((read = fileContent.read(bytes)) != -1) {
+                        out.write(bytes, 0, read);
+                    }
+                    pd.updateProduct(p);
+                    request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
+                } catch (FileNotFoundException fne) {
+                    System.out.println(fne.getMessage());
+                } finally {
+                    if (out != null) {
+                        out.close();
+                    }
+                    if (fileContent != null) {
+                        fileContent.close();
+                    }
+                    if (writer != null) {
+                        writer.close();
+                    }
+                }
+            } else {
+                p.setImage("");
                 pd.updateProduct(p);
                 request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
-            } catch (FileNotFoundException fne) {
-                System.out.println(fne.getMessage());
-            } finally {
-                if (out != null) {
-                    out.close();
-                }
-                if (fileContent != null) {
-                    fileContent.close();
-                }
-                if (writer != null) {
-                    writer.close();
-                }
             }
-        } else {
-            pd.updateProduct(p);
-            request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
         }
     }
 

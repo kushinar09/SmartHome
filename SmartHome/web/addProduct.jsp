@@ -31,7 +31,7 @@
                                 <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
                             </div>
                         </div>
-                        <form action="" class="row tm-edit-product-row">
+                        <form action="addProduct" method="post" enctype="multipart/form-data" class="row tm-edit-product-row">
                             <div class="col-xl-6 col-lg-6 col-md-12">
                                 <div class="tm-edit-product-form" style="display: block; margin-top: 0em;">
                                     <div class="form-group mb-3">
@@ -41,13 +41,13 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="description">Mô tả</label>
-                                        <textarea class="form-control validate" rows="5" style="min-height: 86px;" id="description" onchange="showSnip()" required ></textarea>
+                                        <textarea class="form-control validate" rows="5" style="min-height: 86px;" id="description" name="description" onchange="showSnip()" required ></textarea>
                                         <div class="snippets-add" id="snippets-add"></div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="category">Loại sản phẩm</label>
-                                        <select class="custom-select tm-select-accounts" id="category">
-                                            <option selected>Chọn loại sản phẩm ...</option>
+                                        <select class="custom-select tm-select-accounts" id="category" name="category" required>
+                                            <option selected value="">Chọn loại sản phẩm ...</option>
                                             <option value="1">An ninh & Giám sát</option>
                                             <option value="2">Thiết bị Smarthome</option>
                                             <option value="3">Đèn thông minh</option>
@@ -62,9 +62,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                            <label for="branch">Thương hiệu
+                                            <label for="brand">Thương hiệu
                                             </label>
-                                            <input id="branch" name="branch" type="text" class="form-control validate"
+                                            <input id="brand" name="brand" type="text" class="form-control validate"
                                                    data-large-mode="true" />
                                         </div>
                                         <div class="form-group mb-3 col-xs-12 col-sm-6">
@@ -83,7 +83,7 @@
                                        onclick="document.getElementById('fileInput').click();" style="position: absolute;"></i>
                                 </div>
                                 <div class="custom-file mt-3 mb-3">
-                                    <input id="fileInput" type="file" onchange="previewFile()" style="display:none;" required/>
+                                    <input id="fileInput" name="fileInput" type="file" onchange="previewFile()" style="display:none;" required/>
                                     <input type="button" class="btn btn-primary btn-block mx-auto"
                                            value="UPLOAD PRODUCT IMAGE"
                                            onclick="document.getElementById('fileInput').click();" />

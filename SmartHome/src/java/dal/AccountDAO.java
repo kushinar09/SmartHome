@@ -125,7 +125,21 @@ public class AccountDAO extends DBContext {
         return null;
     }
 
-    public void changePwd(Account a, String newpwd) {
+    public void changePwdEmp(Account a, String newpwd) {
+        try {
+            String sql = "UPDATE [ACCOUNT_EMP]\n"
+                    + "SET [password] = ? WHERE [email] = ? AND [password] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, newpwd);
+            statement.setString(2, a.getEmail());
+            statement.setString(3, a.getPassword());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public void changePwdCus(Account a, String newpwd) {
         try {
             String sql = "UPDATE [ACCOUNT_CUS]\n"
                     + "SET [password] = ? WHERE [email] = ? AND [password] = ?";

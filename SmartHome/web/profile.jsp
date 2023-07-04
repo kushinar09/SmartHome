@@ -12,17 +12,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="css/profile.css?v=3">
+        <link rel="stylesheet" href="css/profile.css?v=6">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="fontawesome/css/all.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="fontawesome/css/all.css">
-        <c:set var="c" value="${sessionScope.customer}"></c:set>
+        <c:set var="e" value="${sessionScope.employee}"></c:set>
         <c:set var="a" value="${sessionScope.account}"></c:set>
         </head>
     </head>
     <body data-new-gr-c-s-check-loaded="14.1112.0" data-gr-ext-installed="" _c_t_j1="1">
-        <section class="ftco-section">
+        <div>
+            <%@include file="header.jsp" %>
+        </div>
+        <section class="ftco-section" style="margin-top: 150px;">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-10 content">
@@ -36,29 +39,29 @@
                             <div class="row no-gutters">
                                 <div class="col-md-6 d-flex align-items-stretch">
                                     <div class="contact-wrap w-100 p-md-5 p-4 py-5">
-                                        <h3 class="mb-41">Thông tin khách hàng</h3>
+                                        <h3 class="mb-41">Thông tin cá nhân</h3>
                                         <div id="form-message-warning" class="mb-42"></div>
                                         <div id="form-message-success" class="mb-43">Lưu thành công!</div>
-                                        <form action="changeInfo" method="post" id="contactForm" name="contactForm" class="contactForm">
+                                        <form action="change" method="post" id="contactForm" name="contactForm" class="contactForm">
                                             <div class="row">
                                                 <div class="col-md-12 input-content">
                                                     <div class="form-group">
                                                         <p style="color: #7e8287; font-size: 1rem; margin: 0">Họ và tên: </p>
                                                         <input type="text" class="form-controlnew" name="name" id="name"
-                                                               placeholder="Name" value="${c.name}" readonly>
+                                                               placeholder="Name" value="${e.name}" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 input-content">
                                                 <div class="form-group">
                                                     <p style="color: #7e8287; font-size: 1rem; margin: 0">Giới tính: </p>
                                                     <input type="text" class="form-controlnew" name="genderI" id="gender"
-                                                           placeholder="Gender" value="${c.gender == "M" ? "Nam" : "Nữ"}" readonly>
+                                                           placeholder="Gender" value="${e.gender == "m" ? "Nam" : "Nữ"}" readonly>
                                                     <select class="form-controlnew hidden-select" name="genderS" id="genderselect" style="display: none;">
-                                                        <c:if test="${c.gender == 'M'}">
+                                                        <c:if test="${e.gender == 'm'}">
                                                             <option value="Nam" style="background-color:#fff; color: #000000;" selected>Nam</option>
                                                             <option value="Nữ" style="background-color:#fff; color: #000000;">Nữ</option>
                                                         </c:if>
-                                                        <c:if test="${c.gender == 'F'}">
+                                                        <c:if test="${c.gender == 'f'}">
                                                             <option value="Nam" style="background-color:#fff; color: #000000;">Nam</option>
                                                             <option value="Nữ" style="background-color:#fff; color: #000000;" selected>Nữ</option>
                                                         </c:if>
@@ -68,27 +71,14 @@
                                             <div class="col-md-12 input-content">
                                                 <div class="form-group">
                                                     <p style="color: #7e8287; font-size: 1rem; margin: 0">Ngày sinh: </p>
-                                                    <input type="date" class="form-controlnew" name="dob" id="dob" value="${c.dob}" readonly>
+                                                    <input type="date" class="form-controlnew" name="dob" id="dob" value="${e.dob}" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 input-content">
                                                 <div class="form-group">
                                                     <p style="color: #7e8287; font-size: 1rem; margin: 0">Số điện thoại: </p>
                                                     <input type="text" class="form-controlnew" name="phone" id="phone"
-                                                           placeholder="Phone number" value="${c.phone}" readonly>                                              
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 input-content">
-                                                <grammarly-extension data-grammarly-shadow-root="true"
-                                                                     style="position: absolute; top: 0px; left: 0px; pointer-events: none;"
-                                                                     class="dnXmp"></grammarly-extension>
-                                                <grammarly-extension data-grammarly-shadow-root="true"
-                                                                     style="position: absolute; top: 0px; left: 0px; pointer-events: none;"
-                                                                     class="dnXmp"></grammarly-extension>
-                                                <p style="color: #7e8287; font-size: 1rem; margin: 0">Địa chỉ: </p>
-                                                <div class="form-group">
-                                                    <textarea name="address" class="form-control-textarea" id="address"
-                                                              cols="30" rows="6" placeholder="Message" readonly>${c.address}</textarea>
+                                                           placeholder="Phone number" value="${e.phone}" readonly>                                              
                                                 </div>
                                             </div>
                                             <div class="col-md-12 input-content">
@@ -178,12 +168,14 @@
             </div>
         </div>
     </section>
+    <div>
+        <%@include file="footer.jsp" %>
+    </div>
     <script type="text/javascript">
         function show() {
             document.getElementById("name").readOnly = false;
             document.getElementById("dob").readOnly = false;
             document.getElementById("phone").readOnly = false;
-            document.getElementById("address").readOnly = false;
 
             document.getElementById("gender").style.display = "none";
             document.getElementById("genderselect").style.display = "block";

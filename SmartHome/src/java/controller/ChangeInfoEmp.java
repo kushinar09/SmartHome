@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
+import model.Employee;
 
 /**
  *
@@ -68,7 +72,39 @@ public class ChangeInfoEmp extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        EmployeeDAO ed = new EmployeeDAO();
+
+        if (request.getParameter("name") == null || request.getParameter("genderS") == null || request.getParameter("dob") == null || request.getParameter("phone") == null) {
+            response.sendRedirect("home.jsp");
+        } else {
+            String name = request.getParameter("name");
+            String gender = request.getParameter("genderS");
+            if (gender.equals("Nam")) {
+                gender = "m";
+            } else {
+                gender = "f";
+            }
+            Date dob = Date.valueOf(request.getParameter("dob"));
+            String phone = request.getParameter("phone");
+
+            HttpSession session = request.getSession(false);
+            if (session != null && session.getAttribute("employee") != null) {
+                Employee e = (Employee) session.getAttribute("employee");
+                String id = e.getId();
+                Employee en = new Employee();
+                en.setName(name);
+                en.setGender(gender);
+                en.setDob(dob);
+                en.setPhone(phone);
+                ed.updateEmployee(en, id);
+                Employee gete = ed.getEmployeeById(id);
+                session.removeAttribute("employee");
+                session.setAttribute("employee", gete);
+                response.sendRedirect("profile.jsp");
+            } else {
+                response.sendRedirect("home.jsp");
+            }
+        }
     }
 
     /** 

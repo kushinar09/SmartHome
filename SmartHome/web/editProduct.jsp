@@ -30,7 +30,7 @@
                         </a>
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
+                                <h2 class="tm-block-title d-inline-block">Chỉnh sửa sản phẩm</h2>
                             </div>
                         </div>
                         <form action="editProduct?id=${p.id_prod}" method="post" enctype="multipart/form-data" class="row tm-edit-product-row">

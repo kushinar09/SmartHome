@@ -57,7 +57,7 @@ html {
 }
 
 .ftco-section {
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(22,44,176,1) 0%, rgba(22,114,176,1) 50%, rgba(22,150,176,1) 100%);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(92 111 229) 0%, rgba(22,114,176,1) 50%, rgba(22,150,176,1) 100%);
     padding: 1em 0;
     display: block;
 }

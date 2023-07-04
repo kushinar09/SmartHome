@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Product;
 
 /**
  *
@@ -55,7 +57,15 @@ public class DeleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        ProductDAO pd = new ProductDAO();
+        if(request.getParameter("id") == null){
+            response.sendRedirect("home.jsp");
+        }else{
+            String id = request.getParameter("id");
+            Product p = pd.getProductById(id);
+            pd.insertProductWaiting(p, 3);
+            request.getRequestDispatcher("ProductServlet?type=" + p.getType()).forward(request, response);
+        }
     } 
 
     /** 

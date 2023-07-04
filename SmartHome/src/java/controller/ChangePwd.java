@@ -5,6 +5,7 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -75,13 +76,13 @@ public class ChangePwd extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String newpwd = request.getParameter("password");
-        AccountDAO ad = new AccountDAO();
+        EmployeeDAO ed = new EmployeeDAO();
 
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("account") != null) {
             Account a = (Account) session.getAttribute("account");
-            ad.changePwd(a, newpwd);
-            Account anew = ad.getAccountCustomerByEmail(a.getEmail());
+            ed.changePwd(a, newpwd);
+            Account anew = ed.getAccountByEmail(a.getEmail());
             session.removeAttribute("account");
             session.setAttribute("account", anew);
             response.sendRedirect("profile.jsp");

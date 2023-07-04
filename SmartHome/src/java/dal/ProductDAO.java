@@ -218,30 +218,93 @@ public class ProductDAO extends DBContext {
 
     public void updateProduct(Product p) {
         try {
-            String sql = "UPDATE [dbo].[PRODUCT]\n"
-                    + "SET [name] = ?,[type] = ?,[year] = ?,[brand] = ?,[weight] = ?,[price] = ?,[description] = ?\n"
-                    + "WHERE [id_prod] = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, p.getName());
-            statement.setInt(2, p.getType());
-            statement.setInt(3, p.getYear());
-            statement.setString(4, p.getBrand());
-            statement.setDouble(5, p.getWeight());
-            statement.setDouble(6, p.getPrice());
-            statement.setString(7, p.getDescription());
-            statement.setString(8, p.getId_prod());
-            statement.executeUpdate();
+            if (p.getImage().equals("")) {
+                String sql = "UPDATE [dbo].[PRODUCT]\n"
+                        + "SET [name] = ?,[type] = ?,[year] = ?,[brand] = ?,[weight] = ?,[price] = ?,[description] = ?\n"
+                        + "WHERE [id_prod] = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, p.getName());
+                statement.setInt(2, p.getType());
+                statement.setInt(3, p.getYear());
+                statement.setString(4, p.getBrand());
+                statement.setDouble(5, p.getWeight());
+                statement.setDouble(6, p.getPrice());
+                statement.setString(7, p.getDescription());
+                statement.setString(8, p.getId_prod());
+                statement.executeUpdate();
+            } else {
+                String sql = "UPDATE [dbo].[PRODUCT]\n"
+                        + "SET [name] = ?,[type] = ?,[year] = ?,[brand] = ?,[weight] = ?,[price] = ?,[description] = ?,[image] = ?\n"
+                        + "WHERE [id_prod] = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, p.getName());
+                statement.setInt(2, p.getType());
+                statement.setInt(3, p.getYear());
+                statement.setString(4, p.getBrand());
+                statement.setDouble(5, p.getWeight());
+                statement.setDouble(6, p.getPrice());
+                statement.setString(7, p.getDescription());
+                statement.setString(8, p.getImage());
+                statement.setString(9, p.getId_prod());
+                statement.executeUpdate();
+            }
 
-            sql = "UPDATE [dbo].[STORAGE]\n"
+            String sql2 = "UPDATE [dbo].[STORAGE]\n"
                     + "SET [in_stock] = ?\n"
                     + "WHERE [id_prod] = ?";
-            PreparedStatement statement2 = connection.prepareStatement(sql);
+            PreparedStatement statement2 = connection.prepareStatement(sql2);
             statement2.setInt(1, p.getQuantity());
             statement2.setString(2, p.getId_prod());
             statement2.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+
+    public void insertProductWaiting(Product p, int type) {
+        try {
+            String sql = "INSERT INTO [dbo].[PRODUCT_WAITING]\n"
+                    + "([id_prod],[image],[name],[type],[year],[brand],[weight]\n"
+                    + "           ,[price],[promopercent],[description],[in_stock],[typeNoti])\n"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, p.getId_prod());
+            statement.setString(2, p.getImage());
+            statement.setString(3, p.getName());
+            statement.setInt(4, p.getType());
+            statement.setInt(5, p.getYear());
+            statement.setString(6, p.getBrand());
+            statement.setDouble(7, p.getWeight());
+            statement.setDouble(8, p.getPrice());
+            statement.setInt(9, p.getPromopercent());
+            statement.setString(10, p.getDescription());
+            statement.setInt(11, p.getQuantity());
+            statement.setInt(12, type);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    public int getSizeOfProduct() {
+        int size = 0;
+        try {
+            String sql = "SELECT * FROM PRODUCT";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                size++;
+            }
+            String sql2 = "SELECT * FROM PRODUCT_WAITING WHERE id_prod LIKE 'NEW%'";
+            PreparedStatement statement2 = connection.prepareStatement(sql2);
+            ResultSet rs2 = statement2.executeQuery();
+            while (rs2.next()) {
+                size++;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return size;
     }
 
     public static void main(String[] args) {
@@ -256,6 +319,6 @@ public class ProductDAO extends DBContext {
         p.setName("Cam bien");
         p.setType(2);
         pd.updateProduct(p);
-       
+
     }
 }
