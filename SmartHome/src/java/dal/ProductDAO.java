@@ -244,17 +244,18 @@ public class ProductDAO extends DBContext {
         }
     }
 
-//    public static void main(String[] args) {
-//        // TODO code application logic here
-//        ProductDAO pd = new ProductDAO();
-////        List<Product> list = pd.getListBySearch("Cam");
-////        for (Product product : list) {
-////            System.out.println(product.getName());
-////        }
-//        
-//        List<Product> list = pd.getListBySearch("cam");
+    public static void main(String[] args) {
+        // TODO code application logic here
+        ProductDAO pd = new ProductDAO();
+//        List<Product> list = pd.getListBySearch("Cam");
 //        for (Product product : list) {
-//            System.out.println(product.getPromopercent());
+//            System.out.println(product.getName());
 //        }
-//    }
+        Product p = new Product();
+        p.setId_prod("CB001");
+        p.setName("Cam bien");
+        p.setType(2);
+        pd.updateProduct(p);
+       
+    }
 }

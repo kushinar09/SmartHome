@@ -59,7 +59,7 @@
                                 <a href="detail?id=${product.id_prod}" class="flex-col">
                                     <div class="box-img">
                                         <div class="prd-img">
-                                            <img width="300" height="300" src="img/product/${product.image}" alt="${product.name}" sizes="(max-width: 300px) 100vw, 300px"/>
+                                            <img width="300" height="300" src="./img/product/${product.image}" alt="${product.name}" sizes="(max-width: 300px) 100vw, 300px"/>
                                         </div>
                                         <c:if test="${product.quantity == 0}">
                                             <div class="out-of-stock-label">Hết hàng</div>

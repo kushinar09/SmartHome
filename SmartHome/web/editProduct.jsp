@@ -16,10 +16,9 @@
 
     </head>
     <body>
-        <c:if test="${requestScope.productEdit != null}">
-            <c:set var="p" value="${requestScope.productEdit}"></c:set>
+        <c:if test="${sessionScope.productEdit != null}">
+            <c:set var="p" value="${sessionScope.productEdit}"></c:set>
         </c:if>
-        <input type="text" name="id" readonly value="${p.id_prod}" style="display: none;">
 
         <div class="container tm-mt-big tm-mb-big">
             <div class="row">
@@ -34,7 +33,7 @@
                                 <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
                             </div>
                         </div>
-                        <form action="editProduct" method="post" enctype="multipart/form-data" class="row tm-edit-product-row">
+                        <form action="editProduct?id=${p.id_prod}" method="post" enctype="multipart/form-data" class="row tm-edit-product-row">
                             <div class="col-xl-6 col-lg-6 col-md-12">
                                 <div class="tm-edit-product-form" style="display: block; margin-top: 0em;">
                                     <div class="form-group mb-3">
@@ -83,7 +82,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                                 <div class="tm-product-img-dummy mx-auto">
-                                    <img width="240" height="240" src="img/product/${p.image}" alt="Image preview..." id="preview-img">
+                                    <img width="240" height="240" src="./img/product/${p.image}" alt="Image preview..." id="preview-img">
                                     <i class="fas fa-cloud-upload-alt tm-upload-icon"
                                        onclick="document.getElementById('fileInput').click();"></i>
                                 </div>

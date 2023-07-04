@@ -51,12 +51,12 @@ public class EditProduct extends HttpServlet {
             response.sendRedirect("pagenotfound.html");
         } else {
             Product p = pd.getProductById(id);
-//        HttpSession session = request.getSession();
-//            session.removeAttribute("productEdit");
-//            session.setAttribute("productEdit", p);
-//            response.sendRedirect("editProduct.jsp");
-            request.setAttribute("productEdit", p);
-            request.getRequestDispatcher("editProduct.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            session.removeAttribute("productEdit");
+            session.setAttribute("productEdit", p);
+            response.sendRedirect("editProduct.jsp");
+//            request.setAttribute("productEdit", p);
+//            request.getRequestDispatcher("editProduct.jsp").forward(request, response);
 
         }
     }
@@ -96,24 +96,24 @@ public class EditProduct extends HttpServlet {
         String id_prod = request.getParameter("id");
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        
+
         String type_text = request.getParameter("type");
         int type = Integer.parseInt(type_text);
-        
+
         String price_text = request.getParameter("price");
         Double price = Double.parseDouble(price_text);
-        
+
         String brand = request.getParameter("brand");
-        
+
         String quantity_text = request.getParameter("stock");
         int quantity = Integer.parseInt(quantity_text);
-        
+
         String year_text = request.getParameter("year");
         int year = Integer.parseInt(year_text);
-        
+
         String weight_text = request.getParameter("weight");
         Double weight = Double.parseDouble(weight_text);
-        
+
         Product p = new Product();
         p.setId_prod(id_prod);
         p.setName(name);
@@ -124,33 +124,42 @@ public class EditProduct extends HttpServlet {
         p.setWeight(weight);
         p.setBrand(brand);
         p.setQuantity(quantity);
-        
+
         String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\product";
         Part filePart = request.getPart("fileInput");
         String image = getFileName(filePart);
+        System.out.println(image);
         if (!image.equals("")) {
-            String ori_image = pd.getImageById(id_prod);
-            String filePath = uploadDirectory + File.separator + ori_image;
-            System.out.println("1");
+// Tạo tên file mới
+            String newFileName = pd.getImageById(id_prod);
+            System.out.println(newFileName);
+            String filePath = uploadDirectory + File.separator + newFileName;
             File file = new File(filePath);
-            file.delete();
-            System.out.println("2");
+
+// Kiểm tra nếu file đã tồn tại
+            if (file.exists()) {
+                // Xóa file cũ trước khi lưu file mới
+                file.delete();
+            }
+
+// Lưu file mới lên server
             OutputStream out = null;
             InputStream fileContent = null;
             final PrintWriter writer = response.getWriter();
-            System.out.println("3");
+
             try {
                 out = new FileOutputStream(file);
                 fileContent = filePart.getInputStream();
-                System.out.println("3.5");
+
                 int read;
                 final byte[] bytes = new byte[1024];
 
                 while ((read = fileContent.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
+                pd.updateProduct(p);
+                request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
             } catch (FileNotFoundException fne) {
-                System.out.println("3.9");
                 System.out.println(fne.getMessage());
             } finally {
                 if (out != null) {
@@ -163,9 +172,10 @@ public class EditProduct extends HttpServlet {
                     writer.close();
                 }
             }
+        } else {
+            pd.updateProduct(p);
+            request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
         }
-        pd.updateProduct(p);
-        response.sendRedirect("product.jsp");
     }
 
     private String getFileName(final Part part) {
