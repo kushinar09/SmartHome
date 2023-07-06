@@ -4,8 +4,6 @@
  */
 package controller;
 
-import dal.AccountDAO;
-import dal.CustomerDAO;
 import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Account;
-import model.Customer;
 import model.Employee;
 
 /**

@@ -137,7 +137,7 @@ public class EditProduct extends HttpServlet {
             String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\product";
             Part filePart = request.getPart("fileInput");
             String image = getFileName(filePart);
-            System.out.println(image);
+//            System.out.println(image);
             if (!image.equals("")) {
                 String olfFileName = pd.getImageById(id_prod);
                 String filePath = uploadDirectory + File.separator + olfFileName;
@@ -171,7 +171,8 @@ public class EditProduct extends HttpServlet {
                         out.write(bytes, 0, read);
                     }
                     pd.updateProduct(p);
-                    request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
+//                    request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
+                    response.sendRedirect("ProductServlet?type=" + type);
                 } catch (FileNotFoundException fne) {
                     System.out.println(fne.getMessage());
                 } finally {
@@ -188,7 +189,8 @@ public class EditProduct extends HttpServlet {
             } else {
                 p.setImage("");
                 pd.updateProduct(p);
-                request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
+//                request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
+                response.sendRedirect("ProductServlet?type=" + type);
             }
         }
     }

@@ -44,11 +44,11 @@
                                 <div class="login-fly">
                                     <div class="login-content">
                                         <ul class="login-content-list">
-                                            <li class="login-content-item">
+                                            <li class="login-content-item" style="margin-bottom: 0;">
                                                 <a href="profile.jsp" style="color: #007bff; font-size: 17px;">Thông tin</a>
                                             </li>
-                                            <li class="login-content-item">
-                                                <form action="logout" method="post">
+                                            <li class="login-content-item" style="margin-bottom: 0;">
+                                                <form action="logout" method="post" style="margin-bottom: 0;">
                                                     <button type="submit" class="btn-logout" style="color: #007bff; cursor: pointer; font-size: 17px;">Đăng xuất</button>
                                                 </form>
                                             </li>

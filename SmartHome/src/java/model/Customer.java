@@ -78,5 +78,5 @@ public class Customer {
     public void setId_acc(int id_acc) {
         this.id_acc = id_acc;
     }
-
+    
 }

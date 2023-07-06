@@ -6,44 +6,47 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="dal.EmployeeDAO" %>
+<%@page import="dal.CustomerDAO" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+    <c:set var="p" value="${requestScope.product}"></c:set>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>${p.name}</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="fontawesome/css/all.css"/>
         <link rel="stylesheet" href="css/prddetail.css?v=5"/>
     </head>
-    <c:set var="p" value="${requestScope.product}"></c:set>
-        <body>
-            <style>
-                #gap-1226549991 {
-                    padding-top: 10px;
-                }
 
-                #text-1285734529 {
-                    line-height: 0.75;
-                    text-align: center;
-                }
+    <body onload="scrollchat()">
+        <style>
+            #gap-1226549991 {
+                padding-top: 10px;
+            }
 
-                #col-515625378>.col-inner {
-                    border-radius: 10px;
-                }
+            #text-1285734529 {
+                line-height: 0.75;
+                text-align: center;
+            }
 
-                #col-515625378 {
-                    padding-left: 0;
-                    padding-right: 0;
-                    margin-bottom: 15px;
-                }
+            #col-515625378>.col-inner {
+                border-radius: 10px;
+            }
 
-                .icon-inner img {
-                    border-radius: 50%;
-                    width: 100%;
-                    height: auto;
-                }
-            </style>
-            <div>
+            #col-515625378 {
+                padding-left: 0;
+                padding-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .icon-inner img {
+                border-radius: 50%;
+                width: 100%;
+                height: auto;
+            }
+        </style>
+        <div>
             <%@include file="header.jsp" %>
         </div>
         <div class="container-fluid" style="margin-top: 150px;">
@@ -72,39 +75,42 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <form>
+                                                <form action="putComment?id=${p.id_prod}" method="post" id="chat"> 
                                                     <h3 class="pull-left">New Comment</h3>
                                                     <button type="submit" class="btn btn-normal pull-right" style="margin-bottom: 10px;">Submit</button>
                                                     <fieldset>
                                                         <div class="row">
                                                             <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-                                                                <textarea class="form-control" id="message"
+                                                                <textarea class="form-control" id="message" name="message"
                                                                           placeholder="Your message" required=""></textarea>
                                                             </div>
                                                         </div>
                                                     </fieldset>
                                                 </form>
 
-                                                <h3>Comments (1)</h3>
-
-                                                <!-- COMMENT 1 - START -->
-                                                <div class="comment-field">
-                                                    <div class="media">
-                                                        <div class="media-body">
-                                                            <h4 class="media-heading">John Doe</h4>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-                                                                ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                                                                dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
-                                                                sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-                                                                amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-                                                                consectetur adipiscing elit.</p>
-                                                            <ul class="list-unstyled list-inline media-detail pull-left">
-                                                                <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                                            </ul>
+                                                <h3>Comments (${requestScope.comment.size()})</h3>
+                                                <c:forEach var="c" items="${requestScope.comment}">
+                                                    <!-- COMMENT 1 - START -->
+                                                    <div class="comment-field">
+                                                        <div class="media">
+                                                            <div class="media-body">
+                                                                <c:set value="${requestScope.edao}" var="ed"></c:set>
+                                                                <c:set value="${requestScope.cdao}" var="cd"></c:set>
+                                                                <c:if test="${c.id_cus != null}">
+                                                                    <h5 class="media-heading">${cd.getEmployeeById(c.getId_emp()).getName()}</h5>
+                                                                </c:if>
+                                                                <c:if test="${c.id_emp != null}">
+                                                                    <h5 class="media-heading" style="color: #0033ff">${ed.getEmployeeById(c.id_emp).name} <i class="fa-solid fa-circle-check"></i></h5>
+                                                                </c:if>
+                                                                <p>${c.content}</p>
+                                                                <ul class="list-unstyled list-inline media-detail pull-left">
+                                                                    <li><i class="fa fa-calendar"></i>${c.day}</li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
+                                                        <!-- COMMENT 1 - END -->
                                                     </div>
-                                                    <!-- COMMENT 1 - END -->
-                                                </div>
+                                                </c:forEach>
                                             </div>
                                         </div>
                                     </div>
@@ -213,5 +219,11 @@
         <div>
             <%@include file="footer.jsp" %>
         </div>
+        <script type="text/javascript">
+            function scrollchat() {
+                var elem = document.getElementById('chat');
+                elem.scrollTop = elem.scrollHeight;
+            }
+        </script>
     </body>
 </html>

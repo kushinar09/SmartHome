@@ -40,32 +40,6 @@ public class ProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet loginServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet loginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
         String type = request.getParameter("type");
         String order = request.getParameter("orderby");
         String search = request.getParameter("search");
@@ -83,12 +57,12 @@ public class ProductServlet extends HttpServlet {
             list = pd.getListProductByType(ty);
             title = pd.getNameByType(ty);
         }
-        
+
         if (request.getParameter("search") != null) {
             title = "Search: " + search;
             list = pd.getListBySearch(search);
         }
-        
+
         if (request.getParameter("orderby") != null) {
             act.sortList(list, order);
             request.setAttribute("order", order);
@@ -105,6 +79,21 @@ public class ProductServlet extends HttpServlet {
         session.removeAttribute("list");
         session.setAttribute("list", list);
         request.getRequestDispatcher("product.jsp").forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**

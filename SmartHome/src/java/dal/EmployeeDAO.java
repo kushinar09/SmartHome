@@ -87,7 +87,7 @@ public class EmployeeDAO extends DBContext {
                 e.setDob(rs.getDate("dob"));
                 e.setPhone(rs.getString("phoneNo"));
                 e.setHireDate(rs.getDate("hiredate"));
-                e.setJob(rs.getString("descript"));
+                e.setJob(rs.getString("job"));
                 e.setId_empm(rs.getString("id_empm"));
                 e.setId_acc(rs.getInt("id_acc"));
                 return e;
