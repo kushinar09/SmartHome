@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="css/prddetail.css?v=5"/>
     </head>
 
-    <body onload="scrollchat()">
+    <body>
         <style>
             #gap-1226549991 {
                 padding-top: 10px;

@@ -84,7 +84,7 @@ String dataPoints = gsonObj.toJson(list2);
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="accountAd.jsp">
+                                <a class="nav-link" href="customerAd.jsp">
                                     <i class="far fa-user"></i>
                                     Customers
                                 </a>

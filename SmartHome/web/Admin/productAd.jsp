@@ -70,27 +70,8 @@
                                 Employees
                             </a>
                         </li>
-                        <!--                        <li class="nav-item dropdown">
-                                                    <a
-                                                        class="nav-link dropdown-toggle"
-                                                        href="#"
-                                                        id="navbarDropdown"
-                                                        role="button"
-                                                        data-toggle="dropdown"
-                                                        aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="far fa-user"></i>
-                                                            
-                                                        <span> Customers <i class="fas fa-angle-down"></i> </span>
-                                                    </a>
-                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <a class="dropdown-item" href="#">Profile</a>
-                                                        <a class="dropdown-item" href="#">Billing</a>
-                                                        <a class="dropdown-item" href="#">Customize</a>
-                                                    </div>
-                                                </li>-->
                         <li class="nav-item">
-                            <a class="nav-link" href="accountAd.jsp">
+                            <a class="nav-link" href="customerAd.jsp">
                                 <i class="far fa-user"></i>
                                 Customers
                             </a>
