@@ -12,7 +12,7 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="fontawesome/css/all.css" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/mo-style.css?v=1">
+        <link rel="stylesheet" href="css/mo-style.css?v=3">
 
     </head>
     <body>

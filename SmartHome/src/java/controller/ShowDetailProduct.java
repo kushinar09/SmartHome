@@ -72,9 +72,6 @@ public class ShowDetailProduct extends HttpServlet {
             String id = request.getParameter("id");
             Product p = pd.getProductById(id);
             List<Comment> listc = cd.getAllCommentOfProduct(id);
-            for (Comment c : listc) {
-                System.out.println(c.getContent());
-            }
             request.setAttribute("edao", ed);
             request.setAttribute("cdao", cud);
             request.setAttribute("product", p);

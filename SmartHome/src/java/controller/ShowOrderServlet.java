@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.Admin;
+package controller;
 
+import dal.OrderDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,13 +14,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.OrderDetail;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name="homeAdServlet", urlPatterns={"/homeAd"})
-public class homeAdServlet extends HttpServlet {
+@WebServlet(name="ShowOrderServlet", urlPatterns={"/showOrder"})
+public class ShowOrderServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +39,10 @@ public class homeAdServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet homeAdServlet</title>");  
+            out.println("<title>Servlet ShowOrderServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet homeAdServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ShowOrderServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +59,17 @@ public class homeAdServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        OrderDAO od = new OrderDAO();
+        ProductDAO pd = new ProductDAO();
+        String id = request.getParameter("id");
+        List<OrderDetail> order = od.getDetailOfOrder(id);
+        for (OrderDetail o : order) {
+            System.out.println(o.getId_order() + " " + o.getId_prod() + " " + o.getQuantity());
+        }
+        request.setAttribute("detail", order);
+        request.setAttribute("id", id);
+        request.setAttribute("pdao", pd);
+        request.getRequestDispatcher("showOrder.jsp").forward(request, response);
     } 
 
     /** 

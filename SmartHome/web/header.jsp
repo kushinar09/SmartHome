@@ -107,7 +107,7 @@
                                                             <a href="pagenotfound.html" class="nav-top-link">TIN TỨC</a>
                                                         </li>-->
                             <li id="menu-item" class="menu-item-custom">
-                                <a href="pagenotfound.html" class="nav-top-link">ĐƠN HÀNG</a>
+                                <a href="order" class="nav-top-link">ĐƠN HÀNG</a>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
                                 <a href="pagenotfound.html" class="nav-top-link">TƯ VẤN</a>

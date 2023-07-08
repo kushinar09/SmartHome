@@ -85,6 +85,7 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter outp = response.getWriter();
         ProductDAO pd = new ProductDAO();
         Product p = new Product();
 
@@ -117,16 +118,16 @@ public class AddProduct extends HttpServlet {
         p.setBrand(brand);
         p.setQuantity(quantity);
         p.setPromopercent(0);
-        p.setId_prod("NEW" + (pd.getSizeOfProduct()+1));
+        p.setId_prod("NEW" + (pd.getSizeOfProduct() + 1));
 
         String uploadDirectory = "C:\\Users\\FR\\Desktop\\cms\\PRJ301_BanTQ\\ASM\\img\\img-upload";
         Part filePart = request.getPart("fileInput");
-        
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmssyyyyMMdd");
         LocalDateTime now = LocalDateTime.now();
         String timenow = dtf.format(now);
         String newFileName = timenow + ".png";
-        
+
         String filePath = uploadDirectory + File.separator + newFileName;
         File file = new File(filePath);
 
@@ -152,7 +153,11 @@ public class AddProduct extends HttpServlet {
                 out.write(bytes, 0, read);
             }
             pd.insertProductWaiting(p, 2);
-            request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
+            outp.println("<script type=\"text/javascript\">");
+            outp.println("alert('Submitted a request to ADD the product');");
+            outp.println("location='ProductServlet?type=" + type + "'");
+            outp.println("</script>");
+//            request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
         } catch (FileNotFoundException fne) {
             System.out.println(fne.getMessage());
         } finally {

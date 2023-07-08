@@ -55,13 +55,13 @@
                                                 <div class="form-group">
                                                     <p style="color: #7e8287; font-size: 1rem; margin: 0">Giới tính: </p>
                                                     <input type="text" class="form-controlnew" name="genderI" id="gender"
-                                                           placeholder="Gender" value="${e.gender == "m" ? "Nam" : "Nữ"}" readonly>
+                                                           placeholder="Gender" value="${e.gender.toLowerCase() == "m" ? "Nam" : "Nữ"}" readonly>
                                                     <select class="form-controlnew hidden-select" name="genderS" id="genderselect" style="display: none;">
-                                                        <c:if test="${e.gender == 'm'}">
+                                                        <c:if test="${e.gender.toLowerCase() == 'm'}">
                                                             <option value="Nam" style="background-color:#fff; color: #000000;" selected>Nam</option>
                                                             <option value="Nữ" style="background-color:#fff; color: #000000;">Nữ</option>
                                                         </c:if>
-                                                        <c:if test="${c.gender == 'f'}">
+                                                        <c:if test="${e.gender.toLowerCase() == 'f'}">
                                                             <option value="Nam" style="background-color:#fff; color: #000000;">Nam</option>
                                                             <option value="Nữ" style="background-color:#fff; color: #000000;" selected>Nữ</option>
                                                         </c:if>

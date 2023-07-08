@@ -12,7 +12,7 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="fontawesome/css/all.css"/>
-        <link rel="stylesheet" href="css/mo-style.css?v=2"/>
+        <link rel="stylesheet" href="css/mo-style2.css?v=2"/>
     </head>
     <body>
         <div style="min-height:100vh; display:flex; flex-direction:column;justify-content:space-between;">
@@ -184,7 +184,7 @@
 
                                             function myFunction() {
                                                 // Declare variables
-                                                var input, filter, list, a, b, c, i, idValue, nameValue, adrValue;
+                                                var input, filter, list, a, b, c, d, i, idValue, nameValue, adrValue, phValue;
                                                 input = document.getElementById('myInput');
                                                 filter = input.value.toUpperCase();
                                                 par = document.getElementById("table_cus");
@@ -195,10 +195,13 @@
                                                     a = list[i].getElementsByTagName("th")[0];
                                                     b = list[i].getElementsByTagName("td")[0];
                                                     c = list[i].getElementsByTagName("td")[4];
+                                                    d = list[i].getElementsByTagName("td")[3];
                                                     idValue = a.textContent || a.innerText;
                                                     nameValue = b.textContent || b.innerText;
                                                     adrValue = c.textContent || c.innerText;
-                                                    if (idValue.toUpperCase().indexOf(filter) > -1 || nameValue.toUpperCase().indexOf(filter) > -1 || adrValue.toUpperCase().indexOf(filter) > -1) {
+                                                    phValue = d.textContent || d.innerText;
+                                                    if (idValue.toUpperCase().indexOf(filter) > -1 || nameValue.toUpperCase().indexOf(filter) > -1
+                                                            || adrValue.toUpperCase().indexOf(filter) > -1 || phValue.toUpperCase().indexOf(filter) > -1) {
                                                         list[i].style.display = "";
                                                     } else {
                                                         list[i].style.display = "none";
