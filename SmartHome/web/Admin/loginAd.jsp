@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -71,7 +72,7 @@
                                     <i class="far fa-user"></i> Employees
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link" href="customerAd.jsp">
                                     <i class="far fa-user"></i>
@@ -95,11 +96,11 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col-12">
-                                <form action="homeAd.jsp" method="post" class="tm-login-form">
+                                <form action="../loginAd" method="post" class="tm-login-form">
                                     <div class="form-group">
                                         <label for="username">Username</label>
                                         <input
-                                            name="username"
+                                            name="user"
                                             type="text"
                                             class="form-control validate"
                                             id="username"
@@ -110,7 +111,7 @@
                                     <div class="form-group mt-3">
                                         <label for="password">Password</label>
                                         <input
-                                            name="password"
+                                            name="pwd"
                                             type="password"
                                             class="form-control validate"
                                             id="password"
@@ -126,9 +127,9 @@
                                             Login
                                         </button>
                                     </div>
-                                    <button class="mt-5 btn btn-primary btn-block text-uppercase">
+<!--                                    <button class="mt-5 btn btn-primary btn-block text-uppercase">
                                         Forgot your password?
-                                    </button>
+                                    </button>-->
                                 </form>
                             </div>
                         </div>

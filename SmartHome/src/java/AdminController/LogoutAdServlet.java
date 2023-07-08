@@ -2,12 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package AdminController;
 
-import dal.CommentDAO;
-import dal.CustomerDAO;
-import dal.EmployeeDAO;
-import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,16 +11,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Comment;
-import model.Product;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "ShowDetailProduct", urlPatterns = {"/detail"})
-public class ShowDetailProduct extends HttpServlet {
+@WebServlet(name = "LogoutAdServlet", urlPatterns = {"/logoutAd"})
+public class LogoutAdServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +37,10 @@ public class ShowDetailProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShowDetailProduct</title>");
+            out.println("<title>Servlet LogoutAdServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShowDetailProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogoutAdServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,25 +58,13 @@ public class ShowDetailProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDAO pd = new ProductDAO();
-        CommentDAO cd = new CommentDAO();
-        CustomerDAO cud = new CustomerDAO();
-        EmployeeDAO ed = new EmployeeDAO();
-        if (request.getParameter("id") != null) {
-            String id = request.getParameter("id");
-            Product p = pd.getProductById(id);
-            List<Comment> listc = cd.getAllCommentOfProduct(id);
-            for (Comment c : listc) {
-                System.out.println(c.getContent());
-            }
-            request.setAttribute("edao", ed);
-            request.setAttribute("cdao", cud);
-            request.setAttribute("product", p);
-            request.setAttribute("comment", listc);
-            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("product.jsp");
-        }
+        HttpSession session = request.getSession();
+        session.removeAttribute("admin");
+        session.removeAttribute("CustomerDAO");
+        session.removeAttribute("AccountDAO");
+        session.removeAttribute("EmployeeDAO");
+        session.removeAttribute("ProductDAO");
+        response.sendRedirect("Admin/loginAd.jsp");
     }
 
     /**

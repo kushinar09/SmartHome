@@ -97,7 +97,7 @@
                                                                 <c:set value="${requestScope.edao}" var="ed"></c:set>
                                                                 <c:set value="${requestScope.cdao}" var="cd"></c:set>
                                                                 <c:if test="${c.id_cus != null}">
-                                                                    <h5 class="media-heading">${cd.getEmployeeById(c.getId_emp()).getName()}</h5>
+                                                                    <h5 class="media-heading">${cd.getCustomerById(c.getId_cus()).getName()}</h5>
                                                                 </c:if>
                                                                 <c:if test="${c.id_emp != null}">
                                                                     <h5 class="media-heading" style="color: #0033ff">${ed.getEmployeeById(c.id_emp).name} <i class="fa-solid fa-circle-check"></i></h5>

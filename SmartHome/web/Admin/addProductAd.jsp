@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +15,9 @@
         <link rel="stylesheet" href="../fontawesome/css/all.css"/>
         <link rel="stylesheet" href="css/admincss.css?v=2"/>
     </head>
+    <c:if test="${sessionScope.admin == null}">
+        <c:redirect url = "loginAd.jsp"/>
+    </c:if>
     <body>
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">

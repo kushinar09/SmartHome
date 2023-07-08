@@ -5,25 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
-<%@ page import="com.google.gson.Gson"%>
-<%@ page import="com.google.gson.JsonObject"%>
-
-<%
-Gson gsonObj = new Gson();
-Map<Object,Object> map = null;
-List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
-List<Map<Object,Object>> list2 = new ArrayList<Map<Object,Object>>();
- 
-map = new HashMap<Object,Object>(); map.put("label", "Health"); map.put("y", 35); map.put("exploded", true); list.add(map);
-map = new HashMap<Object,Object>(); map.put("label", "Finance"); map.put("y", 20); list.add(map);
-map = new HashMap<Object,Object>(); map.put("label", "Career"); map.put("y", 18); list.add(map);
-map = new HashMap<Object,Object>(); map.put("label", "Education"); map.put("y", 15); list.add(map);
-map = new HashMap<Object,Object>(); map.put("label", "Family"); map.put("y", 5); list.add(map);
-map = new HashMap<Object,Object>(); map.put("label", "Real Estate"); map.put("y", 7); list.add(map);
- 
-String dataPoints = gsonObj.toJson(list2);
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,6 +15,9 @@ String dataPoints = gsonObj.toJson(list2);
         <link rel="stylesheet" href="../fontawesome/css/all.css"/>
         <link rel="stylesheet" href="css/admincss.css?v=2"/>
     </head>
+    <c:if test="${sessionScope.admin == null}">
+        <c:redirect url = "loginAd.jsp"/>
+    </c:if>
     <body id="reportsPage">
         <div class="" id="home">
             <nav class="navbar navbar-expand-xl">
@@ -92,7 +77,7 @@ String dataPoints = gsonObj.toJson(list2);
                         </ul>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link d-block" href="loginAd.jsp">
+                                <a class="nav-link d-block" href="../logoutAd">
                                     Admin, <b>Logout</b>
                                 </a>
                             </li>
@@ -104,7 +89,7 @@ String dataPoints = gsonObj.toJson(list2);
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <p class="text-white mt-5 mb-5">Welcome back, <b>Admin</b></p>
+                        <p class="text-white mt-5 mb-5">Welcome back, <b>${sessionScope.admin}</b></p>
                     </div>
                 </div>
                 <!-- row -->

@@ -16,6 +16,22 @@ import model.Account;
  */
 public class AccountDAO extends DBContext {
 
+    public boolean checkAccountAdmin(String user, String pwd) {
+        try {
+            String sql = "SELECT * FROM [ACCOUNT_ADMIN] WHERE [user] = ? AND [password] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user);
+            statement.setString(2, pwd);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
     public int insertAccountCustomer(Account a) {
         try {
             String sql = "INSERT INTO [ACCOUNT_CUS] ([username], [email], [password])\n"
@@ -138,7 +154,7 @@ public class AccountDAO extends DBContext {
             System.err.println(ex.getMessage());
         }
     }
-    
+
     public void changePwdCus(Account a, String newpwd) {
         try {
             String sql = "UPDATE [ACCOUNT_CUS]\n"

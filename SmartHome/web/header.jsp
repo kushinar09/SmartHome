@@ -101,7 +101,7 @@
                                 </div>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
-                                <a href="intro.jsp" class="nav-top-link">KHÁCH HÀNG</a>
+                                <a href="customer" class="nav-top-link">KHÁCH HÀNG</a>
                             </li>
                             <!--                            <li id="menu-item" class="menu-item-custom">
                                                             <a href="pagenotfound.html" class="nav-top-link">TIN TỨC</a>

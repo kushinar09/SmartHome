@@ -17,9 +17,6 @@ import model.Customer;
  * @author FR
  */
 public class CustomerDAO extends DBContext {
-
-    private int id_cus = 1;
-
     public CustomerDAO() {
     }
 
@@ -36,6 +33,7 @@ public class CustomerDAO extends DBContext {
                 c.setGender(rs.getString("gender"));
                 c.setDob(rs.getDate("dob"));
                 c.setPhone(rs.getString("phoneNO"));
+                c.setAddress(rs.getString("address"));
                 c.setId_acc(rs.getInt("id_acc"));
                 list.add(c);
             }

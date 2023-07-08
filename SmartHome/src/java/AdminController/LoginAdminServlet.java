@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package AdminController;
 
-import dal.CommentDAO;
+import dal.AccountDAO;
 import dal.CustomerDAO;
 import dal.EmployeeDAO;
 import dal.ProductDAO;
@@ -15,16 +15,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Comment;
-import model.Product;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "ShowDetailProduct", urlPatterns = {"/detail"})
-public class ShowDetailProduct extends HttpServlet {
+@WebServlet(name = "LoginAdminServlet", urlPatterns = {"/loginAd"})
+public class LoginAdminServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +41,10 @@ public class ShowDetailProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShowDetailProduct</title>");
+            out.println("<title>Servlet LoginAdminServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShowDetailProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoginAdminServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,25 +62,7 @@ public class ShowDetailProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDAO pd = new ProductDAO();
-        CommentDAO cd = new CommentDAO();
-        CustomerDAO cud = new CustomerDAO();
-        EmployeeDAO ed = new EmployeeDAO();
-        if (request.getParameter("id") != null) {
-            String id = request.getParameter("id");
-            Product p = pd.getProductById(id);
-            List<Comment> listc = cd.getAllCommentOfProduct(id);
-            for (Comment c : listc) {
-                System.out.println(c.getContent());
-            }
-            request.setAttribute("edao", ed);
-            request.setAttribute("cdao", cud);
-            request.setAttribute("product", p);
-            request.setAttribute("comment", listc);
-            request.getRequestDispatcher("productDetail.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("product.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -96,7 +76,30 @@ public class ShowDetailProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        CustomerDAO cd = new CustomerDAO();
+        AccountDAO ad = new AccountDAO();
+        EmployeeDAO ed = new EmployeeDAO();
+        ProductDAO pd = new ProductDAO();
+        HttpSession session = request.getSession();
+
+        if (request.getParameter("user") != null && request.getParameter("pwd") != null) {
+            String user = request.getParameter("user");
+            String pwd = request.getParameter("pwd");
+            if (ad.checkAccountAdmin(user, pwd)) {
+                session.setAttribute("admin", request.getParameter("user"));
+                session.setAttribute("CustomerDAO", cd);
+                session.setAttribute("AccountDAO", ad);
+                session.setAttribute("EmployeeDAO", ed);
+                session.setAttribute("ProductDAO", pd);
+                response.sendRedirect("Admin/homeAd.jsp");
+            } else {
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('User or password incorrect');");
+                out.println("location='Admin/loginAd.jsp';");
+                out.println("</script>");
+            }
+        }
     }
 
     /**
