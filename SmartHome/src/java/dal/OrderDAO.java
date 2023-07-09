@@ -39,6 +39,42 @@ public class OrderDAO extends DBContext {
         }
         return list;
     }
+    
+    public Order getOrderById(String id){
+        try {
+            String sql = "SELECT * FROM [ORDER] WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Order o = new Order();
+                o.setId(rs.getInt("id"));
+                o.setStatus(rs.getString("status"));
+                o.setId_cus(rs.getString("id_cus"));
+                o.setAddress(rs.getString("address"));
+                o.setStart_date(rs.getDate("start_date"));
+                o.setDelivery_date(rs.getDate("delivery_due"));
+                return o;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    
+    public void changeStatus(String id, String status){
+        try {
+            String sql = "UPDATE [ORDER]\n"
+                    + "SET [status] = ?\n"
+                    + "WHERE [id] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, status);
+            statement.setString(2, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 
     public List<OrderDetail> getDetailOfOrder(String id) {
         List<OrderDetail> list = new ArrayList<>();

@@ -31,7 +31,10 @@
             <main class="page payment-page" style="margin-top: 150px;">
                 <section class="payment-form dark">
                     <div class="container">
-                        <form>
+                        <div style="position: absolute; top: 20%; left: 25.5%; z-index: 5;">
+                            <a href="order.jsp">Back</a>
+                        </div>
+                        <form style="z-index: 4" action="process?id=${id}" method="post" id="form-order">
                             <div class="products">
                                 <h3 class="title">Order #${id}</h3>
                                 <div id="all_products">
@@ -54,30 +57,38 @@
                                     <div class="form-group col-sm-7">
                                         <label for="card-holder">Customer</label>
                                         <input id="card-holder" type="text" class="form-control" placeholder="Card Holder"
-                                               aria-label="Card Holder" aria-describedby="basic-addon1">
+                                               aria-label="Card Holder" aria-describedby="basic-addon1" 
+                                               value="${requestScope.cdao.getCustomerById(requestScope.order.id_cus).name}" readonly>
                                     </div>
                                     <div class="form-group col-sm-5">
-                                        <label for="">Expiration Date</label>
+                                        <label for="">Status</label>
                                         <div class="input-group expiration-date">
-                                            <input type="text" class="form-control" placeholder="MM" aria-label="MM"
-                                                   aria-describedby="basic-addon1">
-                                            <span class="date-separator">/</span>
-                                            <input type="text" class="form-control" placeholder="YY" aria-label="YY"
-                                                   aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Status" aria-label="YY"
+                                                   aria-describedby="basic-addon1" 
+                                                   value="${requestScope.order.status}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group col-sm-8">
                                         <label for="card-number">Address</label>
                                         <input id="card-number" type="text" class="form-control" placeholder="Card Number"
-                                               aria-label="Card Holder" aria-describedby="basic-addon1">
+                                               aria-label="Card Holder" aria-describedby="basic-addon1" 
+                                               value="${requestScope.cdao.getCustomerById(requestScope.order.id_cus).address}" readonly>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="cvc">Phone No.</label>
                                         <input id="cvc" type="text" class="form-control" placeholder="CVC" aria-label="Card Holder"
-                                               aria-describedby="basic-addon1">
+                                               aria-describedby="basic-addon1" 
+                                               value="${requestScope.cdao.getCustomerById(requestScope.order.id_cus).phone}" readonly>
                                     </div>
                                     <div class="form-group col-sm-12">
-                                        <button type="button" class="btn btn-primary btn-block">Proceed</button>
+                                        <c:if test="${requestScope.order.status != 'Pending'}">
+                                            <button type="button" class="btn btn-primary btn-block" disabled>${requestScope.order.status}</button>
+                                        </c:if>
+                                        <c:if test="${requestScope.order.status == 'Pending'}">
+                                            <input type="hidden" id="getvalue" name="newstatus" value="">
+                                            <button type="button" class="btn btn-primary btn-block" onclick="valueip(this)">Processing</button>
+                                            <button type="button" class="btn btn-primary btn-block" onclick="valueip(this)">Cancel</button>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -102,6 +113,11 @@
                 var textnumb = total.toString();
                 textnumb = textnumb.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                 document.getElementById("total_price").innerHTML = textnumb + ' đ';
+            }
+            
+            function valueip(element){
+                document.getElementById("getvalue").value = element.innerHTML;
+                document.getElementById("form-order").submit();
             }
         </script>    
     </body>
