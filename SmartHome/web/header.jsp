@@ -110,17 +110,17 @@
                                 <a href="order" class="nav-top-link">ĐƠN HÀNG</a>
                             </li>
                             <li id="menu-item" class="menu-item-custom">
-                                <a href="pagenotfound.html" class="nav-top-link">TƯ VẤN</a>
+                                <a href="advise" class="nav-top-link">TƯ VẤN</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="contact">
+<!--                    <div class="contact">
                         <div class="contact-btn">
                             <a rel="noopener noreferrer" href="#" target="_blank" class="button plain is-outline" style="padding: 7px;border-radius:89px;">
                                 <span>BÁO LỖI</span>
                             </a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>     

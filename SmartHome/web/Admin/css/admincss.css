@@ -716,3 +716,16 @@ input[type="checkbox"]:focus {
     max-height: 350px;
   }
 }
+
+#idcus:read-only, #email:read-only {
+    background-color: #6b81a0;
+}
+
+#table_cus tr{
+    cursor: pointer;
+}
+
+#table_cus tr:hover{
+    background-color: #50697f;
+}
+

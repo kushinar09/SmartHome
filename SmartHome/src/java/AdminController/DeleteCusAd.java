@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+
+package AdminController;
 
 import dal.CustomerDAO;
 import java.io.IOException;
@@ -13,46 +14,41 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import model.Customer;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "ChangeInfomation", urlPatterns = {"/changeInfo"})
-public class ChangeInfoCus extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+@WebServlet(name="DeleteCusAd", urlPatterns={"/deleteCusAd"})
+public class DeleteCusAd extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangeInfomation</title>");
+            out.println("<title>Servlet DeleteCusAd</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangeInfomation at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteCusAd at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -60,13 +56,20 @@ public class ChangeInfoCus extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+    throws ServletException, IOException {
+        CustomerDAO cd = new CustomerDAO();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("admin") == null) {
+            response.sendRedirect("Admin/loginAd.jsp");
+        } else {
+            String id = request.getParameter("id");
+            cd.deleteCustomer(id);
+            response.sendRedirect("customerAd");
+        }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -74,42 +77,12 @@ public class ChangeInfoCus extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        CustomerDAO cd = new CustomerDAO();
-        if (request.getParameter("name") == null || request.getParameter("gender") == null || request.getParameter("dob") == null || request.getParameter("phone") == null || request.getParameter("address") == null) {
-            response.sendRedirect("home.jsp");
-        } else {
-            String id = request.getParameter("idcus");
-            String name = request.getParameter("name");
-            String gender = request.getParameter("gender");
-            if (gender.equals("M")) {
-                gender = "M";
-            } else {
-                gender = "F";
-            }
-            Date dob = Date.valueOf(request.getParameter("dob"));
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-
-            HttpSession session = request.getSession(false);
-            if (session.getAttribute("account") != null) {
-                Customer cn = new Customer();
-                cn.setName(name);
-                cn.setGender(gender);
-                cn.setDob(dob);
-                cn.setPhone(phone);
-                cn.setAddress(address);
-                cd.updateCustomer(cn, id);
-                response.sendRedirect("customer");
-            } else {
-                response.sendRedirect("login.jsp");
-            }
-        }
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

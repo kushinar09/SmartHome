@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.CustomerDAO;
+import dal.ConnectDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +13,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import model.Customer;
+import model.Answer;
+import model.Employee;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "ChangeInfomation", urlPatterns = {"/changeInfo"})
-public class ChangeInfoCus extends HttpServlet {
+@WebServlet(name = "PostAnswer", urlPatterns = {"/postAns"})
+public class PostAnswer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class ChangeInfoCus extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangeInfomation</title>");
+            out.println("<title>Servlet PostAnswer</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangeInfomation at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PostAnswer at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,35 +75,21 @@ public class ChangeInfoCus extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CustomerDAO cd = new CustomerDAO();
-        if (request.getParameter("name") == null || request.getParameter("gender") == null || request.getParameter("dob") == null || request.getParameter("phone") == null || request.getParameter("address") == null) {
-            response.sendRedirect("home.jsp");
+        HttpSession session = request.getSession();
+        ConnectDAO cd = new ConnectDAO();
+        if (session.getAttribute("account") == null) {
+            response.sendRedirect("login.jsp");
         } else {
-            String id = request.getParameter("idcus");
-            String name = request.getParameter("name");
-            String gender = request.getParameter("gender");
-            if (gender.equals("M")) {
-                gender = "M";
-            } else {
-                gender = "F";
-            }
-            Date dob = Date.valueOf(request.getParameter("dob"));
-            String phone = request.getParameter("phone");
-            String address = request.getParameter("address");
-
-            HttpSession session = request.getSession(false);
-            if (session.getAttribute("account") != null) {
-                Customer cn = new Customer();
-                cn.setName(name);
-                cn.setGender(gender);
-                cn.setDob(dob);
-                cn.setPhone(phone);
-                cn.setAddress(address);
-                cd.updateCustomer(cn, id);
-                response.sendRedirect("customer");
-            } else {
-                response.sendRedirect("login.jsp");
-            }
+            String id_ques = request.getParameter("id");
+            String title = request.getParameter("answer");
+            Employee emp = (Employee) session.getAttribute("employee");
+            String id_emp = emp.getId();
+            Answer a = new Answer();
+            a.setTitle(title);
+            a.setId_emp(id_emp);
+            a.setId_ques(id_ques);
+            cd.insertAnswer(a);
+            response.sendRedirect("advise");
         }
     }
 

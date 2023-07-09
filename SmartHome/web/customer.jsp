@@ -43,7 +43,7 @@
                                         <tr onclick="show(this)" id="row_cus">
                                             <th scope="row"><b>#${c.id}</b></th>
                                             <td>${c.name}</td>
-                                            <td><b>${c.gender.toLowerCase() == 'm' ? "Male" : "Female"}</b></td>
+                                            <td><b>${c.gender.toLowerCase() == 'm' ? "Nam" : "Nữ"}</b></td>
                                             <td><b>${c.dob}</b></td>
                                             <td><b>${c.phone}</b></td>
                                             <td>${c.address}</td>
@@ -64,18 +64,18 @@
                                         <div class="tm-block-col tm-col-account-settings-cus">
                                             <div class="tm-bg-primary-dark tm-block tm-block-settings">
                                                 <h2 class="tm-block-title">Account Settings</h2>
-                                                <form action="" class="tm-signup-form row">
+                                                <form action="changePwdCus?id=${c.id}" method="post" class="tm-signup-form row">
                                                     <div class="form-group col-lg-12">
                                                         <label for="email">Account Email</label>
-                                                        <input id="email" name="email" type="email" class="form-control validate" value="${a.email}"/>
+                                                        <input id="email" name="email" type="email" class="form-control validate" value="${a.email}" readonly/>
                                                     </div>
                                                     <div class="form-group col-lg-6">
-                                                        <label for="name">Username</label>
-                                                        <input id="name" name="name" type="text" class="form-control validate" value="${a.username}" />
+                                                        <label for="user">Username</label>
+                                                        <input id="user" name="user" type="text" class="form-control validate" value="${a.username}" />
                                                     </div>
                                                     <div class="form-group col-lg-6">
                                                         <label for="password">Password</label>
-                                                        <input id="password" name="password" type="password"
+                                                        <input id="pwd" name="pwd" type="password"
                                                                class="form-control validate" value="${a.password}" />
                                                     </div>
                                                     <div class="form-group col-lg-2">
@@ -99,7 +99,7 @@
                                                     <h2 class="tm-block-title d-inline-block">Infomation</h2>
                                                 </div>
                                             </div>
-                                            <form action="" method="post" enctype="multipart/form-data" class="row tm-edit-product-row">
+                                            <form action="changeInfo" method="post" class="row tm-edit-product-row">
                                                 <div class="col-xl-6 col-lg-6 col-md-12">
                                                     <div class="tm-edit-product-form" style="display: block; margin-top: 0em;">
                                                         <div class="form-group mb-3">
@@ -119,8 +119,8 @@
                                                                 <label for="category">Gender</label>
                                                                 <select class="custom-select tm-select-accounts" id="gender" name="gender"
                                                                         required style="height: 50px;">
-                                                                    <option value="M" ${c.gender.toLowerCase() == 'm' ? "selected" : ""}>Male</option>
-                                                                    <option value="F" ${c.gender.toLowerCase() == 'm' ? "" : "selected"}>Female</option>
+                                                                    <option value="M" ${c.gender.toLowerCase() == 'm' ? "selected" : ""}>Nam</option>
+                                                                    <option value="F" ${c.gender.toLowerCase() == 'm' ? "" : "selected"}>Nữ</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group mb-3 col-xs-12 col-sm-6">
@@ -136,7 +136,7 @@
                                                     <div class="form-group mb-3">
                                                         <label for="phone">Phone No.
                                                         </label>
-                                                        <input id="phone" name="phone" type="number" class="form-control validate"
+                                                        <input id="phone" name="phone" type="text" class="form-control validate"
                                                                data-large-mode="true" required value="${c.phone}" />
                                                     </div>
                                                     <div class="form-group mb-3">
@@ -147,12 +147,12 @@
                                                 </div>
                                                 <div class="col-12 form-group">
                                                     <label class="tm-hide-sm">&nbsp;</label>
-                                                    <button type="submit" class="btn btn-primary btn-block text-uppercase">Cập nhật</button>
+                                                    <button type="submit" class="btn btn-primary btn-block text-uppercase">Update</button>
                                                 </div>
 
                                                 <div class="col-12">
-                                                    <a href="#">
-                                                        <div class="btn btn-primary btn-block text-uppercase">Xóa tài khoản</div>
+                                                    <a href="#" onclick="showMess('${c.id}')">
+                                                        <div class="btn btn-primary btn-block text-uppercase">Delete</div>
                                                     </a>
                                                 </div>
                                             </form>
@@ -206,6 +206,11 @@
                                                     } else {
                                                         list[i].style.display = "none";
                                                     }
+                                                }
+                                            }
+                                            function showMess(id) {
+                                                if (confirm("Are you sure to delete?")) {
+                                                    window.location = "deleteCus?id=" + id;
                                                 }
                                             }
         </script>

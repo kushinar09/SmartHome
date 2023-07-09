@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import model.PrdStorage;
 import model.Product;
 
 /**
@@ -305,6 +306,41 @@ public class ProductDAO extends DBContext {
             System.out.println(ex.getMessage());
         }
         return size;
+    }
+
+    public List<PrdStorage> getInStorage() {
+        List<PrdStorage> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM STORAGE";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                PrdStorage ps = new PrdStorage();
+                ps.setId_prod(rs.getString("id_prod"));
+                ps.setUpdate(rs.getDate("update"));
+                ps.setSold(rs.getInt("unit_sold"));
+                ps.setStock(rs.getInt("in_stock"));
+                list.add(ps);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+    
+    public List<String> getAllType(){
+        List<String> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM TYPE_OF_PRODUCT";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getString("type"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
     }
 
     public static void main(String[] args) {

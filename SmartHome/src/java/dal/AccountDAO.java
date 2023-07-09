@@ -130,7 +130,7 @@ public class AccountDAO extends DBContext {
             if (rs.next()) {
                 Account a = new Account();
                 a.setId(rs.getInt("id"));
-                a.setUsername("username");
+                a.setUsername(rs.getString("username"));
                 a.setEmail(rs.getString("email"));
                 a.setPassword(rs.getString("password"));
                 return a;
@@ -163,6 +163,20 @@ public class AccountDAO extends DBContext {
             statement.setString(1, newpwd);
             statement.setString(2, a.getEmail());
             statement.setString(3, a.getPassword());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public void updateAccCus(Account a, String user, String pwd){
+        try {
+            String sql = "UPDATE [ACCOUNT_CUS]\n"
+                    + "SET [username] = ?, [password] = ? WHERE [email] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user);
+            statement.setString(2, pwd);
+            statement.setString(3, a.getEmail());
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

@@ -92,7 +92,7 @@ public class LoginAdminServlet extends HttpServlet {
                 session.setAttribute("AccountDAO", ad);
                 session.setAttribute("EmployeeDAO", ed);
                 session.setAttribute("ProductDAO", pd);
-                response.sendRedirect("Admin/homeAd.jsp");
+                response.sendRedirect("homeAd");
             } else {
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('User or password incorrect');");

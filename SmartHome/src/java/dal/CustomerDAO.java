@@ -143,6 +143,25 @@ public class CustomerDAO extends DBContext {
             System.err.println(ex.getMessage());
         }
     }
+    
+    public void deleteCustomer(String id){
+        try {
+            String sql1 = "DELETE COMMENT WHERE id_cus = ?";
+            PreparedStatement statement1 = connection.prepareStatement(sql1);
+            statement1.setString(1, id);
+            statement1.executeUpdate();
+            
+            OrderDAO od = new OrderDAO();
+            od.deleteOrderOfCustomer(id);
+            
+            String sql3 = "DELETE CUSTOMER WHERE id_cus = ?";
+            PreparedStatement statement3 = connection.prepareStatement(sql3);
+            statement3.setString(1, id);
+            statement3.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 
 //    public static void main(String[] args) {
 //        // TODO code application logic here

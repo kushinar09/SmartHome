@@ -78,7 +78,13 @@ public class LogoutAdServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        session.removeAttribute("admin");
+        session.removeAttribute("CustomerDAO");
+        session.removeAttribute("AccountDAO");
+        session.removeAttribute("EmployeeDAO");
+        session.removeAttribute("ProductDAO");
+        response.sendRedirect("Admin/loginAd.jsp");
     }
 
     /**

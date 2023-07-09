@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package AdminController;
 
 import dal.CustomerDAO;
 import java.io.IOException;
@@ -20,8 +20,8 @@ import model.Customer;
  *
  * @author FR
  */
-@WebServlet(name = "ChangeInfomation", urlPatterns = {"/changeInfo"})
-public class ChangeInfoCus extends HttpServlet {
+@WebServlet(name = "ChangeInfoCusAd", urlPatterns = {"/changeInfoAd"})
+public class ChangeInfoCusAd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class ChangeInfoCus extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangeInfomation</title>");
+            out.println("<title>Servlet ChangeInfoCusAd</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangeInfomation at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangeInfoCusAd at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,7 +77,7 @@ public class ChangeInfoCus extends HttpServlet {
             throws ServletException, IOException {
         CustomerDAO cd = new CustomerDAO();
         if (request.getParameter("name") == null || request.getParameter("gender") == null || request.getParameter("dob") == null || request.getParameter("phone") == null || request.getParameter("address") == null) {
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("homeAd.jsp");
         } else {
             String id = request.getParameter("idcus");
             String name = request.getParameter("name");
@@ -92,7 +92,7 @@ public class ChangeInfoCus extends HttpServlet {
             String address = request.getParameter("address");
 
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("account") != null) {
+            if (session.getAttribute("admin") != null) {
                 Customer cn = new Customer();
                 cn.setName(name);
                 cn.setGender(gender);
@@ -100,9 +100,9 @@ public class ChangeInfoCus extends HttpServlet {
                 cn.setPhone(phone);
                 cn.setAddress(address);
                 cd.updateCustomer(cn, id);
-                response.sendRedirect("customer");
+                response.sendRedirect("customerAd");
             } else {
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("Admin/loginAd.jsp");
             }
         }
     }

@@ -11,143 +11,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="fontawesome/css/all.css"/>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/mo-style2.css?v=2"/>
         <style>
-            *{
-                margin: 0;
-                pading: 0;
-                box-sizing: border-box;
-            }
-            body{
-                background-color: rgb(63,72,83);
-                font-family: sans-serif;
-                color: rgb(220,220,220);
-                padding: 50px;
-                width: 100vw;
-                overflow-x: hidden;
-            }
-            h1{
-                font-weight: 400;
-            }
-            a{
-                color: inherit;
-            }
-            p{
-                margin-top: .7em;
-            }
-            .warning{
-                color: rgb(62,148,236);
-            }
-            .st_viewport{
-                padding: 0 40px;
-                max-height: 500px;
-                overflow: auto;
-            }
-
-            [data-table_id="1"]{
-                background-color: rgb(255,115,0);
-            }
-            [data-table_id="2"]{
-                background-color: rgb(61,53,39);
-                color: rgb(220,220,220);
-            }
-            [data-table_id="3"]{
-                background-color: rgba(168,189,4, .8);
-            }
-
-            ._rank{
-                min-width: 80px;
-            }
-            ._id{
-                min-width: 60px;
-            }
-            ._name{
-                min-width: 130px;
-            }
-            ._surname{
-                min-width: 130px;
-            }
-            ._year{
-                min-width: 80px;
-            }
-            ._section{
-                width: 80%;
-                min-width: 130px;
-            }
-
-            pre{
-                overflow: auto;
-            }
-
-            /** Sticky table styles **/
-            .st_viewport{
-                background-color: #ffffff;
-                color: rgb(27,30,36);
-                margin: 20px 0;
-            }
-            /* ###  Table wrap */
-            .st_wrap_table{
-
-            }
-            /* ##   header */
-            .st_table_header{
-                position: -webkit-sticky;
-                position: sticky;
-                top: 0px;
-                z-index: 1;
-                background-color: #435c70;
-                color: rgb(220,220,220);
-            }
-            .st_table_header h2{
-                font-weight: 400;
-                margin: 0 20px;
-                padding: 20px 0 0;
-            }
-            .st_table_header .st_row{
-                color: rgba(220,220,220, .7);
-            }
-            .st_table_header .st_column{
-
-            }
-            /* ##  table */
-            .st_table{
-                background-color: #435c70;
-                color: white;
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                -webkit-flex-direction: column;
-                -ms-flex-direction: column;
-                flex-direction: column;
-            }
-            /* #   row */
-            .st_row{
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                margin: 0;
-            }
-            .st_table .st_row:nth-child(even){
-                background-color: rgba(0,0,0, .1)
-            }
-            /* #   column */
-            .st_column{
-                padding: 10px 20px;
-            }
-            
-            .content_q{
-                color: #ffffff;
-                width: 100%;
-                background: transparent;
-                border: none;
-                
-            }
-            
-            .content_q:focus{
-                outline: none;
+            .anhdaden{
+                /*                display: none;*/
             }
         </style>
     </head>
@@ -156,28 +24,47 @@
             <div class="head">
                 <%@include file="header.jsp" %>
             </div>
-            <div style="margin-top: 150px;">
-                <main class="st_viewport">
-                    <div class="st_wrap_table" data-table_id="0">
-                        <header class="st_table_header">
-                            <h2>Table header one</h2>
-                            <div class="st_row">
-                                <div class="st_column _rank">ID</div>
-                                <div class="st_column _name">Name</div>
-                                <div class="st_column _section">Content</div>
-                            </div>
-                        </header>
-                        <div class="st_table">
-                            <div class="st_row">
-                                <div class="st_column _rank">0</div>
-                                <div class="st_column _name">laura</div>
-                                <div class="st_column _section" style="overflow-x: auto">
-                                    <input type="text" class="content_q" readonly value="asdaaaaaaasddddddddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaaaaaaaaaaaaaa">
-                                </div>
-                            </div>
+            <div style="margin-top: 180px;">
+                <div class="col-12 tm-block-col">
+                    <div class="col-12 tm-block-col">
+                        <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                            <h2 class="tm-block-title">List</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">QUESTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table_cus">
+                                    <c:forEach var="q" items="${sessionScope.listq}">
+                                        <tr id="row_cus" style="cursor: default;">
+                                            <th scope="row"><b>#${q.id}</b></th>
+                                            <td><strong>${q.content}</strong></td>
+                                        </tr>
+                                        <c:if test="${sessionScope.cndao.getAnswerById(q.id) != null}">
+                                            <tr id="answer" class="anhdaden" style="cursor: default;">
+                                                <td><strong>Answer:</strong></td>
+                                                <td>${sessionScope.cndao.getAnswerById(q.id).title}</td>
+                                            </tr>
+                                        </c:if>
+                                        <c:if test="${sessionScope.cndao.getAnswerById(q.id) == null}">
+                                            <tr id="answer" style="cursor: default;">
+                                                <td><strong>Answer:</strong></td>
+                                                <td>
+                                                    <form action="postAns?id=${q.id}" method="post">
+                                                        <input type="text" name="answer" style="width: 80%;">
+                                                        <input type="submit" value="Post" style="width: 5%;"/>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </c:if>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </main>
+                </div>
             </div>
             <footer>
                 <%@include file="footer.jsp" %>

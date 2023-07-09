@@ -37,7 +37,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mx-auto h-100">
                             <li class="nav-item">
-                                <a class="nav-link" href="homeAd.jsp">
+                                <a class="nav-link" href="../homeAd">
                                     <i class="fas fa-tachometer-alt"></i> Dashboard
                                     <span class="sr-only">(current)</span>
                                 </a>
@@ -62,19 +62,19 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="productAd.jsp">
+                                <a class="nav-link" href="../productAd">
                                     <i class="fas fa-shopping-cart"></i> Products
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="accountAd.jsp">
+                                <a class="nav-link" href="../accountAd">
                                     <i class="far fa-user"></i> Employees
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="customerAd.jsp">
+                                <a class="nav-link" href="../customerAd">
                                     <i class="far fa-user"></i>
                                     Customers
                                 </a>

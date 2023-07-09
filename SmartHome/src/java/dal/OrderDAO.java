@@ -39,8 +39,8 @@ public class OrderDAO extends DBContext {
         }
         return list;
     }
-    
-    public Order getOrderById(String id){
+
+    public Order getOrderById(String id) {
         try {
             String sql = "SELECT * FROM [ORDER] WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -61,8 +61,8 @@ public class OrderDAO extends DBContext {
         }
         return null;
     }
-    
-    public void changeStatus(String id, String status){
+
+    public void changeStatus(String id, String status) {
         try {
             String sql = "UPDATE [ORDER]\n"
                     + "SET [status] = ?\n"
@@ -95,4 +95,31 @@ public class OrderDAO extends DBContext {
         }
         return list;
     }
+
+    public void deleteOrderOfCustomer(String id_cus) {
+        try {
+            String sql = "SELECT * FROM [ORDER] WHERE id_cus = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id_cus);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String sql2 = "DELETE ORDER_DETAIL WHERE id_order = ?";
+                PreparedStatement statement2 = connection.prepareStatement(sql2);
+                statement2.setInt(1, id);
+                statement2.executeUpdate();
+            }
+            String sql3 = "DELETE [ORDER] WHERE id_cus = ?";
+            PreparedStatement statement3 = connection.prepareStatement(sql3);
+            statement3.setString(1, id_cus);
+            statement3.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+//    public static void main(String[] args) {
+//        OrderDAO od = new OrderDAO();
+//        od.deleteOrderOfCustomer("CUS2");
+//    }
 }
