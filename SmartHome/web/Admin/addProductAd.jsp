@@ -13,7 +13,7 @@
         <title>Add product</title>
         <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="../fontawesome/css/all.css"/>
-        <link rel="stylesheet" href="css/admincss.css?v=3"/>
+        <link rel="stylesheet" href="css/admincss.css?v=5"/>
     </head>
     <c:if test="${sessionScope.admin == null}">
         <c:redirect url = "loginAd.jsp"/>

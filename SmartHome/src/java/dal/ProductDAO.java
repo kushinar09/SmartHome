@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import model.PrdStorage;
 import model.Product;
+import model.Type_Product;
 
 /**
  *
@@ -386,14 +387,17 @@ public class ProductDAO extends DBContext {
         }
     }
 
-    public List<String> getAllType() {
-        List<String> list = new ArrayList<>();
+    public List<Type_Product> getAllType() {
+        List<Type_Product> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM TYPE_OF_PRODUCT";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                list.add(rs.getString("type"));
+                Type_Product tp = new Type_Product();
+                tp.setType(rs.getInt("id_type"));
+                tp.setName(rs.getString("type"));
+                list.add(tp);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -415,6 +419,43 @@ public class ProductDAO extends DBContext {
             PreparedStatement statement2 = connection.prepareStatement(sql2);
             statement2.setString(1, id);
             statement2.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    public void insertType(String type) {
+        try {
+            String sql = "SELECT TOP 1 * FROM TYPE_OF_PRODUCT ORDER BY [id_type] DESC";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            int max = 0;
+            if (rs.next()) {
+                max = rs.getInt("id_type");
+            }
+            max = max + 1;
+
+            String sql2 = "INSERT INTO [dbo].[TYPE_OF_PRODUCT] VALUES(?, ?)";
+            PreparedStatement statement2 = connection.prepareStatement(sql2);
+            statement2.setInt(1, max);
+            statement2.setString(2, type);
+            statement2.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    public void deleteType(int type) {
+
+        try {
+            List<Product> list = getListProductByType(type);
+            for (Product p : list) {
+                deleteProduct(p.getId_prod());
+            }
+            String sql1 = "DELETE TYPE_OF_PRODUCT WHERE id_type = ?";
+            PreparedStatement statement1 = connection.prepareStatement(sql1);
+            statement1.setInt(1, type);
+            statement1.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
