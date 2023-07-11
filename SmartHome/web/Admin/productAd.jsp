@@ -13,7 +13,7 @@
         <title>Product</title>
         <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="../fontawesome/css/all.css"/>
-        <link rel="stylesheet" href="css/admincss.css?v=2"/>
+        <link rel="stylesheet" href="css/admincss.css?v=4"/>
     </head>
     <c:if test="${sessionScope.admin == null}">
         <c:redirect url = "loginAd.jsp"/>
@@ -21,7 +21,7 @@
     <body id="reportsPage">
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
-                <a class="navbar-brand" href="homeAd.jsp">
+                <a class="navbar-brand" href="../homeAd">
                     <h1 class="tm-site-title mb-0">Product Admin</h1>
                 </a>
                 <button
@@ -52,18 +52,18 @@
 
                         <li class="nav-item dropdown">
 
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa-solid fa-user-tie"></i>
-                                    <span>
-                                        Employees <i class="fas fa-angle-down"></i>
-                                    </span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Infomation</a>
-                                    <a class="dropdown-item" href="#">Salary</a>
-                                </div>
-                            </li>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-user-tie"></i>
+                                <span>
+                                    Employees <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Infomation</a>
+                                <a class="dropdown-item" href="#">Salary</a>
+                            </div>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../customerAd">
                                 <i class="far fa-user"></i>
@@ -107,7 +107,7 @@
                                             <td>${p.stock}</td>
                                             <td>${p.update}</td>
                                             <td>
-                                                <a href="#" class="tm-product-delete-link">
+                                                <a href="#" class="tm-product-delete-link" onclick="deleteP(this, '${p.id_prod}')">
                                                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                                 </a>
                                             </td>
@@ -134,11 +134,11 @@
                                     <c:forEach var="ty" items="${sessionScope.ProductDAO.getAllType()}">
                                         <tr>
                                             <td class="tm-product-name">${ty}</td>
-<!--                                            <td class="text-center">
-                                                <a href="#" class="tm-product-delete-link">
-                                                    <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                                                </a>
-                                            </td>-->
+                                            <!--                                            <td class="text-center">
+                                                                                            <a href="#" class="tm-product-delete-link">
+                                                                                                <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                                                                            </a>
+                                                                                        </td>-->
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -172,6 +172,42 @@
                     window.location.href = "editProductAd.jsp";
                 });
             });
+
+            function deleteP(element, id) {
+                if (confirm("Are you sure to delete?")) {
+                    ajaxPost('http://localhost:9999/SmartHome/deleteProductAd?id=' + id, id, null);
+                    element.parentElement.parentElement.style.display = 'none';
+                }
+            }
+
+            function ajaxPost(url, data, callback) {
+                var xmlDoc = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+
+                xmlDoc.open('POST', url, true);
+                xmlDoc.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                xmlDoc.onreadystatechange = function () {
+                    if (xmlDoc.readyState === 4 && xmlDoc.status === 200) {
+                        callback(xmlDoc);
+                    }
+                };
+
+                xmlDoc.send(data);
+            }
+
+            function ajaxGet(url, callback) {
+                var xmlDoc = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+
+                xmlDoc.open('GET', url, true);
+
+                xmlDoc.onreadystatechange = function () {
+                    if (xmlDoc.readyState === 4 && xmlDoc.status === 200) {
+                        callback(xmlDoc);
+                    }
+                };
+
+                xmlDoc.send();
+            }
         </script>
     </body>
 </html>

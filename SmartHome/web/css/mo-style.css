@@ -912,7 +912,7 @@ input[type="checkbox"]:focus {
 }
 
 
-p {
+#ftwp-postcontent p {
     margin-top: 0;
     margin-bottom: 1.3em;
     line-height: 1.6em
@@ -927,39 +927,39 @@ p {
     list-style: disc;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.heading-font {
+#ftwp-postcontent h1,
+#ftwp-postcontent h2,
+#ftwp-postcontent h3,
+#ftwp-postcontent h4,
+#ftwp-postcontent h5,
+#ftwp-postcontent h6,
+#ftwp-postcontent .heading-font {
     color: #000000;
 }
 
-.h2,
-h2 {
+#ftwp-postcontent .h2,
+#ftwp-postcontent h2 {
     font-size: 1.6em;
 }
 
-.h3,
-h3 {
+#ftwp-postcontent .h3,
+#ftwp-postcontent h3 {
     font-size: 1.25em;
 }
 
-.h1,
-.h2,
-h1,
-h2 {
+#ftwp-postcontent .h1,
+#ftwp-postcontent .h2,
+#ftwp-postcontent h1,
+#ftwp-postcontent h2 {
     line-height: 1.3;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+#ftwp-postcontent h1,
+#ftwp-postcontent h2,
+#ftwp-postcontent h3,
+#ftwp-postcontent h4,
+#ftwp-postcontent h5,
+#ftwp-postcontent h6 {
     text-rendering: optimizeSpeed;
     color: #555;
     margin-bottom: 0.5em;
@@ -967,23 +967,23 @@ h6 {
     width: 100%;
 }
 
-ul {
+#ftwp-postcontent ul {
     list-style: disc;
 }
 
-img {
+#ftwp-postcontent img {
     opacity: 1;
     transition: opacity 1s;
 }
 
-img {
+#ftwp-postcontent img {
     display: inline-block;
     height: auto;
     max-width: 100%;
     vertical-align: middle;
 }
 
-img {
+#ftwp-postcontent img {
     border-style: none;
 }
 
@@ -1009,24 +1009,24 @@ img {
     max-width: 100%;
 }
 
-blockquote,
-dl,
-figure,
-form,
-ol,
-p,
-pre,
-ul {
+#ftwp-postcontent blockquote,
+#ftwp-postcontent dl,
+#ftwp-postcontent figure,
+#ftwp-postcontent form,
+#ftwp-postcontent ol,
+#ftwp-postcontent p,
+#ftwp-postcontent pre,
+#ftwp-postcontent ul {
     margin-bottom: 1.3em;
 }
 
-ol,
-ul {
+#ftwp-postcontent ol,
+#ftwp-postcontent ul {
     margin-top: 0;
     padding: 0;
 }
 
-ul {
+#ftwp-postcontent ul {
     list-style: disc;
 }
 
@@ -1039,88 +1039,89 @@ ul {
     margin-left: 1.3em;
 }
 
-li {
+#ftwp-postcontent li {
     margin-bottom: 0.6em;
 }
 
-.wp-caption {
+#ftwp-postcontent .wp-caption {
     margin-bottom: 2em;
     max-width: 100%;
 }
 
 @media (min-width: 850px) {
-    .aligncenter {
+    #ftwp-postcontent .aligncenter {
         clear: both;
         display: block;
         margin: 0 auto;
     }
 }
 
-.aligncenter {
+#ftwp-postcontent .aligncenter {
     clear: both;
 }
 
-blockquote,
-dl,
-figure,
-form,
-ol,
-p,
-pre,
-ul {
+#ftwp-postcontent blockquote,
+#ftwp-postcontent dl,
+#ftwp-postcontent figure,
+#ftwp-postcontent form,
+#ftwp-postcontent ol,
+#ftwp-postcontent p,
+#ftwp-postcontent pre,
+#ftwp-postcontent ul {
     margin-bottom: 1.3em;
 }
 
-figure {
+#ftwp-postcontent figure {
     margin: 0;
 }
 
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-main,
-menu,
-nav,
-section,
-summary {
+#ftwp-postcontent article,
+#ftwp-postcontent aside,
+#ftwp-postcontent details,
+#ftwp-postcontent figcaption,
+#ftwp-postcontent figure,
+#ftwp-postcontent footer,
+#ftwp-postcontent header,
+#ftwp-postcontent main,
+#ftwp-postcontent menu,
+#ftwp-postcontent nav,
+#ftwp-postcontent section,
+#ftwp-postcontent summary {
     display: block;
 }
 
-figure {
+#ftwp-postcontent figure {
     margin: 0 0 1em;
 }
 
-.wp-caption .wp-caption-text {
+#ftwp-postcontent .wp-caption .wp-caption-text {
     background: rgba(0,0,0,.05);
     font-size: .9em;
     font-style: italic;
     padding: 0.4em;
 }
-.wp-caption-text {
+#ftwp-postcontent .wp-caption-text {
     text-align: center;
 }
-article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+#ftwp-postcontent article, #ftwp-postcontent aside, #ftwp-postcontent details, #ftwp-postcontent figcaption, #ftwp-postcontent figure, #ftwp-postcontent footer, 
+#ftwp-postcontent header, #ftwp-postcontent main, #ftwp-postcontent menu, #ftwp-postcontent nav, #ftwp-postcontent section, #ftwp-postcontent summary {
     display: block;
 }
 
 #ftwp-postcontent td, #ftwp-postcontent th {
     padding: 5px;
 }
-td:first-child, th:first-child {
+#ftwp-postcontent td:first-child, #ftwp-postcontent th:first-child {
     padding-left: 0;
 }
-table, td, th {
+#ftwp-postcontent table, #ftwp-postcontent td, #ftwp-postcontent th {
     border-color: #333;
     color: inherit;
 }
-td {
+#ftwp-postcontent td {
     color: #666;
 }
-td, th {
+#ftwp-postcontent td, #ftwp-postcontent th {
     border-bottom: 1px solid #ececec;
     font-size: .9em;
     line-height: 1.3;

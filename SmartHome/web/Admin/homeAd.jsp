@@ -24,7 +24,7 @@
         <div class="" id="home">
             <nav class="navbar navbar-expand-xl">
                 <div class="container h-100">
-                    <a class="navbar-brand" href="homeAd.jsp">
+                    <a class="navbar-brand" href="../homeAd">
                         <h1 class="tm-site-title mb-0">Product Admin</h1>
                     </a>
                     <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -124,20 +124,20 @@
                                                     long current = timestamp.getTime();
                                                     pageContext.setAttribute("current", current);
                                                 %>
-                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60)}" />
+                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
                                                 <c:if test="${ms >= 24*60}">
                                                     <c:set var="d" value="${Math.floor(ms/24/60)}"/>
                                                     <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
                                                     <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${d}d ${h}h ${m}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
                                                 </c:if>
                                                 <c:if test="${ms < 24*60 && ms >=60}">
                                                     <c:set var="h" value="${Math.floor(ms/60)}"/>
                                                     <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${h}h ${m}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
                                                 </c:if>
                                                 <c:if test="${ms < 60}">
-                                                    <span class="tm-small tm-text-color-secondary">${Math.round(ms)}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
                                                 </c:if>
                                             </div>
                                         </div>
@@ -153,20 +153,20 @@
                                                     long current = timestamp.getTime();
                                                     pageContext.setAttribute("current", current);
                                                 %>
-                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60)}" />
+                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
                                                 <c:if test="${ms >= 24*60}">
                                                     <c:set var="d" value="${Math.floor(ms/24/60)}"/>
                                                     <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
                                                     <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${d}d ${h}h ${m}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
                                                 </c:if>
                                                 <c:if test="${ms < 24*60 && ms >=60}">
                                                     <c:set var="h" value="${Math.floor(ms/60)}"/>
                                                     <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${h}h ${m}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
                                                 </c:if>
                                                 <c:if test="${ms < 60}">
-                                                    <span class="tm-small tm-text-color-secondary">${Math.round(ms)}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
                                                 </c:if>
                                             </div>
                                         </div>
@@ -182,20 +182,20 @@
                                                     long current = timestamp.getTime();
                                                     pageContext.setAttribute("current", current);
                                                 %>
-                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60)}" />
+                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
                                                 <c:if test="${ms >= 24*60}">
                                                     <c:set var="d" value="${Math.floor(ms/24/60)}"/>
                                                     <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
                                                     <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${d}d ${h}h ${m}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
                                                 </c:if>
                                                 <c:if test="${ms < 24*60 && ms >=60}">
                                                     <c:set var="h" value="${Math.floor(ms/60)}"/>
                                                     <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${h}h ${m}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
                                                 </c:if>
                                                 <c:if test="${ms < 60}">
-                                                    <span class="tm-small tm-text-color-secondary">${Math.round(ms)}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
                                                 </c:if>
                                             </div>
                                         </div>
@@ -211,20 +211,20 @@
                                                     long current = timestamp.getTime();
                                                     pageContext.setAttribute("current", current);
                                                 %>
-                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60)}" />
+                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
                                                 <c:if test="${ms >= 24*60}">
                                                     <c:set var="d" value="${Math.floor(ms/24/60)}"/>
                                                     <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
                                                     <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${d}d ${h}h ${m}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
                                                 </c:if>
                                                 <c:if test="${ms < 24*60 && ms >=60}">
                                                     <c:set var="h" value="${Math.floor(ms/60)}"/>
                                                     <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${h}h ${m}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
                                                 </c:if>
                                                 <c:if test="${ms < 60}">
-                                                    <span class="tm-small tm-text-color-secondary">${Math.round(ms)}m ago.</span>
+                                                    <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
                                                 </c:if>
                                             </div>
                                         </div>
@@ -303,11 +303,6 @@
                     updateBarChart();
                 });
             });
-
-            function ser() {
-                let http = new XMLHttpRequest();
-                http.open('POST', '');
-            }
         </script>
     </body>
 </html>

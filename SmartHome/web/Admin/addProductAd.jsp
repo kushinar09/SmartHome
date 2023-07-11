@@ -13,7 +13,7 @@
         <title>Add product</title>
         <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="../fontawesome/css/all.css"/>
-        <link rel="stylesheet" href="css/admincss.css?v=2"/>
+        <link rel="stylesheet" href="css/admincss.css?v=3"/>
     </head>
     <c:if test="${sessionScope.admin == null}">
         <c:redirect url = "loginAd.jsp"/>
@@ -21,7 +21,7 @@
     <body>
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
-                <a class="navbar-brand" href="homeAd.jsp">
+                <a class="navbar-brand" href="../homeAd">
                     <h1 class="tm-site-title mb-0">Product Admin</h1>
                 </a>
                 <button
@@ -44,7 +44,7 @@
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link active" href="../productAd">
                                 <i class="fas fa-shopping-cart"></i> Products
@@ -53,18 +53,18 @@
 
                         <li class="nav-item dropdown">
 
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa-solid fa-user-tie"></i>
-                                    <span>
-                                        Employees <i class="fas fa-angle-down"></i>
-                                    </span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Infomation</a>
-                                    <a class="dropdown-item" href="#">Salary</a>
-                                </div>
-                            </li>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-user-tie"></i>
+                                <span>
+                                    Employees <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Infomation</a>
+                                <a class="dropdown-item" href="#">Salary</a>
+                            </div>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../customerAd">
                                 <i class="far fa-user"></i>
@@ -86,118 +86,101 @@
             <div class="row">
                 <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
                     <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                        <a href="productAd.jsp" class="row link-back" style="margin-bottom: 10px;">
+                            <i class="fas fa-arrow-alt-circle-left" style="margin: 4px; margin-left: 15px;"></i>
+                            Back
+                        </a>
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="tm-block-title d-inline-block">Add Product</h2>
+                                <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
                             </div>
                         </div>
-                        <div class="row tm-edit-product-row">
+                        <form action="../addProductAd" method="post" enctype="multipart/form-data" class="row tm-edit-product-row">
                             <div class="col-xl-6 col-lg-6 col-md-12">
-                                <form action="" class="tm-edit-product-form">
+                                <div class="tm-edit-product-form" style="display: block; margin-top: 0em;">
                                     <div class="form-group mb-3">
-                                        <label
-                                            for="name"
-                                            >Product Name
+                                        <label for="name">Tên sản phẩm
                                         </label>
-                                        <input
-                                            id="name"
-                                            name="name"
-                                            type="text"
-                                            class="form-control validate"
-                                            required
-                                            />
+                                        <input id="name" name="name" type="text" class="form-control validate" required />
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label
-                                            for="description"
-                                            >Description</label
-                                        >
-                                        <textarea
-                                            class="form-control validate"
-                                            rows="3"
-                                            required
-                                            ></textarea>
+                                        <label for="description">Mô tả</label>
+                                        <textarea class="form-control validate" rows="5" style="min-height: 86px;" id="description" name="description" onchange="showSnip()" required></textarea>
+                                        <div class="snippets-add" id="snippets-add"></div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label
-                                            for="category"
-                                            >Category</label
-                                        >
-                                        <select
-                                            class="custom-select tm-select-accounts"
-                                            id="category"
-                                            >
-                                            <option selected>Select category</option>
-                                            <option value="1">New Arrival</option>
-                                            <option value="2">Most Popular</option>
-                                            <option value="3">Trending</option>
+                                        <label for="category">Loại sản phẩm</label>
+                                        <select class="custom-select tm-select-accounts" id="category" name="category" required>
+                                            <option selected value="">Chọn loại sản phẩm ...</option>
+                                            <c:forEach var="tp" items="${sessionScope.ProductDAO.getAllType()}" varStatus="loop">
+                                                <option value="${loop.count}">${tp}</option>
+                                            </c:forEach>
                                         </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="price">Giá tiền (VND)
+                                        </label>
+                                        <input id="price" name="price" type="text" class="form-control validate" required />
                                     </div>
                                     <div class="row">
                                         <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                            <label
-                                                for="expire_date"
-                                                >Expire Date
+                                            <label for="brand">Thương hiệu
                                             </label>
-                                            <input
-                                                id="expire_date"
-                                                name="expire_date"
-                                                type="text"
-                                                class="form-control validate"
-                                                data-large-mode="true"
-                                                />
+                                            <input id="brand" name="brand" type="text" class="form-control validate"
+                                                   data-large-mode="true" />
                                         </div>
                                         <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                            <label
-                                                for="stock"
-                                                >Units In Stock
+                                            <label for="stock">Số lượng
                                             </label>
-                                            <input
-                                                id="stock"
-                                                name="stock"
-                                                type="text"
-                                                class="form-control validate"
-                                                required
-                                                />
+                                            <input id="stock" name="stock" type="text" class="form-control validate"
+                                                   required />
                                         </div>
                                     </div>
-
+                                </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                                 <div class="tm-product-img-dummy mx-auto">
-                                    <i
-                                        class="fas fa-cloud-upload-alt tm-upload-icon"
-                                        onclick="document.getElementById('fileInput').click();"
-                                        ></i>
+                                    <img width="240" height="240" src="" alt="Image preview..." id="preview-img" style="display: none;">
+                                    <i class="fas fa-cloud-upload-alt tm-upload-icon"
+                                       onclick="document.getElementById('fileInput').click();" style="position: absolute;"></i>
                                 </div>
                                 <div class="custom-file mt-3 mb-3">
-                                    <input id="fileInput" type="file" style="display:none;" />
-                                    <input
-                                        type="button"
-                                        class="btn btn-primary btn-block mx-auto"
-                                        value="UPLOAD PRODUCT IMAGE"
-                                        onclick="document.getElementById('fileInput').click();"
-                                        />
+                                    <input id="fileInput" name="fileInput" type="file" onchange="previewFile()" style="display:none;" required/>
+                                    <input type="button" class="btn btn-primary btn-block mx-auto"
+                                           value="UPLOAD PRODUCT IMAGE"
+                                           onclick="document.getElementById('fileInput').click();" />
+                                </div>
+                                <div class="form-group mb-3" style="margin-top: 26px;">
+                                    <label for="year">Năm sản xuất
+                                    </label>
+                                    <input id="year" name="year" type="number" class="form-control validate"
+                                           data-large-mode="true" />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="weight">Cân nặng
+                                    </label>
+                                    <div class="row">
+                                        <div class="mb-10 col-xs-10 col-sm-10" style="padding-right: 0;">
+                                            <input id="weight" name="weight" type="number" step="0.01"
+                                                   class="form-control validate" required />
+                                        </div>
+                                        <div class="mb-2 col-xs-2 col-sm-2" style="padding-left: 0;">
+                                            <select class="custom-select tm-select-accounts" id="category">
+                                                <option value="kg" selected>Kg</option>
+                                                <!--                                                    <option value="lb">Lb</option>-->
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Product Now</button>
+                                <button type="submit" class="btn btn-primary btn-block text-uppercase">Thêm</button>
                             </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="tm-footer row tm-mt-small">
-            <div class="col-12 font-weight-light">
-                <p class="text-center text-white mb-0 px-4 small">
-                    Copyright &copy; <b>2018</b> All rights reserved. 
-
-                    Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>
-                </p>
-            </div>
-        </footer> 
 
         <script src="js/jquery-3.3.1.min.js"></script>
         <!-- https://jquery.com/download/ -->
@@ -205,10 +188,36 @@
         <!-- https://jqueryui.com/download/ -->
         <script src="js/bootstrap.min.js"></script>
         <!-- https://getbootstrap.com/ -->
+
         <script>
-                                            $(function () {
-                                                $("#expire_date").datepicker();
-                                            });
+                                               function previewFile() {
+                                                   var preview = document.getElementById("preview-img");
+                                                   var file = document.querySelector('input[type=file]').files[0];
+                                                   var reader = new FileReader();
+
+                                                   reader.onloadend = function () {
+                                                       preview.src = reader.result;
+                                                       preview.style.display = 'block';
+                                                   };
+
+                                                   if (file) {
+                                                       reader.readAsDataURL(file);
+                                                   } else {
+                                                       preview.src = "";
+                                                   }
+                                               }
+
+                                               function showSnip() {
+                                                   var snippet = document.getElementById("snippets-add");
+                                                   var texta = document.getElementById("description");
+
+                                                   if (texta.value === "") {
+                                                       snippet.style.display = 'none';
+                                                   } else {
+                                                       snippet.style.display = 'block';
+                                                   }
+                                                   snippet.innerHTML = texta.value;
+                                               }
         </script>
     </body>
 </html>

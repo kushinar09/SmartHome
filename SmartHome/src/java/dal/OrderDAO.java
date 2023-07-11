@@ -118,6 +118,17 @@ public class OrderDAO extends DBContext {
         }
     }
     
+    public void deleteOrderOfProduct(String id_prod) {
+        try {
+            String sql = "DELETE [ORDER_DETAIL] WHERE id_prod = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id_prod);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
 //    public static void main(String[] args) {
 //        OrderDAO od = new OrderDAO();
 //        od.deleteOrderOfCustomer("CUS2");

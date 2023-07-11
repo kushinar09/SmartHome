@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -337,7 +338,7 @@ public class ProductDAO extends DBContext {
     public List<PrdStorage> getInStorage() {
         List<PrdStorage> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM STORAGE";
+            String sql = "SELECT * FROM STORAGE ORDER BY [update] DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -352,6 +353,37 @@ public class ProductDAO extends DBContext {
             System.out.println(ex.getMessage());
         }
         return list;
+    }
+
+    public void insertProduct(Product p) {
+        try {
+            String sql = "INSERT INTO [dbo].[PRODUCT]\n"
+                    + "([id_prod],[image],[name],[type],[year],[brand],[weight]\n"
+                    + "           ,[price],[promopercent],[description])\n"
+                    + "VALUES(?,?,?,?,?,?,?,?,0,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, p.getId_prod());
+            statement.setString(2, p.getImage());
+            statement.setString(3, p.getName());
+            statement.setInt(4, p.getType());
+            statement.setInt(5, p.getYear());
+            statement.setString(6, p.getBrand());
+            statement.setDouble(7, p.getWeight());
+            statement.setDouble(8, p.getPrice());
+            statement.setString(9, p.getDescription());
+            statement.executeUpdate();
+
+            String sql2 = "INSERT INTO [dbo].[STORAGE] VALUES(?, ?, ?, ?)";
+            PreparedStatement statement2 = connection.prepareStatement(sql2);
+            statement2.setString(1, p.getId_prod());
+            Date sqlDate = new Date(System.currentTimeMillis());
+            statement2.setDate(2, sqlDate);
+            statement2.setInt(3, 0);
+            statement2.setInt(4, p.getQuantity());
+            statement2.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
     public List<String> getAllType() {
@@ -369,17 +401,28 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
+    public void deleteProduct(String id) {
+        try {
+            String sql1 = "DELETE STORAGE WHERE id_prod = ?";
+            PreparedStatement statement1 = connection.prepareStatement(sql1);
+            statement1.setString(1, id);
+            statement1.executeUpdate();
+
+            OrderDAO od = new OrderDAO();
+            od.deleteOrderOfProduct(id);
+
+            String sql2 = "DELETE PRODUCT WHERE id_prod = ?";
+            PreparedStatement statement2 = connection.prepareStatement(sql2);
+            statement2.setString(1, id);
+            statement2.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
 //    public static void main(String[] args) {
 //        // TODO code application logic here
-//        ProductDAO pd = new ProductDAO();
-////        List<Product> list = pd.getListBySearch("Cam");
-////        for (Product product : list) {
-////            System.out.println(product.getName());
-////        }
-//        Product p = new Product();
-//        p.setId_prod("NEW001");
-//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//        System.out.println(pd.insertNotification(p, 2, "NV001",timestamp));
-//
+//        Date sqlDate = new Date(System.currentTimeMillis());
+//        System.out.println(sqlDate);
 //    }
 }

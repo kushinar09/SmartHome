@@ -14,7 +14,7 @@
         <!-- https://fontawesome.com/ -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
         <!-- https://getbootstrap.com/ -->
-        <link rel="stylesheet" href="css/mo-style.css?v=5">
+        <link rel="stylesheet" href="css/mo-style.css?v=6">
 
     </head>
     <body>
