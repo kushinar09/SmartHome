@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Account;
 import model.Employee;
+import model.Job;
 
 /**
  *
@@ -22,7 +23,7 @@ public class EmployeeDAO extends DBContext {
     public List<Employee> getAllEmployee() {
         List<Employee> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM [EMPLOYEE] E INNER JOIN [JOB] J ON E.job = J.job";
+            String sql = "SELECT * FROM [EMPLOYEE]";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -34,7 +35,7 @@ public class EmployeeDAO extends DBContext {
                 e.setDob(rs.getDate("dob"));
                 e.setPhone(rs.getString("phoneNo"));
                 e.setHireDate(rs.getDate("hiredate"));
-                e.setJob(rs.getString("descript"));
+                e.setJob(rs.getString("job"));
                 e.setId_empm(rs.getString("id_empm"));
                 e.setId_acc(rs.getInt("id_acc"));
                 list.add(e);
@@ -44,7 +45,7 @@ public class EmployeeDAO extends DBContext {
         }
         return list;
     }
-    
+
     public Employee getEmployeeByAccount(Account a) {
         try {
             String sql = "SELECT * FROM [EMPLOYEE] WHERE [id_acc] = ?";
@@ -137,7 +138,31 @@ public class EmployeeDAO extends DBContext {
             System.err.println(ex.getMessage());
         }
     }
-    
+
+    public void undateFullEmp(Employee e, String id) {
+        try {
+            String sql = "UPDATE [dbo].[EMPLOYEE]\n"
+                    + "SET [image] = ?,[name] = ?,[gender] = ?\n"
+                    + "      ,[dob] = ?,[phoneNo] = ?,[hiredate] = ?,[job] = ?\n"
+                    + "      ,[id_empm] = ?,[id_acc] = ?\n"
+                    + "WHERE [id_emp] = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, e.getImage());
+            statement.setString(2, e.getName());
+            statement.setString(3, e.getGender());
+            statement.setDate(4, e.getDob());
+            statement.setString(5, e.getPhone());
+            statement.setDate(6, e.getHireDate());
+            statement.setString(7, e.getJob());
+            statement.setString(8, e.getId_empm());
+            statement.setInt(9, e.getId_acc());
+            statement.setString(10, e.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
     public int insertAccount(Account a) {
         try {
             String sql = "INSERT INTO [ACCOUNT_EMP] ([username], [email], [password])\n"
@@ -233,7 +258,7 @@ public class EmployeeDAO extends DBContext {
             if (rs.next()) {
                 Account a = new Account();
                 a.setId(rs.getInt("id"));
-                a.setUsername("username");
+                a.setUsername(rs.getString("username"));
                 a.setEmail(rs.getString("email"));
                 a.setPassword(rs.getString("password"));
                 return a;
@@ -252,6 +277,38 @@ public class EmployeeDAO extends DBContext {
             statement.setString(1, newpwd);
             statement.setString(2, a.getEmail());
             statement.setString(3, a.getPassword());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    public List<Job> getListJob() {
+        List<Job> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [JOB]";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Job j = new Job();
+                j.setType(rs.getString("job"));
+                j.setTitle(rs.getString("descript"));
+                list.add(j);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public void updateAccount(Account a) {
+        try {
+            String sql = "UPDATE [ACCOUNT_EMP]\n"
+                    + "SET [username] = ?, [password] = ? WHERE [email] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, a.getUsername());
+            statement.setString(2, a.getPassword());
+            statement.setString(3, a.getEmail());
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
