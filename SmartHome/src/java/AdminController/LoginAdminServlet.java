@@ -5,6 +5,7 @@
 package AdminController;
 
 import dal.AccountDAO;
+import dal.ConnectDAO;
 import dal.CustomerDAO;
 import dal.EmployeeDAO;
 import dal.ProductDAO;
@@ -81,6 +82,7 @@ public class LoginAdminServlet extends HttpServlet {
         AccountDAO ad = new AccountDAO();
         EmployeeDAO ed = new EmployeeDAO();
         ProductDAO pd = new ProductDAO();
+        ConnectDAO cond = new ConnectDAO();
         HttpSession session = request.getSession();
 
         if (request.getParameter("user") != null && request.getParameter("pwd") != null) {
@@ -92,6 +94,7 @@ public class LoginAdminServlet extends HttpServlet {
                 session.setAttribute("AccountDAO", ad);
                 session.setAttribute("EmployeeDAO", ed);
                 session.setAttribute("ProductDAO", pd);
+                session.setAttribute("ConnectDAO", cond);
                 response.sendRedirect("homeAd");
             } else {
                 out.println("<script type=\"text/javascript\">");

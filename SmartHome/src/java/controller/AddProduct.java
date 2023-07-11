@@ -13,14 +13,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import model.Employee;
 import model.Product;
 
 /**
@@ -87,88 +90,95 @@ public class AddProduct extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter outp = response.getWriter();
         ProductDAO pd = new ProductDAO();
+        HttpSession session = request.getSession();
         Product p = new Product();
 
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
+        if (session.getAttribute("employee") == null) {
+            response.sendRedirect("login.jsp");
+        } else {
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
 
-        String type_text = request.getParameter("category");
-        int type = Integer.parseInt(type_text);
+            String type_text = request.getParameter("category");
+            int type = Integer.parseInt(type_text);
 
-        String price_text = request.getParameter("price");
-        Double price = Double.parseDouble(price_text);
+            String price_text = request.getParameter("price");
+            Double price = Double.parseDouble(price_text);
 
-        String brand = request.getParameter("brand");
+            String brand = request.getParameter("brand");
 
-        String quantity_text = request.getParameter("stock");
-        int quantity = Integer.parseInt(quantity_text);
+            String quantity_text = request.getParameter("stock");
+            int quantity = Integer.parseInt(quantity_text);
 
-        String year_text = request.getParameter("year");
-        int year = Integer.parseInt(year_text);
+            String year_text = request.getParameter("year");
+            int year = Integer.parseInt(year_text);
 
-        String weight_text = request.getParameter("weight");
-        Double weight = Double.parseDouble(weight_text);
+            String weight_text = request.getParameter("weight");
+            Double weight = Double.parseDouble(weight_text);
 
-        p.setName(name);
-        p.setDescription(description);
-        p.setType(type);
-        p.setPrice(price);
-        p.setYear(year);
-        p.setWeight(weight);
-        p.setBrand(brand);
-        p.setQuantity(quantity);
-        p.setPromopercent(0);
-        p.setId_prod("NEW" + (pd.getSizeOfProduct() + 1));
+            p.setName(name);
+            p.setDescription(description);
+            p.setType(type);
+            p.setPrice(price);
+            p.setYear(year);
+            p.setWeight(weight);
+            p.setBrand(brand);
+            p.setQuantity(quantity);
+            p.setPromopercent(0);
+            p.setId_prod("NEW" + (pd.getSizeOfProduct() + 1));
 
-        String uploadDirectory = "C:\\Users\\FR\\Desktop\\cms\\PRJ301_BanTQ\\ASM\\img\\img-upload";
-        Part filePart = request.getPart("fileInput");
+            String uploadDirectory = "C:\\Users\\FR\\Desktop\\cms\\PRJ301_BanTQ\\ASM\\img\\img-upload";
+            Part filePart = request.getPart("fileInput");
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmssyyyyMMdd");
-        LocalDateTime now = LocalDateTime.now();
-        String timenow = dtf.format(now);
-        String newFileName = timenow + ".png";
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmssyyyyMMdd");
+            LocalDateTime now = LocalDateTime.now();
+            String timenow = dtf.format(now);
+            String newFileName = timenow + ".png";
 
-        String filePath = uploadDirectory + File.separator + newFileName;
-        File file = new File(filePath);
+            String filePath = uploadDirectory + File.separator + newFileName;
+            File file = new File(filePath);
 
-        if (file.exists()) {
-            file.delete();
-        }
-        p.setImage(newFileName);
-        filePath = uploadDirectory + File.separator + newFileName;
-        file = new File(filePath);
-
-        OutputStream out = null;
-        InputStream fileContent = null;
-        final PrintWriter writer = response.getWriter();
-
-        try {
-            out = new FileOutputStream(file);
-            fileContent = filePart.getInputStream();
-
-            int read;
-            final byte[] bytes = new byte[1024];
-
-            while ((read = fileContent.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
+            if (file.exists()) {
+                file.delete();
             }
-            pd.insertProductWaiting(p, 2);
-            outp.println("<script type=\"text/javascript\">");
-            outp.println("alert('Submitted a request to ADD the product');");
-            outp.println("location='ProductServlet?type=" + type + "'");
-            outp.println("</script>");
+            p.setImage(newFileName);
+            filePath = uploadDirectory + File.separator + newFileName;
+            file = new File(filePath);
+
+            OutputStream out = null;
+            InputStream fileContent = null;
+            final PrintWriter writer = response.getWriter();
+
+            try {
+                out = new FileOutputStream(file);
+                fileContent = filePart.getInputStream();
+
+                int read;
+                final byte[] bytes = new byte[1024];
+
+                while ((read = fileContent.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+                Employee e = (Employee) session.getAttribute("employee");
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                pd.insertProductWaiting(p, 2, e.getId(), timestamp);
+                outp.println("<script type=\"text/javascript\">");
+                outp.println("alert('Submitted a request to ADD the product');");
+                outp.println("location='ProductServlet?type=" + type + "'");
+                outp.println("</script>");
 //            request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
-        } catch (FileNotFoundException fne) {
-            System.out.println(fne.getMessage());
-        } finally {
-            if (out != null) {
-                out.close();
-            }
-            if (fileContent != null) {
-                fileContent.close();
-            }
-            if (writer != null) {
-                writer.close();
+            } catch (FileNotFoundException fne) {
+                System.out.println(fne.getMessage());
+            } finally {
+                if (out != null) {
+                    out.close();
+                }
+                if (fileContent != null) {
+                    fileContent.close();
+                }
+                if (writer != null) {
+                    writer.close();
+                }
             }
         }
 //        Path source = Paths.get("/home/folder1/image.png");

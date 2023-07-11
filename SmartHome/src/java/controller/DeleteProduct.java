@@ -12,6 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import model.Employee;
 import model.Product;
 
 /**
@@ -61,12 +64,16 @@ public class DeleteProduct extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         ProductDAO pd = new ProductDAO();
-        if (request.getParameter("id") == null) {
+        HttpSession session = request.getSession();
+        if (request.getParameter("id") == null && session.getAttribute("employee") == null) {
             response.sendRedirect("home.jsp");
         } else {
             String id = request.getParameter("id");
             Product p = pd.getProductById(id);
-            pd.insertProductWaiting(p, 3);
+            Employee e = (Employee) session.getAttribute("employee");
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//            String time = sdf3.format(timestamp);
+            pd.insertProductWaiting(p, 3, e.getId(), timestamp);
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Submitted a request to DELETE the product');");
             out.println("location='ProductServlet?type=" + p.getType() + "'");

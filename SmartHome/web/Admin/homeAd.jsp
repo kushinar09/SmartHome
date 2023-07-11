@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,35 +41,26 @@
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown">
-
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <i class="far fa-file-alt"></i>
-                                    <span>
-                                        Reports <i class="fas fa-angle-down"></i>
-                                    </span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Daily Report</a>
-                                    <a class="dropdown-item" href="#">Weekly Report</a>
-                                    <a class="dropdown-item" href="#">Yearly Report</a>
-                                </div>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="../productAd">
                                     <i class="fas fa-shopping-cart"></i>
                                     Products
                                 </a>
                             </li>
+                            <li class="nav-item dropdown">
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="../accountAd">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-user-tie"></i>
-                                    Employees
+                                    <span>
+                                        Employees <i class="fas fa-angle-down"></i>
+                                    </span>
                                 </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Infomation</a>
+                                    <a class="dropdown-item" href="#">Salary</a>
+                                </div>
                             </li>
-
                             <li class="nav-item">
                                 <a class="nav-link" href="../customerAd">
                                     <i class="far fa-user"></i>
@@ -94,103 +87,150 @@
                 </div>
                 <!-- row -->
                 <div class="row tm-content-row">
-<!--                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                        <div class="tm-bg-primary-dark tm-block">
-                            <h2 class="tm-block-title">Latest Hits</h2>
-                            <canvas id="lineChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                        <div class="tm-bg-primary-dark tm-block">
-                            <h2 class="tm-block-title">Performance</h2>
-                            <canvas id="barChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                        <div class="tm-bg-primary-dark tm-block tm-block-taller">
-                            <h2 class="tm-block-title">Storage Information</h2>
-                            <div id="pieChartContainer">
-                                <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
-                            </div>                        
-                        </div>
-                    </div>-->
-<!--col-sm-12 col-md-12 col-lg-6 col-xl-6-->
+                    <!--                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                                            <div class="tm-bg-primary-dark tm-block">
+                                                <h2 class="tm-block-title">Latest Hits</h2>
+                                                <canvas id="lineChart"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                                            <div class="tm-bg-primary-dark tm-block">
+                                                <h2 class="tm-block-title">Performance</h2>
+                                                <canvas id="barChart"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                                            <div class="tm-bg-primary-dark tm-block tm-block-taller">
+                                                <h2 class="tm-block-title">Storage Information</h2>
+                                                <div id="pieChartContainer">
+                                                    <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
+                                                </div>                        
+                                            </div>
+                                        </div>-->
+                    <!--col-sm-12 col-md-12 col-lg-6 col-xl-6-->
                     <div class="col-12 tm-block-col">
                         <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
                             <h2 class="tm-block-title">Notification List</h2>
                             <div class="tm-notification-items">
-                                <div class="media tm-notification-item">
-                                    <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
-                                    <div class="media-body">
-                                        <p class="mb-2"><b>Jessica</b> and <b>6 others</b> sent you new <a href="#"
-                                                                                                           class="tm-notification-link">product updates</a>. Check new orders.</p>
-                                        <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                    </div>
-                                </div>
-                                <div class="media tm-notification-item">
-                                    <div class="tm-gray-circle"><img src="img/notification-02.jpg" alt="Avatar Image" class="rounded-circle"></div>
-                                    <div class="media-body">
-                                        <p class="mb-2"><b>Oliver Too</b> and <b>6 others</b> sent you existing <a href="#"
-                                                                                                                   class="tm-notification-link">product updates</a>. Read more reports.</p>
-                                        <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                    </div>
-                                </div>
-                                <div class="media tm-notification-item">
-                                    <div class="tm-gray-circle"><img src="img/notification-03.jpg" alt="Avatar Image" class="rounded-circle"></div>
-                                    <div class="media-body">
-                                        <p class="mb-2"><b>Victoria</b> and <b>6 others</b> sent you <a href="#"
-                                                                                                        class="tm-notification-link">order updates</a>. Read order information.</p>
-                                        <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                    </div>
-                                </div>
-                                <div class="media tm-notification-item">
-                                    <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image" class="rounded-circle"></div>
-                                    <div class="media-body">
-                                        <p class="mb-2"><b>Laura Cute</b> and <b>6 others</b> sent you <a href="#"
-                                                                                                          class="tm-notification-link">product records</a>.</p>
-                                        <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                    </div>
-                                </div>
-                                <div class="media tm-notification-item">
-                                    <div class="tm-gray-circle"><img src="img/notification-02.jpg" alt="Avatar Image" class="rounded-circle"></div>
-                                    <div class="media-body">
-                                        <p class="mb-2"><b>Samantha</b> and <b>6 others</b> sent you <a href="#"
-                                                                                                        class="tm-notification-link">order stuffs</a>.</p>
-                                        <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                    </div>
-                                </div>
-                                <div class="media tm-notification-item">
-                                    <div class="tm-gray-circle"><img src="img/notification-03.jpg" alt="Avatar Image" class="rounded-circle"></div>
-                                    <div class="media-body">
-                                        <p class="mb-2"><b>Sophie</b> and <b>6 others</b> sent you <a href="#"
-                                                                                                      class="tm-notification-link">product updates</a>.</p>
-                                        <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                    </div>
-                                </div>
-                                <div class="media tm-notification-item">
-                                    <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image" class="rounded-circle"></div>
-                                    <div class="media-body">
-                                        <p class="mb-2"><b>Lily A</b> and <b>6 others</b> sent you <a href="#"
-                                                                                                      class="tm-notification-link">product updates</a>.</p>
-                                        <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                    </div>
-                                </div>
-                                <div class="media tm-notification-item">
-                                    <div class="tm-gray-circle"><img src="img/notification-02.jpg" alt="Avatar Image" class="rounded-circle"></div>
-                                    <div class="media-body">
-                                        <p class="mb-2"><b>Amara</b> and <b>6 others</b> sent you <a href="#"
-                                                                                                     class="tm-notification-link">product updates</a>.</p>
-                                        <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                    </div>
-                                </div>
-                                <div class="media tm-notification-item">
-                                    <div class="tm-gray-circle"><img src="img/notification-03.jpg" alt="Avatar Image" class="rounded-circle"></div>
-                                    <div class="media-body">
-                                        <p class="mb-2"><b>Cinthela</b> and <b>6 others</b> sent you <a href="#"
-                                                                                                        class="tm-notification-link">product updates</a>.</p>
-                                        <span class="tm-small tm-text-color-secondary">6h ago.</span>
-                                    </div>
-                                </div>
+                                <c:forEach var="n" items="${sessionScope.ConnectDAO.getNotification()}">
+                                    <c:if test="${n.type == 1}">
+                                        <div class="media tm-notification-item">
+                                            <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
+                                            <div class="media-body">
+                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="#"
+                                                                                                                                                      class="tm-notification-link">Sửa sản phẩm</a>. Kiểm tra thay đổi.</p>
+                                                <%
+                                                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                                    long current = timestamp.getTime();
+                                                    pageContext.setAttribute("current", current);
+                                                %>
+                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60)}" />
+                                                <c:if test="${ms >= 24*60}">
+                                                    <c:set var="d" value="${Math.floor(ms/24/60)}"/>
+                                                    <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
+                                                    <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
+                                                    <span class="tm-small tm-text-color-secondary">${d}d ${h}h ${m}m ago.</span>
+                                                </c:if>
+                                                <c:if test="${ms < 24*60 && ms >=60}">
+                                                    <c:set var="h" value="${Math.floor(ms/60)}"/>
+                                                    <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
+                                                    <span class="tm-small tm-text-color-secondary">${h}h ${m}m ago.</span>
+                                                </c:if>
+                                                <c:if test="${ms < 60}">
+                                                    <span class="tm-small tm-text-color-secondary">${Math.round(ms)}m ago.</span>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${n.type == 2}">
+                                        <div class="media tm-notification-item">
+                                            <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
+                                            <div class="media-body">
+                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> gửi yêu cầu <a href="#"
+                                                                                                                                                     class="tm-notification-link">Thêm sản phẩm</a>. Kiểm tra yêu cầu.</p>
+                                                <%
+                                                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                                    long current = timestamp.getTime();
+                                                    pageContext.setAttribute("current", current);
+                                                %>
+                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60)}" />
+                                                <c:if test="${ms >= 24*60}">
+                                                    <c:set var="d" value="${Math.floor(ms/24/60)}"/>
+                                                    <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
+                                                    <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
+                                                    <span class="tm-small tm-text-color-secondary">${d}d ${h}h ${m}m ago.</span>
+                                                </c:if>
+                                                <c:if test="${ms < 24*60 && ms >=60}">
+                                                    <c:set var="h" value="${Math.floor(ms/60)}"/>
+                                                    <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
+                                                    <span class="tm-small tm-text-color-secondary">${h}h ${m}m ago.</span>
+                                                </c:if>
+                                                <c:if test="${ms < 60}">
+                                                    <span class="tm-small tm-text-color-secondary">${Math.round(ms)}m ago.</span>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${n.type == 3}">
+                                        <div class="media tm-notification-item">
+                                            <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
+                                            <div class="media-body">
+                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> gửi yêu cầu <a href="#"
+                                                                                                                                                     class="tm-notification-link">Xóa sản phẩm</a>. Kiểm tra yêu cầu.</p>
+                                                <%
+                                                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                                    long current = timestamp.getTime();
+                                                    pageContext.setAttribute("current", current);
+                                                %>
+                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60)}" />
+                                                <c:if test="${ms >= 24*60}">
+                                                    <c:set var="d" value="${Math.floor(ms/24/60)}"/>
+                                                    <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
+                                                    <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
+                                                    <span class="tm-small tm-text-color-secondary">${d}d ${h}h ${m}m ago.</span>
+                                                </c:if>
+                                                <c:if test="${ms < 24*60 && ms >=60}">
+                                                    <c:set var="h" value="${Math.floor(ms/60)}"/>
+                                                    <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
+                                                    <span class="tm-small tm-text-color-secondary">${h}h ${m}m ago.</span>
+                                                </c:if>
+                                                <c:if test="${ms < 60}">
+                                                    <span class="tm-small tm-text-color-secondary">${Math.round(ms)}m ago.</span>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${n.type == 4}">
+                                        <div class="media tm-notification-item">
+                                            <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
+                                            <div class="media-body">
+                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> sent you new <a href="#"
+                                                                                                                                                      class="tm-notification-link">product updates</a>. Check new orders.</p>
+                                                <%
+                                                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                                    long current = timestamp.getTime();
+                                                    pageContext.setAttribute("current", current);
+                                                %>
+                                                <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60)}" />
+                                                <c:if test="${ms >= 24*60}">
+                                                    <c:set var="d" value="${Math.floor(ms/24/60)}"/>
+                                                    <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
+                                                    <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
+                                                    <span class="tm-small tm-text-color-secondary">${d}d ${h}h ${m}m ago.</span>
+                                                </c:if>
+                                                <c:if test="${ms < 24*60 && ms >=60}">
+                                                    <c:set var="h" value="${Math.floor(ms/60)}"/>
+                                                    <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
+                                                    <span class="tm-small tm-text-color-secondary">${h}h ${m}m ago.</span>
+                                                </c:if>
+                                                <c:if test="${ms < 60}">
+                                                    <span class="tm-small tm-text-color-secondary">${Math.round(ms)}m ago.</span>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                    </c:if>
+
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -263,6 +303,11 @@
                     updateBarChart();
                 });
             });
+
+            function ser() {
+                let http = new XMLHttpRequest();
+                http.open('POST', '');
+            }
         </script>
     </body>
 </html>

@@ -8,9 +8,11 @@ import dal.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import model.Answer;
+import model.Notification;
 import model.Question;
 
 /**
@@ -101,11 +103,32 @@ public class ConnectDAO extends DBContext {
         }
     }
 
-//
-//    public static void main(String[] args) {
-//        // TODO code application logic here
-//        ConnectDAO cd = new ConnectDAO();
-//        Account a = cd.getAccountCustomerByEmail("phong@gmail.com");
-//        System.out.println(a.getUsername());
-//    }
+    public List<Notification> getNotification() {
+        List<Notification> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [NOTIFICATION] ORDER BY time DESC";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Notification n = new Notification();
+                n.setId(rs.getInt("id"));
+                n.setId_emp(rs.getString("id_emp"));
+                n.setId_prod(rs.getString("id_prd"));
+                n.setTime(rs.getTimestamp("time"));
+                n.setType(rs.getInt("type"));
+                list.add(n);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Timestamp ts1 = Timestamp.valueOf("2018-09-01 09:01:45");
+        Timestamp ts2 = Timestamp.valueOf("2018-09-01 09:08:44");
+        long diffInMs = (ts2.getTime() - ts1.getTime())/1000/60;
+        System.out.println(diffInMs);
+    }
 }

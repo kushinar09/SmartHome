@@ -7,6 +7,8 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -262,11 +264,34 @@ public class ProductDAO extends DBContext {
         }
     }
 
-    public void insertProductWaiting(Product p, int type) {
+    public int insertNotification(Product p, int type, String id_emp, Timestamp time) {
         try {
+            String sql2 = "INSERT INTO [dbo].[NOTIFICATION]\n"
+                    + "VALUES(?,?,?,?)";
+            PreparedStatement statement2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+            statement2.setString(1, id_emp);
+            statement2.setString(2, p.getId_prod());
+            statement2.setTimestamp(3, time);
+            statement2.setInt(4, type);
+            statement2.execute();
+            ResultSet rs = statement2.getGeneratedKeys();
+            if (rs.next()) {
+                return (rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return 0;
+    }
+
+    public void insertProductWaiting(Product p, int type, String id_emp, Timestamp time) {
+        try {
+
+            int id = insertNotification(p, type, id_emp, time);
+
             String sql = "INSERT INTO [dbo].[PRODUCT_WAITING]\n"
                     + "([id_prod],[image],[name],[type],[year],[brand],[weight]\n"
-                    + "           ,[price],[promopercent],[description],[in_stock],[typeNoti])\n"
+                    + "           ,[price],[promopercent],[description],[in_stock],[id_noti])\n"
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, p.getId_prod());
@@ -280,8 +305,9 @@ public class ProductDAO extends DBContext {
             statement.setInt(9, p.getPromopercent());
             statement.setString(10, p.getDescription());
             statement.setInt(11, p.getQuantity());
-            statement.setInt(12, type);
+            statement.setInt(12, id);
             statement.executeUpdate();
+
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -327,8 +353,8 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
-    public List<String> getAllType(){
+
+    public List<String> getAllType() {
         List<String> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM TYPE_OF_PRODUCT";
@@ -343,18 +369,17 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
-    public static void main(String[] args) {
-        // TODO code application logic here
-        ProductDAO pd = new ProductDAO();
-//        List<Product> list = pd.getListBySearch("Cam");
-//        for (Product product : list) {
-//            System.out.println(product.getName());
-//        }
-        Product p = new Product();
-        p.setId_prod("CB001");
-        p.setName("Cam bien");
-        p.setType(2);
-        pd.updateProduct(p);
-
-    }
+//    public static void main(String[] args) {
+//        // TODO code application logic here
+//        ProductDAO pd = new ProductDAO();
+////        List<Product> list = pd.getListBySearch("Cam");
+////        for (Product product : list) {
+////            System.out.println(product.getName());
+////        }
+//        Product p = new Product();
+//        p.setId_prod("NEW001");
+//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//        System.out.println(pd.insertNotification(p, 2, "NV001",timestamp));
+//
+//    }
 }

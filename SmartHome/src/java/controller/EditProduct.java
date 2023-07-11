@@ -20,8 +20,10 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import model.Employee;
 import model.Product;
 
 /**
@@ -98,7 +100,7 @@ public class EditProduct extends HttpServlet {
             throws ServletException, IOException {
         ProductDAO pd = new ProductDAO();
         HttpSession session = request.getSession();
-        if (session.getAttribute("account") == null) {
+        if (session.getAttribute("account") == null && session.getAttribute("employee") == null) {
             response.sendRedirect("login.jsp");
         } else {
 
@@ -171,6 +173,9 @@ public class EditProduct extends HttpServlet {
                         out.write(bytes, 0, read);
                     }
                     pd.updateProduct(p);
+                    Employee e = (Employee) session.getAttribute("employee");
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    pd.insertProductWaiting(p, 1, e.getId(), timestamp);
 //                    request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
                     response.sendRedirect("ProductServlet?type=" + type);
                 } catch (FileNotFoundException fne) {
@@ -189,6 +194,9 @@ public class EditProduct extends HttpServlet {
             } else {
                 p.setImage("");
                 pd.updateProduct(p);
+                Employee e = (Employee) session.getAttribute("employee");
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                pd.insertProductWaiting(p, 1, e.getId(), timestamp);
 //                request.getRequestDispatcher("ProductServlet?type=" + type).forward(request, response);
                 response.sendRedirect("ProductServlet?type=" + type);
             }
