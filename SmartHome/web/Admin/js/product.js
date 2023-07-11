@@ -4,12 +4,47 @@
  */
 
 
-$(function () {
-    $(".tm-product-name").on("click", function () {
-        var id = this.firstElementChild.value;
-        window.location.href = '../editProductAd?id=' + id;
-    });
-});
+//$(function () {
+//    $(".tm-product-name").on("click", function () {
+//        var id = this.firstElementChild.value;
+//        window.location.href = '../editProductAd?id=' + id;
+//    });
+//});
+
+window.onload = function() {
+    var reloading = sessionStorage.getItem("reloading");
+    if (reloading) {
+        sessionStorage.removeItem("reloading");
+        reload();
+    }
+};
+
+function reload(){
+    ajaxGet('http://localhost:9999/SmartHome/productAd', null);
+}
+
+function next(id) {
+    window.location.href = 'http://localhost:9999/SmartHome/editProductAd?id=' + id;
+}
+
+function delmul() {
+    if (confirm("Are you sure to delete?")) {
+        var checkedBoxes = document.querySelectorAll('input[name=del-check]:checked');
+        var str = '';
+        for (var i = 0; i < checkedBoxes.length; i++) {
+            console.log(checkedBoxes[i].parentElement.nextElementSibling.firstElementChild.value);
+            checkedBoxes[i].parentElement.parentElement.style.display = 'none';
+            str = str + checkedBoxes[i].parentElement.nextElementSibling.firstElementChild.value + ",";
+        }
+        deleteMulti(str);
+    }
+}
+
+function deleteMulti(str) {
+    alert(str);
+    ajaxPost('http://localhost:9999/SmartHome/deleteProductMulAd?string=' + str, str, null);
+}
+
 function deleteP(element, id) {
     if (confirm("Are you sure to delete?")) {
         ajaxPost('http://localhost:9999/SmartHome/deleteProductAd?id=' + id, id, null);

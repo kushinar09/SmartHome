@@ -116,7 +116,6 @@ public class Product {
 //    public void setPromoend(Date promoend) {
 //        this.promoend = promoend;
 //    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -131,6 +130,11 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "id_prod=" + id_prod + ", image=" + image + ", name=" + name + ", type=" + type + ", year=" + year + ", brand=" + brand + ", weight=" + weight + ", price=" + price + ", promopercent=" + promopercent + ", description=" + ", quantity=" + quantity + '}';
     }
 
 }

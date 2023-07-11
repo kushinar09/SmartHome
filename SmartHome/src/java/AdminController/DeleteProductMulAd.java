@@ -13,16 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.PrdStorage;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name="ProductAdServlet", urlPatterns={"/productAd"})
-public class ProductAdServlet extends HttpServlet {
+@WebServlet(name="DeleteProductMulAd", urlPatterns={"/deleteProductMulAd"})
+public class DeleteProductMulAd extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +36,10 @@ public class ProductAdServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductAdServlet</title>");  
+            out.println("<title>Servlet DeleteProductMulAd</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductAdServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeleteProductMulAd at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,12 +56,7 @@ public class ProductAdServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        ProductDAO pd = new ProductDAO();
-        List<PrdStorage> listps = pd.getInStorage();
-        session.removeAttribute("listps");
-        session.setAttribute("listps", listps);
-        response.sendRedirect("Admin/productAd.jsp");
+        processRequest(request, response);
     } 
 
     /** 
@@ -77,11 +69,12 @@ public class ProductAdServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        String str = request.getParameter("string");
+        String[] list = str.split(",");
         ProductDAO pd = new ProductDAO();
-        List<PrdStorage> listps = pd.getInStorage();
-        session.setAttribute("listps", listps);
-        response.sendRedirect("Admin/productAd.jsp");
+        for (String p : list) {
+            pd.deleteProduct(p);
+        }
     }
 
     /** 

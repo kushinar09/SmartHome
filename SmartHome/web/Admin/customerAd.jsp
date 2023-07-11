@@ -45,7 +45,7 @@
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link" href="../productAd">
                                     <i class="fas fa-shopping-cart"></i> Products
@@ -334,66 +334,56 @@
                     </div>
                 </c:forEach>
             </div>
-
-            <!-- <footer class="tm-footer row tm-mt-small">
-              <div class="col-12 font-weight-light">
-                <p class="text-center text-white mb-0 px-4 small">
-                  Copyright &copy; <b>2018</b> All rights reserved. 
-                  
-                  Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>
-                </p>
-              </div>
-            </footer> -->
-            <script type="text/javascript">
-                function show(element) {
-                    var index = Array.from(element.parentNode.children).indexOf(element);
-                    $('#list-info').children().css('display', 'none');
-                    if (index >= 1) {
-                        $('#list-info div:nth-child(' + (index + 1) + ')').css('display', 'block');
-                        document.getElementById('list-info').children[index].scrollIntoView({behavior: 'smooth', block: 'nearest'});
-                    } else {
-                        document.getElementById("list-info").firstElementChild.style.display = 'block';
-                        document.getElementById("list-info").firstElementChild.scrollIntoView({behavior: 'smooth', block: 'nearest'});
-                    }
-                }
-
-                function myFunction() {
-                    // Declare variables
-                    var input, filter, list, a, b, c, d, i, idValue, nameValue, adrValue, phValue;
-                    input = document.getElementById('myInput');
-                    filter = input.value.toUpperCase();
-                    par = document.getElementById("table_cus");
-                    list = par.getElementsByTagName("tr");
-
-                    // Loop through all list items, and hide those who don't match the search query
-                    for (i = 0; i < list.length; i++) {
-                        a = list[i].getElementsByTagName("th")[0];
-                        b = list[i].getElementsByTagName("td")[0];
-                        c = list[i].getElementsByTagName("td")[4];
-                        d = list[i].getElementsByTagName("td")[3];
-                        idValue = a.textContent || a.innerText;
-                        nameValue = b.textContent || b.innerText;
-                        adrValue = c.textContent || c.innerText;
-                        phValue = d.textContent || d.innerText;
-                        if (idValue.toUpperCase().indexOf(filter) > -1 || nameValue.toUpperCase().indexOf(filter) > -1
-                                || adrValue.toUpperCase().indexOf(filter) > -1 || phValue.toUpperCase().indexOf(filter) > -1) {
-                            list[i].style.display = "";
-                        } else {
-                            list[i].style.display = "none";
-                        }
-                    }
-                }
-                function showMess(id) {
-                    if (confirm("Are you sure to delete?")) {
-                        window.location = "../deleteCusAd?id=" + id;
-                    }
-                }
-            </script>
         </div>
 
         <script src="js/jquery-3.3.1.min.js"></script>
         <!-- https://jquery.com/download/ -->
         <script src="js/bootstrap.min.js"></script>
         <!-- https://getbootstrap.com/ -->
+        <script type="text/javascript">
+            function show(element) {
+                var index = Array.from(element.parentNode.children).indexOf(element);
+                $('#list-info').children().css('display', 'none');
+                if (index >= 1) {
+                    $('#list-info div:nth-child(' + (index + 1) + ')').css('display', 'block');
+                    document.getElementById('list-info').children[index].scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                } else {
+                    document.getElementById("list-info").firstElementChild.style.display = 'block';
+                    document.getElementById("list-info").firstElementChild.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                }
+            }
+
+            function myFunction() {
+                // Declare variables
+                var input, filter, list, a, b, c, d, i, idValue, nameValue, adrValue, phValue;
+                input = document.getElementById('myInput');
+                filter = input.value.toUpperCase();
+                par = document.getElementById("table_cus");
+                list = par.getElementsByTagName("tr");
+
+                // Loop through all list items, and hide those who don't match the search query
+                for (i = 0; i < list.length; i++) {
+                    a = list[i].getElementsByTagName("th")[0];
+                    b = list[i].getElementsByTagName("td")[0];
+                    c = list[i].getElementsByTagName("td")[4];
+                    d = list[i].getElementsByTagName("td")[3];
+                    idValue = a.textContent || a.innerText;
+                    nameValue = b.textContent || b.innerText;
+                    adrValue = c.textContent || c.innerText;
+                    phValue = d.textContent || d.innerText;
+                    if (idValue.toUpperCase().indexOf(filter) > -1 || nameValue.toUpperCase().indexOf(filter) > -1
+                            || adrValue.toUpperCase().indexOf(filter) > -1 || phValue.toUpperCase().indexOf(filter) > -1) {
+                        list[i].style.display = "";
+                    } else {
+                        list[i].style.display = "none";
+                    }
+                }
+            }
+            function showMess(id) {
+                if (confirm("Are you sure to delete?")) {
+                    window.location = "../deleteCusAd?id=" + id;
+                }
+            }
+        </script>
     </body>
 </html>

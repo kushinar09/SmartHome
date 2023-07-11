@@ -92,7 +92,7 @@
                         </a>
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="tm-block-title d-inline-block">Thêm sản phẩm</h2>
+                                <h2 class="tm-block-title d-inline-block">Chỉnh sửa sản phẩm</h2>
                             </div>
                         </div>
                         <form action="../addProductAd" method="post" enctype="multipart/form-data" class="row tm-edit-product-row">
@@ -112,8 +112,8 @@
                                         <label for="category">Loại sản phẩm</label>
                                         <select class="custom-select tm-select-accounts" id="category" name="category" required>
                                             <option selected value="">Chọn loại sản phẩm ...</option>
-                                            <c:forEach var="tp" items="${sessionScope.ProductDAO.getAllType()}" varStatus="loop">
-                                                <option value="${loop.count}">${tp}</option>
+                                            <c:forEach var="tp" items="${sessionScope.ProductDAO.getAllType()}">
+                                                <option value="${tp.type}">${tp.name}</option>
                                             </c:forEach>
                                         </select>
                                     </div>

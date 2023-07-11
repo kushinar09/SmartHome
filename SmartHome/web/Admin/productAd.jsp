@@ -18,7 +18,7 @@
     <c:if test="${sessionScope.admin == null}">
         <c:redirect url = "loginAd.jsp"/>
     </c:if>
-    <body id="reportsPage">
+    <body id="reportsPage" onload="reload()">
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
                 <a class="navbar-brand" href="../homeAd">
@@ -101,8 +101,8 @@
                                     <c:forEach var="p" items="${sessionScope.listps}">
                                         <c:set var="pd" value="${sessionScope.ProductDAO}"/>
                                         <tr>
-                                            <th scope="row"><input type="checkbox" /></th>
-                                            <td class="tm-product-name">
+                                            <th scope="row"><input type="checkbox" name="del-check" /></th>
+                                            <td class="tm-product-name" onclick="next('${p.id_prod}')">
                                                 ${pd.getProductById(p.id_prod).name}
                                                 <input type="hidden" value="${p.id_prod}">
                                             </td>
@@ -121,7 +121,7 @@
                         </div>
                         <!-- table container -->
                         <a href="addProductAd.jsp" class="btn btn-primary btn-block text-uppercase mb-3">Add new product</a>
-                        <button class="btn btn-primary btn-block text-uppercase">
+                        <button class="btn btn-primary btn-block text-uppercase" onclick="delmul()">
                             Delete selected products
                         </button>
                     </div>

@@ -236,6 +236,7 @@ public class ProductDAO extends DBContext {
                 statement.setDouble(6, p.getPrice());
                 statement.setString(7, p.getDescription());
                 statement.setString(8, p.getId_prod());
+                System.out.println("he1");
                 statement.executeUpdate();
             } else {
                 String sql = "UPDATE [dbo].[PRODUCT]\n"
@@ -251,6 +252,7 @@ public class ProductDAO extends DBContext {
                 statement.setString(7, p.getDescription());
                 statement.setString(8, p.getImage());
                 statement.setString(9, p.getId_prod());
+                System.out.println("he2");
                 statement.executeUpdate();
             }
 
@@ -260,6 +262,7 @@ public class ProductDAO extends DBContext {
             PreparedStatement statement2 = connection.prepareStatement(sql2);
             statement2.setInt(1, p.getQuantity());
             statement2.setString(2, p.getId_prod());
+            System.out.println("he3");
             statement2.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

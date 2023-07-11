@@ -71,7 +71,6 @@ public class DeleteProductAd extends HttpServlet {
     throws ServletException, IOException {
         String id = request.getParameter("id");
         ProductDAO pd = new ProductDAO();
-        System.out.println(id);
         pd.deleteProduct(id);
     }
 

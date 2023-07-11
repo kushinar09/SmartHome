@@ -64,6 +64,7 @@ public class LogoutAdServlet extends HttpServlet {
         session.removeAttribute("AccountDAO");
         session.removeAttribute("EmployeeDAO");
         session.removeAttribute("ProductDAO");
+        session.removeAttribute("ConnectDAO");
         response.sendRedirect("Admin/loginAd.jsp");
     }
 
@@ -84,6 +85,7 @@ public class LogoutAdServlet extends HttpServlet {
         session.removeAttribute("AccountDAO");
         session.removeAttribute("EmployeeDAO");
         session.removeAttribute("ProductDAO");
+        session.removeAttribute("ConnectDAO");
         response.sendRedirect("Admin/loginAd.jsp");
     }
 

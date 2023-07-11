@@ -63,7 +63,7 @@ public class HomeServlet extends HttpServlet {
         List<Order> listo = od.getAllOrder();
         HttpSession session = request.getSession();
         if (session.getAttribute("admin") == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("Admin/loginAd.jsp");
         } else {
             session.setAttribute("listo", listo);
             response.sendRedirect("Admin/homeAd.jsp");
