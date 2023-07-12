@@ -105,4 +105,10 @@ public class Employee {
     public void setId_acc(int id_acc) {
         this.id_acc = id_acc;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "id=" + id + ", image=" + image + ", name=" + name + ", gender=" + gender + ", dob=" + dob + ", phone=" + phone + ", hireDate=" + hireDate + ", job=" + job + ", id_empm=" + id_empm + ", id_acc=" + id_acc + '}';
+    }
+
 }

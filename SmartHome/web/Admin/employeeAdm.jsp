@@ -63,7 +63,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="../employeeAd">Infomation</a>
-                                    <a class="dropdown-item" href="#">Salary</a>
+                                    <a class="dropdown-item" href="http://localhost:9999/SmartHome/Admin/salary.jsp">Salary</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -137,7 +137,7 @@
                                                 <div class="tm-avatar-container">
                                                     <img src="img/img-emp/${e.image}" alt="Avatar" class="tm-avatar img-fluid mb-4" id="preview-img">
                                                 </div>
-                                                <input id="fileInput" name="fileInput" type="file" onchange="previewFile()" required style="display:none;"/>
+                                                <input id="fileInput" name="fileInput" type="file" onchange="previewFile()" style="display:none;"/>
                                                 <input type="button" class="btn btn-primary btn-block mx-auto text-uppercase"
                                                        value="Upload New Photo"
                                                        onclick="document.getElementById('fileInput').click();" />
@@ -172,7 +172,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                                        
+
                                         <div class="tm-block-col tm-col-account-settings">
                                             <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
                                                 <div class="row">
@@ -287,7 +287,7 @@
 
                                                             function myFunction() {
                                                                 // Declare variables
-                                                                var input, filter, list, a, b, c, d, i, idValue, nameValue, adrValue, phValue;
+                                                                var input, filter, list, a, b, i, idValue, nameValue;
                                                                 input = document.getElementById('myInput');
                                                                 filter = input.value.toUpperCase();
                                                                 par = document.getElementById("table_cus");
@@ -297,14 +297,9 @@
                                                                 for (i = 0; i < list.length; i++) {
                                                                     a = list[i].getElementsByTagName("th")[0];
                                                                     b = list[i].getElementsByTagName("td")[0];
-                                                                    c = list[i].getElementsByTagName("td")[4];
-                                                                    d = list[i].getElementsByTagName("td")[3];
                                                                     idValue = a.textContent || a.innerText;
                                                                     nameValue = b.textContent || b.innerText;
-                                                                    adrValue = c.textContent || c.innerText;
-                                                                    phValue = d.textContent || d.innerText;
-                                                                    if (idValue.toUpperCase().indexOf(filter) > -1 || nameValue.toUpperCase().indexOf(filter) > -1
-                                                                            || adrValue.toUpperCase().indexOf(filter) > -1 || phValue.toUpperCase().indexOf(filter) > -1) {
+                                                                    if (idValue.toUpperCase().indexOf(filter) > -1 || nameValue.toUpperCase().indexOf(filter) > -1) {
                                                                         list[i].style.display = "";
                                                                     } else {
                                                                         list[i].style.display = "none";
@@ -333,7 +328,5 @@
                                                                 }
                                                             }
         </script>
-
-
     </body>
 </html>

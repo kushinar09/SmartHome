@@ -4,7 +4,6 @@
  */
 package AdminController;
 
-import dal.AccountDAO;
 import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,6 +72,7 @@ public class ChangeEmpType2 extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -88,8 +88,10 @@ public class ChangeEmpType2 extends HttpServlet {
             String phone = request.getParameter("phone");
             String job = request.getParameter("job");
             Date hireDate = Date.valueOf(request.getParameter("hire"));
-            String id_empm = request.getParameter("id_empm");
-            
+            String id_empm = id;
+            if(request.getParameter("id_empm") != null){
+                id_empm = request.getParameter("id_empm");
+            }
             if (session.getAttribute("admin") != null) {
                 Employee e = ed.getEmployeeById(id);
                 e.setName(name);
@@ -116,5 +118,8 @@ public class ChangeEmpType2 extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+//    
+//    public static void main(String[] args) {
+//        
+//    }
 }

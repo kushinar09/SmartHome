@@ -20,8 +20,8 @@ import model.Employee;
  *
  * @author FR
  */
-@WebServlet(name = "EmployeeAd", urlPatterns = {"/employeeAd"})
-public class EmployeeAd extends HttpServlet {
+@WebServlet(name = "EmployeeAdServlet", urlPatterns = {"/employeeAd"})
+public class EmployeeAdServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
