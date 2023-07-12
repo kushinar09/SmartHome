@@ -63,7 +63,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="../employeeAd">Infomation</a>
-                                    <a class="dropdown-item" href="http://localhost:9999/SmartHome/Admin/salary.jsp">Salary</a>
+<!--                                    <a class="dropdown-item" href="../AddEmployeeAd">Salary</a>-->
                                 </div>
                             </li>
                             <li class="nav-item">

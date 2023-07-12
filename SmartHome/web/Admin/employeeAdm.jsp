@@ -63,7 +63,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="../employeeAd">Infomation</a>
-                                    <a class="dropdown-item" href="http://localhost:9999/SmartHome/Admin/salary.jsp">Salary</a>
+<!--                                    <a class="dropdown-item" href="../AddEmployeeAd">Salary</a>-->
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -90,11 +90,11 @@
                             <div class="col-xl-6 col-lg-6 col-md-12">
                                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Searching..." style="height: 50.5px; width: 100%;margin-bottom: 15px;padding: 5px;">
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-12">
+<!--                            <form method="get" action="../addEmployeeAd" class="col-xl-3 col-lg-3 col-md-12">
                                 <button type="submit" class="btn btn-primary btn-block text-uppercase mybtn">
                                     Add Employee
                                 </button>
-                            </div>
+                            </form>-->
                         </div>
                         <h2 class="tm-block-title">Customer View</h2>
                         <table class="table">
@@ -267,12 +267,12 @@
                 </c:forEach>
             </div>
         </div>
-
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <!-- https://jquery.com/download/ -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- https://getbootstrap.com/ -->
-        <script type="text/javascript">
+    </body>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script type="text/javascript">
                                                             function show(element) {
                                                                 var index = Array.from(element.parentNode.children).indexOf(element);
                                                                 $('#list-info').children().css('display', 'none');
@@ -327,6 +327,8 @@
                                                                     preview.src = "";
                                                                 }
                                                             }
-        </script>
-    </body>
+                                                            function add(){
+                                                                window.location.href = 'http://localhost:9999/SmartHome/Admin/addEmployeeAd.jsp';
+                                                            }
+    </script>
 </html>
