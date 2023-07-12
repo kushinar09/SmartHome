@@ -118,7 +118,7 @@
                                             <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                             <div class="media-body">
                                                 <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="#"
-                                                                                                                                                      class="tm-notification-link">Sửa sản phẩm</a>. Kiểm tra thay đổi.</p>
+                                                                                                                                                      class="tm-notification-link">Sửa sản phẩm</a></p>
                                                 <%
                                                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                                                     long current = timestamp.getTime();
@@ -146,8 +146,8 @@
                                         <div class="media tm-notification-item">
                                             <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                             <div class="media-body">
-                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> gửi yêu cầu <a href="#"
-                                                                                                                                                     class="tm-notification-link">Thêm sản phẩm</a>. Kiểm tra yêu cầu.</p>
+                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="#"
+                                                                                                                                                     class="tm-notification-link">Thêm sản phẩm</a></p>
                                                 <%
                                                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                                                     long current = timestamp.getTime();
@@ -175,8 +175,8 @@
                                         <div class="media tm-notification-item">
                                             <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                             <div class="media-body">
-                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> gửi yêu cầu <a href="#"
-                                                                                                                                                     class="tm-notification-link">Xóa sản phẩm</a>. Kiểm tra yêu cầu.</p>
+                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="#"
+                                                                                                                                                     class="tm-notification-link">Xóa sản phẩm</a></p>
                                                 <%
                                                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                                                     long current = timestamp.getTime();
@@ -205,7 +205,7 @@
                                             <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                             <div class="media-body">
                                                 <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> sent you new <a href="#"
-                                                                                                                                                      class="tm-notification-link">product updates</a>. Check new orders.</p>
+                                                                                                                                                      class="tm-notification-link">product updates</a></p>
                                                 <%
                                                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                                                     long current = timestamp.getTime();

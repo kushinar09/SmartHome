@@ -74,6 +74,7 @@ public class DeleteProduct extends HttpServlet {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 //            String time = sdf3.format(timestamp);
             pd.insertProductWaiting(p, 3, e.getId(), timestamp);
+            pd.deleteProduct(p.getId_prod());
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Submitted a request to DELETE the product');");
             out.println("location='ProductServlet?type=" + p.getType() + "'");
