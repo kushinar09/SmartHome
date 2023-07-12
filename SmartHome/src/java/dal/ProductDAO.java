@@ -318,6 +318,33 @@ public class ProductDAO extends DBContext {
         }
     }
 
+    public Product getProductWaiting(String id, int n) {
+        try {
+            String sql = "SELECT * FROM PRODUCT_WAITING WHERE id_prod = ? AND id_noti = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.setInt(2, n);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                Product p = new Product();
+                p.setId_prod(rs.getString("id_prod"));
+                p.setImage(rs.getString("image"));
+                p.setName(rs.getString("name"));
+                p.setType(rs.getInt("type"));
+                p.setYear(rs.getInt("year"));
+                p.setBrand(rs.getString("brand"));
+                p.setWeight(rs.getDouble("weight"));
+                p.setPrice(rs.getDouble("price"));
+                p.setPromopercent(rs.getInt("promopercent"));
+                p.setQuantity(rs.getInt("in_stock"));
+                return p;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
     public int getSizeOfProduct() {
         int size = 0;
         try {

@@ -162,7 +162,7 @@ public class AddProduct extends HttpServlet {
                 Employee e = (Employee) session.getAttribute("employee");
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 pd.insertProductWaiting(p, 2, e.getId(), timestamp);
-                pd.insertProduct(p);
+//                pd.insertProduct(p);
                 outp.println("<script type=\"text/javascript\">");
                 outp.println("alert('Submitted a request to ADD the product');");
                 outp.println("location='ProductServlet?type=" + type + "'");

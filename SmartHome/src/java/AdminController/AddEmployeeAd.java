@@ -71,7 +71,7 @@ public class AddEmployeeAd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.sendRedirect("Admin/addEmployeeAd.jsp");
+        request.getRequestDispatcher("Admin/addEmployeeAd.jsp").forward(request, response);
     }
 
     /**
@@ -95,7 +95,7 @@ public class AddEmployeeAd extends HttpServlet {
         if (session.getAttribute("admin") == null) {
             response.sendRedirect("Admin/loginAd.jsp");
         } else {
-
+            
             String email = request.getParameter("email");
             System.out.println("email:" + email);
             if (ed.checkEmailExist(email)) {
@@ -106,7 +106,7 @@ public class AddEmployeeAd extends HttpServlet {
             } else {
                 String user = request.getParameter("user");
                 String pwd = request.getParameter("pwd");
-
+                
                 Account a = new Account();
                 a.setEmail(email);
                 a.setUsername(user);
@@ -126,7 +126,7 @@ public class AddEmployeeAd extends HttpServlet {
                 String job = request.getParameter("job");
                 Date hireDate = Date.valueOf(request.getParameter("hire"));
                 String id_empm = request.getParameter("id_empm");
-
+                
                 Employee e = new Employee();
                 e.setId(id_emp);
                 e.setName(name);
@@ -137,7 +137,7 @@ public class AddEmployeeAd extends HttpServlet {
                 e.setJob(job);
                 e.setId_empm(id_empm);
                 e.setId_acc(index);
-
+                
                 String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\Admin\\img\\img-emp";
                 Part filePart = request.getPart("fileInput");
                 String image = getFileName(filePart);
@@ -153,23 +153,23 @@ public class AddEmployeeAd extends HttpServlet {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmssyyyyMMdd");
                 LocalDateTime now = LocalDateTime.now();
                 String timenow = dtf.format(now);
-
+                
                 String newFileName = timenow + ".png";
                 e.setImage(newFileName);
                 String filePath = uploadDirectory + File.separator + newFileName;
                 File file = new File(filePath);
-
+                
                 OutputStream out = null;
                 InputStream fileContent = null;
                 final PrintWriter writer = response.getWriter();
-
+                
                 try {
                     out = new FileOutputStream(file);
                     fileContent = filePart.getInputStream();
-
+                    
                     int read;
                     final byte[] bytes = new byte[1024];
-
+                    
                     while ((read = fileContent.read(bytes)) != -1) {
                         out.write(bytes, 0, read);
                     }
@@ -192,7 +192,7 @@ public class AddEmployeeAd extends HttpServlet {
             }
         }
     }
-
+    
     private String getFileName(final Part part) {
         final String partHeader = part.getHeader("content-disposition");
         for (String content : partHeader.split(";")) {

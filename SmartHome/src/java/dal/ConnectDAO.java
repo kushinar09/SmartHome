@@ -123,6 +123,24 @@ public class ConnectDAO extends DBContext {
         }
         return list;
     }
+    
+    public void deleteNotification(int id){
+        try {
+            String sql1 = "DELETE [dbo].[PRODUCT_WAITING]\n"
+                    + "WHERE id_noti = ?";
+            PreparedStatement statement1 = connection.prepareStatement(sql1);
+            statement1.setInt(1, id);
+            statement1.executeUpdate();
+            
+            String sql = "DELETE [dbo].[NOTIFICATION]\n"
+                    + "WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
         // TODO code application logic here

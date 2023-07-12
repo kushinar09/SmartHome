@@ -4,6 +4,7 @@
  */
 package AdminController;
 
+import dal.ConnectDAO;
 import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -74,7 +75,14 @@ public class AddProductAd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        String n = request.getParameter("n");
+        ProductDAO pd = new ProductDAO();
+        ConnectDAO cd = new ConnectDAO();
+        Product p = pd.getProductWaiting(id, Integer.parseInt(n));
+        pd.insertProduct(p);
+        cd.deleteNotification(Integer.parseInt(n));
+        response.sendRedirect("Admin/homeAd.jsp");
     }
 
     /**
@@ -163,7 +171,7 @@ public class AddProductAd extends HttpServlet {
                 outp.println("<script type=\"text/javascript\">");
                 outp.println("alert('Add product Successful!');");
                 outp.println("location='productAd'");
-                outp.println("</script>"); 
+                outp.println("</script>");
             } catch (FileNotFoundException fne) {
                 System.out.println(fne.getMessage());
             } finally {

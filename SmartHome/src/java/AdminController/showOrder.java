@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package AdminController;
 
+import dal.CustomerDAO;
+import dal.OrderDAO;
 import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,17 +14,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import model.Employee;
-import model.Product;
+import java.util.List;
+import model.OrderDetail;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "DeleteProduct", urlPatterns = {"/deleteProduct"})
-public class DeleteProduct extends HttpServlet {
+@WebServlet(name = "showOrder", urlPatterns = {"/showOrder"})
+public class showOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class DeleteProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteProduct</title>");
+            out.println("<title>Servlet showOrder</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DeleteProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet showOrder at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,25 +62,17 @@ public class DeleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
+        OrderDAO od = new OrderDAO();
         ProductDAO pd = new ProductDAO();
-        HttpSession session = request.getSession();
-        if (request.getParameter("id") == null && session.getAttribute("employee") == null) {
-            response.sendRedirect("home.jsp");
-        } else {
-            String id = request.getParameter("id");
-            Product p = pd.getProductById(id);
-            Employee e = (Employee) session.getAttribute("employee");
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//            String time = sdf3.format(timestamp);
-            pd.insertProductWaiting(p, 3, e.getId(), timestamp);
-//            pd.deleteProduct(p.getId_prod());
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Submitted a request to DELETE the product');");
-            out.println("location='ProductServlet?type=" + p.getType() + "'");
-            out.println("</script>");
-//            request.getRequestDispatcher("ProductServlet?type=" + p.getType()).forward(request, response);
-        }
+        CustomerDAO cd = new CustomerDAO();
+        String id = request.getParameter("id");
+        List<OrderDetail> order = od.getDetailOfOrder(id);
+        request.setAttribute("detail", order);
+        request.setAttribute("order", od.getOrderById(id));
+        request.setAttribute("id", id);
+        request.setAttribute("pdao", pd);
+        request.setAttribute("cdao", cd);
+        request.getRequestDispatcher("showOrder.jsp").forward(request, response);
     }
 
     /**
