@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Answer;
 import model.Notification;
+import model.Product;
 import model.Question;
 
 /**
@@ -122,6 +123,27 @@ public class ConnectDAO extends DBContext {
             System.out.println(ex.getMessage());
         }
         return list;
+    }
+    
+    public Notification getNotificationById(String id) {
+        try {
+            String sql = "SELECT * FROM [NOTIFICATION] WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, Integer.parseInt(id));
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                Notification n = new Notification();
+                n.setId(rs.getInt("id"));
+                n.setId_emp(rs.getString("id_emp"));
+                n.setId_prod(rs.getString("id_prd"));
+                n.setTime(rs.getTimestamp("time"));
+                n.setType(rs.getInt("type"));
+                return n;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
     
     public void deleteNotification(int id){

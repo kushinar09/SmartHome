@@ -180,7 +180,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-1" style="display: flex; align-items: center;">
-                                                <a href="#" class="tm-product-delete-link" onclick="submit(this, '${n.id}')">
+                                                <a href="#" class="tm-product-delete-link" onclick="submitN(this, '${n.id}')">
                                                     <i class="fa-solid fa-check tm-product-delete-icon"></i>
                                                 </a>
                                             </div>
@@ -221,7 +221,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-1" style="display: flex; align-items: center;">
-                                                <a href="#" class="tm-product-delete-link" onclick="submit(this, '${n.id}')">
+                                                <a href="#" class="tm-product-delete-link" onclick="submitN(this, '${n.id}')">
                                                     <i class="fa-solid fa-check tm-product-delete-icon"></i>
                                                 </a>
                                             </div>
@@ -305,7 +305,11 @@
                                                             updateBarChart();
                                                         });
                                                     });
-
+                                                    
+                                                    function submitN(element, id) {
+                                                        ajaxPost('http://localhost:9999/SmartHome/submitNotification?id=' + id, id, null);
+                                                        element.parentElement.parentElement.style.display = 'none';
+                                                    }
 
                                                     function deleteN(element, id) {
                                                         ajaxPost('http://localhost:9999/SmartHome/deleteNotification?id=' + id, id, null);

@@ -336,6 +336,7 @@ public class ProductDAO extends DBContext {
                 p.setWeight(rs.getDouble("weight"));
                 p.setPrice(rs.getDouble("price"));
                 p.setPromopercent(rs.getInt("promopercent"));
+                p.setDescription(rs.getString("description"));
                 p.setQuantity(rs.getInt("in_stock"));
                 return p;
             }
