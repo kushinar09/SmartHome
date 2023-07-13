@@ -6,7 +6,6 @@ package AdminController;
 
 import dal.AccountDAO;
 import dal.EmployeeDAO;
-import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -26,7 +25,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import model.Account;
 import model.Employee;
-import model.Product;
 
 /**
  *
@@ -91,7 +89,6 @@ public class ChangeEmpType1 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         EmployeeDAO ed = new EmployeeDAO();
-        AccountDAO ad = new AccountDAO();
         HttpSession session = request.getSession();
         if (session.getAttribute("admin") == null) {
             response.sendRedirect("Admin/loginAd.jsp");
@@ -99,22 +96,20 @@ public class ChangeEmpType1 extends HttpServlet {
 
             String id_emp = request.getParameter("id");
             Employee e = ed.getEmployeeById(id_emp);
-            
+
             String email = request.getParameter("email");
             String user = request.getParameter("user");
             String pwd = request.getParameter("pwd");
-            
+
             Account a = new Account();
             a.setEmail(email);
             a.setUsername(user);
             a.setPassword(pwd);
             ed.updateAccount(a);
-            
-            
+
             String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\Admin\\img\\img-emp";
-            Part filePart = request.getPart("fileInput");
+            Part filePart = request.getPart("fileInput" + id_emp);
             String image = getFileName(filePart);
-            System.out.println(image);
             if (!image.equals("")) {
                 String olfFileName = e.getImage();
                 String filePath = uploadDirectory + File.separator + olfFileName;
@@ -124,11 +119,11 @@ public class ChangeEmpType1 extends HttpServlet {
                     file.delete();
                 }
 
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmssyyyyMMdd");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmyyyyMMdd");
                 LocalDateTime now = LocalDateTime.now();
                 String timenow = dtf.format(now);
 
-                String newFileName = timenow + ".png";
+                String newFileName = id_emp + "_" + timenow + ".png";
                 e.setImage(newFileName);
                 filePath = uploadDirectory + File.separator + newFileName;
                 file = new File(filePath);
@@ -169,7 +164,7 @@ public class ChangeEmpType1 extends HttpServlet {
             }
         }
     }
-    
+
     private String getFileName(final Part part) {
         final String partHeader = part.getHeader("content-disposition");
         for (String content : partHeader.split(";")) {

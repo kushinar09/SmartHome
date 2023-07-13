@@ -13,6 +13,10 @@ import java.util.List;
 import model.Account;
 import model.Employee;
 import model.Job;
+import model.Salary;
+import model.ra;
+import model.sa;
+import model.ta;
 
 /**
  *
@@ -36,6 +40,7 @@ public class EmployeeDAO extends DBContext {
                 e.setPhone(rs.getString("phoneNo"));
                 e.setHireDate(rs.getDate("hiredate"));
                 e.setJob(rs.getString("job"));
+                e.setLevel(rs.getInt("level"));
                 e.setId_empm(rs.getString("id_empm"));
                 e.setId_acc(rs.getInt("id_acc"));
                 list.add(e);
@@ -61,6 +66,8 @@ public class EmployeeDAO extends DBContext {
                 e.setDob(rs.getDate("dob"));
                 e.setPhone(rs.getString("phoneNo"));
                 e.setHireDate(rs.getDate("hiredate"));
+                e.setJob(rs.getString("job"));
+                e.setLevel(rs.getInt("level"));
                 e.setId_empm(rs.getString("id_empm"));
                 e.setId_acc(rs.getInt("id_acc"));
                 return e;
@@ -89,6 +96,7 @@ public class EmployeeDAO extends DBContext {
                 e.setPhone(rs.getString("phoneNo"));
                 e.setHireDate(rs.getDate("hiredate"));
                 e.setJob(rs.getString("job"));
+                e.setLevel(rs.getInt("level"));
                 e.setId_empm(rs.getString("id_empm"));
                 e.setId_acc(rs.getInt("id_acc"));
                 return e;
@@ -103,8 +111,8 @@ public class EmployeeDAO extends DBContext {
 
     public void insertEmployee(Employee e) {
         try {
-            String sql = "INSERT INTO [dbo].[EMPLOYEE]([id_emp], [image], [name], [gender], [dob], [phoneNo], [hiredate], [job], [id_empm], [id_acc])\n"
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO [dbo].[EMPLOYEE]([id_emp], [image], [name], [gender], [dob], [phoneNo], [hiredate], [job], [level,] [id_empm], [id_acc])\n"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, e.getId());
             statement.setString(2, e.getImage());
@@ -114,8 +122,9 @@ public class EmployeeDAO extends DBContext {
             statement.setString(6, e.getPhone());
             statement.setDate(7, e.getHireDate());
             statement.setString(8, e.getJob());
-            statement.setString(9, e.getId_empm());
-            statement.setInt(10, e.getId_acc());
+            statement.setInt(9, e.getLevel());
+            statement.setString(10, e.getId_empm());
+            statement.setInt(11, e.getId_acc());
             statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -313,5 +322,142 @@ public class EmployeeDAO extends DBContext {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+
+    public List<Salary> getAllSalary() {
+        List<Salary> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [SALARY]";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Salary s = new Salary();
+                s.setId_emp(rs.getString("id_emp"));
+                s.setBasic(rs.getDouble("basic"));
+                s.setOvertime(rs.getInt("overtime"));
+                s.setRa(rs.getInt("ra"));
+                s.setTa(rs.getInt("ta"));
+                s.setSa(rs.getInt("sa"));
+                s.setBonus(rs.getDouble("bonus"));
+                list.add(s);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public List<ra> getAllBonusResponse() {
+        List<ra> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [RESPONSE_ALLOWANCE]";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                ra ra = new ra();
+                ra.setId(rs.getInt("id"));
+                ra.setValue(rs.getDouble("bonus"));
+                ra.setContent(rs.getString("content"));
+                list.add(ra);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public ra getBonusResponse(int id) {
+        try {
+            String sql = "SELECT * FROM [RESPONSE_ALLOWANCE] WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                ra ra = new ra();
+                ra.setId(rs.getInt("id"));
+                ra.setValue(rs.getDouble("bonus"));
+                ra.setContent(rs.getString("content"));
+                return ra;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    public List<ta> getAllBonusToxic() {
+        List<ta> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [TOXIC_ALLOWANCE]";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                ta ta = new ta();
+                ta.setId(rs.getInt("id"));
+                ta.setValue(rs.getDouble("value"));
+                ta.setContent(rs.getString("content"));
+                list.add(ta);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+    
+    public ta getBonusToxic(int id) {
+        try {
+            String sql = "SELECT * FROM [TOXIC_ALLOWANCE] WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                ta ta = new ta();
+                ta.setId(rs.getInt("id"));
+                ta.setValue(rs.getDouble("value"));
+                ta.setContent(rs.getString("content"));
+                return ta;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+
+    public List<sa> getAllBonusSenior() {
+        List<sa> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [SENIOR_ALLOWANCE]";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                sa sa = new sa();
+                sa.setId(rs.getInt("id"));
+                sa.setValue(rs.getDouble("bonus"));
+                sa.setContent(rs.getString("content"));
+                list.add(sa);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+    
+    public sa getBonusSenior(int id) {
+        try {
+            String sql = "SELECT * FROM [SENIOR_ALLOWANCE] WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                sa sa = new sa();
+                sa.setId(rs.getInt("id"));
+                sa.setValue(rs.getDouble("bonus"));
+                sa.setContent(rs.getString("content"));
+                return sa;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 }

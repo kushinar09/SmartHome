@@ -6,9 +6,11 @@ package AdminController;
 
 import dal.AccountDAO;
 import dal.EmployeeDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,16 +23,19 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 import model.Account;
 import model.Employee;
+import model.Product;
 
 /**
  *
  * @author FR
  */
 @WebServlet(name = "AddEmployeeAd", urlPatterns = {"/addEmployeeAd"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 5,
+        maxRequestSize = 1024 * 1024 * 5 * 5)
 public class AddEmployeeAd extends HttpServlet {
 
     /**
@@ -71,7 +76,7 @@ public class AddEmployeeAd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Admin/addEmployeeAd.jsp").forward(request, response);
+        response.sendRedirect("Admin/addEmployeeAd.jsp");
     }
 
     /**
@@ -89,24 +94,20 @@ public class AddEmployeeAd extends HttpServlet {
         EmployeeDAO ed = new EmployeeDAO();
         AccountDAO ad = new AccountDAO();
         HttpSession session = request.getSession();
-        if (request.getParameter("email") == null) {
-            System.out.println("email null");
-        }
         if (session.getAttribute("admin") == null) {
             response.sendRedirect("Admin/loginAd.jsp");
         } else {
-            
+
             String email = request.getParameter("email");
-            System.out.println("email:" + email);
             if (ed.checkEmailExist(email)) {
                 outp.println("<script type=\"text/javascript\">");
                 outp.println("alert('Email already exist');");
-                outp.println("location='addEmployeeAd.jsp'");
+                outp.println("location='Admin/addEmployeeAd.jsp'");
                 outp.println("</script>");
             } else {
                 String user = request.getParameter("user");
                 String pwd = request.getParameter("pwd");
-                
+
                 Account a = new Account();
                 a.setEmail(email);
                 a.setUsername(user);
@@ -118,15 +119,15 @@ public class AddEmployeeAd extends HttpServlet {
                 } else if (index >= 100) {
                     id_emp = "NV" + index;
                 }
-                System.out.println(index);
                 String name = request.getParameter("name");
-                String gender = request.getParameter("gender");
+                String gender = request.getParameter("gender").toLowerCase();
                 Date dob = Date.valueOf(request.getParameter("dob"));
                 String phone = request.getParameter("phone");
                 String job = request.getParameter("job");
                 Date hireDate = Date.valueOf(request.getParameter("hire"));
-                String id_empm = request.getParameter("id_empm");
-                
+                String id_empm = request.getParameter("mn");
+                String level = request.getParameter("level");
+
                 Employee e = new Employee();
                 e.setId(id_emp);
                 e.setName(name);
@@ -135,41 +136,39 @@ public class AddEmployeeAd extends HttpServlet {
                 e.setPhone(phone);
                 e.setHireDate(hireDate);
                 e.setJob(job);
+                e.setLevel(Integer.parseInt(level));
                 e.setId_empm(id_empm);
                 e.setId_acc(index);
-                
+
                 String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\Admin\\img\\img-emp";
                 Part filePart = request.getPart("fileInput");
-                String image = getFileName(filePart);
-                System.out.println(image);
+//                String image = getFileName(filePart);
+//                System.out.println(image);
 //                String olfFileName = e.getImage();
 //                String filePath = uploadDirectory + File.separator + olfFileName;
 //                File file = new File(filePath);
 //
-//                if (file.exists()) {
-//                    file.delete();
-//                }
 
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmssyyyyMMdd");
-                LocalDateTime now = LocalDateTime.now();
-                String timenow = dtf.format(now);
-                
-                String newFileName = timenow + ".png";
+                String newFileName = "emp" + index + ".png";
                 e.setImage(newFileName);
                 String filePath = uploadDirectory + File.separator + newFileName;
                 File file = new File(filePath);
                 
+                if (file.exists()) {
+                    file.delete();
+                }
+                
                 OutputStream out = null;
                 InputStream fileContent = null;
                 final PrintWriter writer = response.getWriter();
-                
+
                 try {
                     out = new FileOutputStream(file);
                     fileContent = filePart.getInputStream();
-                    
+
                     int read;
                     final byte[] bytes = new byte[1024];
-                    
+
                     while ((read = fileContent.read(bytes)) != -1) {
                         out.write(bytes, 0, read);
                     }
@@ -192,7 +191,7 @@ public class AddEmployeeAd extends HttpServlet {
             }
         }
     }
-    
+
     private String getFileName(final Part part) {
         final String partHeader = part.getHeader("content-disposition");
         for (String content : partHeader.split(";")) {
@@ -212,5 +211,13 @@ public class AddEmployeeAd extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    
+    public static void main(String[] args) {
+        ProductDAO pd = new ProductDAO();
+        List<Product> list = pd.getListProductByType(1);
+        for (Product p : list) {
+            System.out.println(p.toString());
+        }
+    }
 }

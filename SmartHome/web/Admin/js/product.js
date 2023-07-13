@@ -41,7 +41,6 @@ function delmul() {
 }
 
 function deleteMulti(str) {
-    alert(str);
     ajaxPost('http://localhost:9999/SmartHome/deleteProductMulAd?string=' + str, str, null);
 }
 
@@ -54,7 +53,7 @@ function deleteP(element, id) {
 
 function deleteC(element, type) {
     if (confirm("Are you sure to delete?")) {
-//        ajaxPost('http://localhost:9999/SmartHome/deleteCategory?type=' + type, type, null);
+//        ajaxPost('http://localhost:9999/SmartHome/deleteCategory?type=' + type + '/', type, null);
         window.location.href = "../deleteCategory?type=" + type;
         element.parentElement.parentElement.style.display = 'none';
     }

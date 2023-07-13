@@ -59,7 +59,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="../employeeAd">Infomation</a>
-<!--                                    <a class="dropdown-item" href="../AddEmployeeAd">Salary</a>-->
+                                    <a class="dropdown-item" href="../salary">Salary</a>
                                 </div>
                             </li>
 

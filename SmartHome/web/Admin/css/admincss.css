@@ -249,7 +249,7 @@ thead {
 }
 .tm-avatar-container {
     position: relative;
-    cursor: pointer;
+/*    cursor: pointer;*/
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -442,7 +442,7 @@ input[type="checkbox"]:focus {
     min-height: 725px;
 }
 .tm-block-product-categories {
-    min-height: 750px;
+    min-height: 850px;
 }
 .tm-product-table-container {
     max-height: 465px;

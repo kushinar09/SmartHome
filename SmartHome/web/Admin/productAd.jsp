@@ -13,7 +13,7 @@
         <title>Product</title>
         <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="../fontawesome/css/all.css"/>
-        <link rel="stylesheet" href="css/admincss.css?v=5"/>
+        <link rel="stylesheet" href="css/admincss.css?v=6"/>
     </head>
     <c:if test="${sessionScope.admin == null}">
         <c:redirect url = "loginAd.jsp"/>
@@ -61,7 +61,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="../employeeAd">Infomation</a>
-<!--                                <a class="dropdown-item" href="../AddEmployeeAd">Salary</a>-->
+                                <a class="dropdown-item" href="../salary">Salary</a>
                             </div>
                         </li>
                         <li class="nav-item">

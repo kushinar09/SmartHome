@@ -20,6 +20,7 @@ public class Employee {
     String phone;
     Date hireDate;
     String job;
+    int level;
     String id_empm;
     int id_acc;
 
@@ -88,6 +89,14 @@ public class Employee {
 
     public void setJob(String job) {
         this.job = job;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public String getId_empm() {

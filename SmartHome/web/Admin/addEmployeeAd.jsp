@@ -63,7 +63,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="../employeeAd">Infomation</a>
-<!--                                    <a class="dropdown-item" href="http://localhost:9999/SmartHome/Admin/salary.jsp">Salary</a>-->
+                                    <a class="dropdown-item" href="../salary">Salary</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -189,7 +189,7 @@
                                                         <div class="form-group mb-3 col-xs-12 col-sm-5">
                                                             <label for="dob">Manager's ID
                                                             </label>
-                                                            <select class="custom-select tm-select-accounts" id="job" name="job"
+                                                            <select class="custom-select tm-select-accounts" id="mn" name="mn"
                                                                     required style="height: 50px;">
                                                                 <option value=""}>...</option>
                                                                 <c:forEach var="j" items="${sessionScope.EmployeeDAO.getAllEmployee()}">
@@ -198,10 +198,16 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group mb-3">
+                                                        <label for="phone">Years of Experience
+                                                        </label>
+                                                        <input id="level" name="level" type="number" class="form-control validate"
+                                                               data-large-mode="true" required placeholder="Enter the employee's year of experience" min="0"/>
+                                                    </div>
                                                 </div>
                                                 <div class="col-12 form-group">
                                                     <label class="tm-hide-sm">&nbsp;</label>
-                                                    <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Employee</button>
+                                                    <input type="submit" class="btn btn-primary btn-block text-uppercase" value="Add Employee">
                                                 </div>
                                             </div>
                                         </div>

@@ -4,9 +4,7 @@
  */
 package AdminController;
 
-import dal.CustomerDAO;
-import dal.OrderDAO;
-import dal.ProductDAO;
+import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,15 +12,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.OrderDetail;
+import model.Salary;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "showOrder", urlPatterns = {"/showOrder"})
-public class showOrder extends HttpServlet {
+@WebServlet(name = "SalaryServlet", urlPatterns = {"/salary"})
+public class SalaryServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +40,10 @@ public class showOrder extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet showOrder</title>");
+            out.println("<title>Servlet SalaryServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet showOrder at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SalaryServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,17 +61,15 @@ public class showOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        OrderDAO od = new OrderDAO();
-        ProductDAO pd = new ProductDAO();
-        CustomerDAO cd = new CustomerDAO();
-        String id = request.getParameter("id");
-        List<OrderDetail> order = od.getDetailOfOrder(id);
-        request.setAttribute("detail", order);
-        request.setAttribute("order", od.getOrderById(id));
-        request.setAttribute("id", id);
-        request.setAttribute("pdao", pd);
-        request.setAttribute("cdao", cd);
-        request.getRequestDispatcher("showOrder.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("admin") == null) {
+            response.sendRedirect("Admin/loginAd.jsp");
+        } else {
+            EmployeeDAO ed = new EmployeeDAO();
+            List<Salary> list = ed.getAllSalary();
+            request.setAttribute("listslr", list);
+            request.getRequestDispatcher("Admin/salary.jsp").forward(request, response);
+        }
     }
 
     /**

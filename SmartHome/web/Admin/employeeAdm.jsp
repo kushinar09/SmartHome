@@ -13,7 +13,7 @@
         <title>Employee</title>
         <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="../fontawesome/css/all.css"/>
-        <link rel="stylesheet" href="css/admincss.css?v=5"/>
+        <link rel="stylesheet" href="css/admincss.css?v=4"/>
     </head>
     <c:if test="${sessionScope.admin == null}">
         <c:redirect url = "loginAd.jsp"/>
@@ -63,7 +63,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="../employeeAd">Infomation</a>
-<!--                                    <a class="dropdown-item" href="../AddEmployeeAd">Salary</a>-->
+                                    <a class="dropdown-item" href="../salary">Salary</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -83,18 +83,18 @@
                     </div>
                 </div>
             </nav>
-            <div class="col-12 tm-block-col">
+            <div class="col-12 tm-block-col" style="margin-top: 50px;">
                 <div class="col-12 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
                         <div class="row" style="margin-bottom: 10px;">
                             <div class="col-xl-6 col-lg-6 col-md-12">
                                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Searching..." style="height: 50.5px; width: 100%;margin-bottom: 15px;padding: 5px;">
                             </div>
-<!--                            <form method="get" action="../addEmployeeAd" class="col-xl-3 col-lg-3 col-md-12">
+                            <form method="get" action="../addEmployeeAd" class="col-xl-3 col-lg-3 col-md-12">
                                 <button type="submit" class="btn btn-primary btn-block text-uppercase mybtn">
                                     Add Employee
                                 </button>
-                            </form>-->
+                            </form>
                         </div>
                         <h2 class="tm-block-title">Customer View</h2>
                         <table class="table">
@@ -123,7 +123,7 @@
                 </div>
             </div>
             <div id="list-info">
-                <c:forEach var="e" items="${sessionScope.listea}">
+                <c:forEach var="e" items="${sessionScope.listea}" varStatus="loop">
                     <c:set var="a" value="${sessionScope.EmployeeDAO.getAccountById(e.id_acc)}" />
                     <div class="container col-12 tm-block-col" id="info" style="display: none;">
                         <div class="col-12 tm-block-col">
@@ -137,10 +137,10 @@
                                                 <div class="tm-avatar-container">
                                                     <img src="img/img-emp/${e.image}" alt="Avatar" class="tm-avatar img-fluid mb-4" id="preview-img">
                                                 </div>
-                                                <input id="fileInput" name="fileInput" type="file" onchange="previewFile()" style="display:none;"/>
+                                                <input id="fileInput${e.id}" name="fileInput${e.id}" type="file" onchange="previewFile(this, ${loop.index})" style="display:none;"/>
                                                 <input type="button" class="btn btn-primary btn-block mx-auto text-uppercase"
                                                        value="Upload New Photo"
-                                                       onclick="document.getElementById('fileInput').click();" />
+                                                       onclick="document.getElementById('fileInput${e.id}').click();" />
                                             </div>
                                             <div class="tm-block-col tm-col-account-settings-cus">
                                                 <div class="tm-bg-primary-dark tm-block tm-block-settings">
@@ -311,9 +311,9 @@
                                                                     window.location = "../deleteCusAd?id=" + id;
                                                                 }
                                                             }
-                                                            function previewFile() {
-                                                                var preview = document.getElementById("preview-img");
-                                                                var file = document.querySelector('input[type=file]').files[0];
+                                                            function previewFile(element) {
+                                                                var preview = element.previousElementSibling.firstElementChild;
+                                                                var file = element.files[0];
                                                                 var reader = new FileReader();
 
                                                                 reader.onloadend = function () {
@@ -327,7 +327,7 @@
                                                                     preview.src = "";
                                                                 }
                                                             }
-                                                            function add(){
+                                                            function add() {
                                                                 window.location.href = 'http://localhost:9999/SmartHome/Admin/addEmployeeAd.jsp';
                                                             }
     </script>

@@ -48,7 +48,6 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-user-tie"></i>
@@ -58,7 +57,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="../employeeAd">Infomation</a>
-                                    <!--                                    <a class="dropdown-item" href="../AddEmployeeAd">Salary</a>-->
+                                    <a class="dropdown-item" href="../salary">Salary</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -111,92 +110,125 @@
                     <div class="col-12 tm-block-col">
                         <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
                             <h2 class="tm-block-title">Notification List</h2>
-                            <div class="tm-notification-items">
+                            <div class="tm-notification-items" style="padding-left: 15px; padding-right: 15px;">
                                 <c:forEach var="n" items="${sessionScope.ConnectDAO.getNotification()}">
                                     <c:if test="${n.type == 1}">
-                                        <div class="media tm-notification-item">
-                                            <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
-                                            <div class="media-body">
-                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="../detail?id=${n.id_prod}"
-                                                                                                                                                      class="tm-notification-link">Sửa sản phẩm</a>. Kiểm tra thay đổi.</p>
-                                                    <%
-                                                        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                                                        long current = timestamp.getTime();
-                                                        pageContext.setAttribute("current", current);
-                                                    %>
-                                                    <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
-                                                    <c:if test="${ms >= 24*60}">
-                                                        <c:set var="d" value="${Math.floor(ms/24/60)}"/>
-                                                        <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
-                                                        <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
-                                                </c:if>
-                                                <c:if test="${ms < 24*60 && ms >=60}">
-                                                    <c:set var="h" value="${Math.floor(ms/60)}"/>
-                                                    <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
-                                                </c:if>
-                                                <c:if test="${ms < 60}">
-                                                    <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
-                                                </c:if>
+                                        <div class="media tm-notification-item row" style="display: flex; align-items: center;">
+                                            <div class="col-10" style="display: flex; align-items: center;">
+                                                <div class="tm-gray-circle"><img src="img/img-emp/${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).image}" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="../detail?id=${n.id_prod}"
+                                                                                                                                                          class="tm-notification-link">Sửa sản phẩm</a>. Kiểm tra thay đổi.</p>
+                                                        <%
+                                                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                                            long current = timestamp.getTime();
+                                                            pageContext.setAttribute("current", current);
+                                                        %>
+                                                        <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
+                                                        <c:if test="${ms >= 24*60}">
+                                                            <c:set var="d" value="${Math.floor(ms/24/60)}"/>
+                                                            <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
+                                                            <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
+                                                        <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
+                                                    </c:if>
+                                                    <c:if test="${ms < 24*60 && ms >=60}">
+                                                        <c:set var="h" value="${Math.floor(ms/60)}"/>
+                                                        <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
+                                                        <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
+                                                    </c:if>
+                                                    <c:if test="${ms < 60}">
+                                                        <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
+                                                    </c:if>
+                                                </div>
+                                            </div>
+                                            <div class="col-1" style="display: flex; align-items: center;">
+                                            </div>
+                                            <div class="col-1" style="padding: 0;display: flex;align-items: center;justify-content: center;">
+                                                <a href="#" class="tm-product-delete-link">
+                                                    <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </c:if>
                                     <c:if test="${n.type == 2}">
-                                        <div class="media tm-notification-item">
-                                            <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
-                                            <div class="media-body">
-                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> gửi yêu cầu <a href="../detail?id=${n.id_prod}"
-                                                                                                                                                     class="tm-notification-link">Thêm sản phẩm</a>. Kiểm tra yêu cầu.    <a href="../addProductAd?id=${n.id_prod}&n=${n.id}" class="tm-notification-link">duyet</a></p>
-                                                    <%
-                                                        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                                                        long current = timestamp.getTime();
-                                                        pageContext.setAttribute("current", current);
-                                                    %>
-                                                    <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
-                                                    <c:if test="${ms >= 24*60}">
-                                                        <c:set var="d" value="${Math.floor(ms/24/60)}"/>
-                                                        <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
-                                                        <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
-                                                </c:if>
-                                                <c:if test="${ms < 24*60 && ms >=60}">
-                                                    <c:set var="h" value="${Math.floor(ms/60)}"/>
-                                                    <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
-                                                </c:if>
-                                                <c:if test="${ms < 60}">
-                                                    <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
-                                                </c:if>
+                                        <div class="media tm-notification-item row" style="display: flex; align-items: center;">
+                                            <div class="col-10" style="display: flex; align-items: center;">
+                                                <div class="tm-gray-circle"><img src="img/img-emp/${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).image}" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../detail?id=${n.id_prod}"
+                                                                                                                                                        class="tm-notification-link">Thêm sản phẩm</a>. Kiểm tra yêu cầu.</p>
+                                                        <%
+                                                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                                            long current = timestamp.getTime();
+                                                            pageContext.setAttribute("current", current);
+                                                        %>
+                                                        <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
+                                                        <c:if test="${ms >= 24*60}">
+                                                            <c:set var="d" value="${Math.floor(ms/24/60)}"/>
+                                                            <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
+                                                            <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
+                                                        <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
+                                                    </c:if>
+                                                    <c:if test="${ms < 24*60 && ms >=60}">
+                                                        <c:set var="h" value="${Math.floor(ms/60)}"/>
+                                                        <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
+                                                        <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
+                                                    </c:if>
+                                                    <c:if test="${ms < 60}">
+                                                        <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
+                                                    </c:if>
+                                                </div>
+                                            </div>
+                                            <div class="col-1" style="display: flex; align-items: center;">
+                                                <a href="#" class="tm-product-delete-link">
+                                                    <i class="fa-solid fa-check tm-product-delete-icon"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-1" style="padding: 0;display: flex;align-items: center;justify-content: center;">
+                                                <a href="#" class="tm-product-delete-link">
+                                                    <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </c:if>
-                                    <c:if test="${n.type == 3}">
-                                        <div class="media tm-notification-item">
-                                            <div class="tm-gray-circle"><img src="img/3440833_person_woman_female_user_profile_icon.png" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
-                                            <div class="media-body">
-                                                <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> gửi yêu cầu <a href="../detail?id=${n.id_prod}"
-                                                                                                                                                     class="tm-notification-link">Xóa sản phẩm</a>. Kiểm tra yêu cầu.    <a href="../deleteProductAd?id=${n.id_prod}&n=${n.id}" class="tm-notification-link">duyet</a></p>
-                                                    <%
-                                                        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                                                        long current = timestamp.getTime();
-                                                        pageContext.setAttribute("current", current);
-                                                    %>
-                                                    <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
-                                                    <c:if test="${ms >= 24*60}">
-                                                        <c:set var="d" value="${Math.floor(ms/24/60)}"/>
-                                                        <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
-                                                        <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
-                                                </c:if>
-                                                <c:if test="${ms < 24*60 && ms >=60}">
-                                                    <c:set var="h" value="${Math.floor(ms/60)}"/>
-                                                    <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
-                                                    <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
-                                                </c:if>
-                                                <c:if test="${ms < 60}">
-                                                    <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
-                                                </c:if>
+                                    <c:if test="${n.type == 1}">
+                                        <div class="media tm-notification-item row" style="display: flex; align-items: center;">
+                                            <div class="col-10" style="display: flex; align-items: center;">
+                                                <div class="tm-gray-circle"><img src="img/img-emp/${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).image}" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
+                                                <div class="media-body">
+                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../detail?id=${n.id_prod}"
+                                                                                                                                                        class="tm-notification-link">Xóa sản phẩm</a>. Kiểm tra yêu cầu.</p>
+                                                        <%
+                                                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                                            long current = timestamp.getTime();
+                                                            pageContext.setAttribute("current", current);
+                                                        %>
+                                                        <c:set var="ms" value="${Math.round((current - n.time.getTime())/1000/60).intValue()}" />
+                                                        <c:if test="${ms >= 24*60}">
+                                                            <c:set var="d" value="${Math.floor(ms/24/60)}"/>
+                                                            <c:set var="h" value="${Math.floor((ms-60*24*Math.floor(ms/24/60))/60)}"/>
+                                                            <c:set var="m" value="${Math.round(ms- Math.floor(ms/24/60)*24*60 - (Math.floor((ms-60*24*Math.floor(ms/24/60))/60))*60)}" />
+                                                        <span class="tm-small tm-text-color-secondary">${d.intValue()}d ${h.intValue()}h ${m.intValue()}m ago.</span>
+                                                    </c:if>
+                                                    <c:if test="${ms < 24*60 && ms >=60}">
+                                                        <c:set var="h" value="${Math.floor(ms/60)}"/>
+                                                        <c:set var="m" value="${Math.round(ms-Math.floor(ms/60)*60)}" />
+                                                        <span class="tm-small tm-text-color-secondary">${h.intValue()}h ${m.intValue()}m ago.</span>
+                                                    </c:if>
+                                                    <c:if test="${ms < 60}">
+                                                        <span class="tm-small tm-text-color-secondary">${ms.intValue()}m ago.</span>
+                                                    </c:if>
+                                                </div>
+                                            </div>
+                                            <div class="col-1" style="display: flex; align-items: center;">
+                                                <a href="#" class="tm-product-delete-link">
+                                                    <i class="fa-solid fa-check tm-product-delete-icon"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-1" style="padding: 0;display: flex;align-items: center;justify-content: center;">
+                                                <a href="#" class="tm-product-delete-link">
+                                                    <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </c:if>
@@ -249,7 +281,6 @@
         <script src="js/bootstrap.min.js"></script>
         <!-- https://getbootstrap.com/ -->
         <script src="js/tooplate-scripts.js"></script>
-        <<script src="js/myjs.js"></script>
         <script>
             Chart.defaults.global.defaultFontColor = 'white';
             let ctxLine,

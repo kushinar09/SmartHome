@@ -67,7 +67,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="../employeeAd">Infomation</a>
-<!--                                    <a class="dropdown-item" href="../AddEmployeeAd">Salary</a>-->
+                                    <a class="dropdown-item" href="../salary">Salary</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -127,7 +127,7 @@
                                         <div class="form-group mb-3">
                                             <label for="price">Giá tiền (VND)
                                             </label>
-                                            <input id="price" name="price" type="text" class="form-control validate" value="${p.price}" required />
+                                            <input id="price" name="price" type="text" class="form-control validate" value="${p.price.toString()}" required />
                                         </div>
                                         <div class="row">
                                             <div class="form-group mb-3 col-xs-12 col-sm-6">
