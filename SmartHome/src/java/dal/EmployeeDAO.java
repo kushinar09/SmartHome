@@ -460,4 +460,18 @@ public class EmployeeDAO extends DBContext {
         }
         return null;
     }
+    
+    public void updateSalary(String id, double basic, double bonus){
+        try {
+            String sql = "UPDATE [SALARY]\n"
+                    + "SET [basic] = ?, [bonus] = ? WHERE [id_emp] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setDouble(1, basic);
+            statement.setDouble(2, bonus);
+            statement.setString(3, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 }

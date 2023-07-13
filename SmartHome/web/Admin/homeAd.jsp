@@ -117,7 +117,7 @@
                                             <div class="col-10" style="display: flex; align-items: center;">
                                                 <div class="tm-gray-circle"><img src="img/img-emp/${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).image}" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                                 <div class="media-body">
-                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="../detail?id=${n.id_prod}"
+                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="../detail?id=${n.id_prod}" target="_blank"
                                                                                                                                                           class="tm-notification-link">Sửa sản phẩm</a>. Kiểm tra thay đổi.</p>
                                                         <%
                                                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -144,7 +144,7 @@
                                             <div class="col-1" style="display: flex; align-items: center;">
                                             </div>
                                             <div class="col-1" style="padding: 0;display: flex;align-items: center;justify-content: center;">
-                                                <a href="#" class="tm-product-delete-link">
+                                                <a href="#" class="tm-product-delete-link" onclick="delN()">
                                                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                                 </a>
                                             </div>
@@ -155,7 +155,7 @@
                                             <div class="col-10" style="display: flex; align-items: center;">
                                                 <div class="tm-gray-circle"><img src="img/img-emp/${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).image}" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                                 <div class="media-body">
-                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../detail?id=${n.id_prod}"
+                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../detail?id=${n.id_prod}" target="_blank"
                                                                                                                                                         class="tm-notification-link">Thêm sản phẩm</a>. Kiểm tra yêu cầu.</p>
                                                         <%
                                                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -185,18 +185,18 @@
                                                 </a>
                                             </div>
                                             <div class="col-1" style="padding: 0;display: flex;align-items: center;justify-content: center;">
-                                                <a href="#" class="tm-product-delete-link">
+                                                <a href="#" class="tm-product-delete-link" onclick="delN()">
                                                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                                 </a>
                                             </div>
                                         </div>
                                     </c:if>
-                                    <c:if test="${n.type == 1}">
+                                    <c:if test="${n.type == 3}">
                                         <div class="media tm-notification-item row" style="display: flex; align-items: center;">
                                             <div class="col-10" style="display: flex; align-items: center;">
                                                 <div class="tm-gray-circle"><img src="img/img-emp/${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).image}" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                                 <div class="media-body">
-                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../detail?id=${n.id_prod}"
+                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../detail?id=${n.id_prod}" target="_blank"
                                                                                                                                                         class="tm-notification-link">Xóa sản phẩm</a>. Kiểm tra yêu cầu.</p>
                                                         <%
                                                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -226,7 +226,7 @@
                                                 </a>
                                             </div>
                                             <div class="col-1" style="padding: 0;display: flex;align-items: center;justify-content: center;">
-                                                <a href="#" class="tm-product-delete-link">
+                                                <a href="#" class="tm-product-delete-link" onclick="delN()">
                                                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                                 </a>
                                             </div>

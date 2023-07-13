@@ -5,6 +5,7 @@
 
 package AdminController;
 
+import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -70,9 +71,12 @@ public class ChangeSalary extends HttpServlet {
     throws ServletException, IOException {
         String str = request.getParameter("string");
         String[] arr = str.split(",");
+        System.out.println("post");
         for (String string : arr) {
             System.out.println(string);
         }
+        EmployeeDAO ed = new EmployeeDAO();
+        ed.updateSalary(arr[0], Double.parseDouble(arr[1]), Double.parseDouble(arr[2]));
     }
 
     /** 

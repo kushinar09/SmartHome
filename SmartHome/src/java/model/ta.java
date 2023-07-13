@@ -11,7 +11,7 @@ package model;
 public class ta {
 
     int id;
-    Double value;
+    double value;
     String content;
 
     public ta() {
@@ -25,11 +25,11 @@ public class ta {
         this.id = id;
     }
 
-    public Double getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
