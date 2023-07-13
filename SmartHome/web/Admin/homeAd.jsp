@@ -144,7 +144,7 @@
                                             <div class="col-1" style="display: flex; align-items: center;">
                                             </div>
                                             <div class="col-1" style="padding: 0;display: flex;align-items: center;justify-content: center;">
-                                                <a href="#" class="tm-product-delete-link" onclick="delN()">
+                                                <a href="#" class="tm-product-delete-link" onclick="deleteN(this, '${n.id}')">
                                                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                                 </a>
                                             </div>
@@ -180,12 +180,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-1" style="display: flex; align-items: center;">
-                                                <a href="#" class="tm-product-delete-link">
+                                                <a href="#" class="tm-product-delete-link" onclick="submit(this, '${n.id}')">
                                                     <i class="fa-solid fa-check tm-product-delete-icon"></i>
                                                 </a>
                                             </div>
                                             <div class="col-1" style="padding: 0;display: flex;align-items: center;justify-content: center;">
-                                                <a href="#" class="tm-product-delete-link" onclick="delN()">
+                                                <a href="#" class="tm-product-delete-link" onclick="deleteN(this, '${n.id}')">
                                                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                                 </a>
                                             </div>
@@ -221,12 +221,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-1" style="display: flex; align-items: center;">
-                                                <a href="#" class="tm-product-delete-link">
+                                                <a href="#" class="tm-product-delete-link" onclick="submit(this, '${n.id}')">
                                                     <i class="fa-solid fa-check tm-product-delete-icon"></i>
                                                 </a>
                                             </div>
                                             <div class="col-1" style="padding: 0;display: flex;align-items: center;justify-content: center;">
-                                                <a href="#" class="tm-product-delete-link" onclick="delN()">
+                                                <a href="#" class="tm-product-delete-link" onclick="deleteN(this, '${n.id}')">
                                                     <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                                 </a>
                                             </div>
@@ -281,30 +281,59 @@
         <script src="js/bootstrap.min.js"></script>
         <!-- https://getbootstrap.com/ -->
         <script src="js/tooplate-scripts.js"></script>
-        <script>
-            Chart.defaults.global.defaultFontColor = 'white';
-            let ctxLine,
-                    ctxBar,
-                    ctxPie,
-                    optionsLine,
-                    optionsBar,
-                    optionsPie,
-                    configLine,
-                    configBar,
-                    configPie,
-                    lineChart;
-            barChart, pieChart;
-            // DOM is ready
-            $(function () {
-                drawLineChart(); // Line Chart
-                drawBarChart(); // Bar Chart
-                drawPieChart(); // Pie Chart
+        <script type="text/javascript">
+                                                    Chart.defaults.global.defaultFontColor = 'white';
+                                                    let ctxLine,
+                                                            ctxBar,
+                                                            ctxPie,
+                                                            optionsLine,
+                                                            optionsBar,
+                                                            optionsPie,
+                                                            configLine,
+                                                            configBar,
+                                                            configPie,
+                                                            lineChart;
+                                                    barChart, pieChart;
+                                                    // DOM is ready
+                                                    $(function () {
+                                                        drawLineChart(); // Line Chart
+                                                        drawBarChart(); // Bar Chart
+                                                        drawPieChart(); // Pie Chart
 
-                $(window).resize(function () {
-                    updateLineChart();
-                    updateBarChart();
-                });
-            });
+                                                        $(window).resize(function () {
+                                                            updateLineChart();
+                                                            updateBarChart();
+                                                        });
+                                                    });
+
+
+                                                    function deleteN(element, id) {
+                                                        ajaxPost('http://localhost:9999/SmartHome/deleteNotification?id=' + id, id, null);
+                                                        element.parentElement.parentElement.style.display = 'none';
+                                                    }
+
+                                                    function ajaxPost(url, data, callback) {
+                                                        var xmlDoc = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                                                        xmlDoc.open('POST', url, true);
+                                                        xmlDoc.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                        xmlDoc.onreadystatechange = function () {
+                                                            if (xmlDoc.readyState === 4 && xmlDoc.status === 200) {
+                                                                callback(xmlDoc);
+                                                            }
+                                                        };
+                                                        xmlDoc.send(data);
+                                                    }
+
+                                                    function ajaxGet(url, callback) {
+                                                        var xmlDoc = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                                                        xmlDoc.open('GET', url, true);
+                                                        xmlDoc.onreadystatechange = function () {
+                                                            if (xmlDoc.readyState === 4 && xmlDoc.status === 200) {
+                                                                callback(xmlDoc);
+                                                            }
+                                                        };
+                                                        xmlDoc.send();
+                                                    }
         </script>
     </body>
 </html>

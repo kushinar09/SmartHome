@@ -11,7 +11,7 @@
 //    });
 //});
 
-window.onload = function() {
+window.onload = function () {
     var reloading = sessionStorage.getItem("reloading");
     if (reloading) {
         sessionStorage.removeItem("reloading");
@@ -19,7 +19,7 @@ window.onload = function() {
     }
 };
 
-function reload(){
+function reload() {
     ajaxGet('http://localhost:9999/SmartHome/productAd', null);
 }
 
