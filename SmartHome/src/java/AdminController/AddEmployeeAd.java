@@ -138,7 +138,6 @@ public class AddEmployeeAd extends HttpServlet {
                 e.setLevel(Integer.parseInt(level));
                 e.setId_empm(id_empm);
                 e.setId_acc(index);
-                System.out.println(e.toString());
                 String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\Admin\\img\\img-emp";
                 Part filePart = request.getPart("fileInput");
 //                String image = getFileName(filePart);
@@ -152,11 +151,11 @@ public class AddEmployeeAd extends HttpServlet {
                 e.setImage(newFileName);
                 String filePath = uploadDirectory + File.separator + newFileName;
                 File file = new File(filePath);
-                
+
                 if (file.exists()) {
                     file.delete();
                 }
-                
+
                 OutputStream out = null;
                 InputStream fileContent = null;
                 final PrintWriter writer = response.getWriter();
@@ -210,8 +209,7 @@ public class AddEmployeeAd extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
+
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
         List<Product> list = pd.getListProductByType(1);
