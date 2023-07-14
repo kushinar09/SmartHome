@@ -20,11 +20,11 @@ window.onload = function () {
 };
 
 function reload() {
-    ajaxGet('http://localhost:9999/SmartHome/productAd', null);
+    ajaxGet('../productAd', null);
 }
 
 function next(id) {
-    window.location.href = 'http://localhost:9999/SmartHome/editProductAd?id=' + id;
+    window.location.href = '../editProductAd?id=' + id;
 }
 
 function delmul() {
@@ -41,19 +41,19 @@ function delmul() {
 }
 
 function deleteMulti(str) {
-    ajaxPost('http://localhost:9999/SmartHome/deleteProductMulAd?string=' + str, str, null);
+    ajaxPost('../deleteProductMulAd?string=' + str, str, null);
 }
 
 function deleteP(element, id) {
     if (confirm("Are you sure to delete?")) {
-        ajaxPost('http://localhost:9999/SmartHome/deleteProductAd?id=' + id, id, null);
+        ajaxPost('../deleteProductAd?id=' + id, id, null);
         element.parentElement.parentElement.style.display = 'none';
     }
 }
 
 function deleteC(element, type) {
     if (confirm("Are you sure to delete?")) {
-//        ajaxPost('http://localhost:9999/SmartHome/deleteCategory?type=' + type + '/', type, null);
+//        ajaxPost('../deleteCategory?type=' + type + '/', type, null);
         window.location.href = "../deleteCategory?type=" + type;
         element.parentElement.parentElement.style.display = 'none';
     }
@@ -110,7 +110,7 @@ function addCate() {
             }
         }
         if (flag) {
-            ajaxPost('http://localhost:9999/SmartHome/addCategory?type=' + newstr, newstr, null);
+            ajaxPost('../addCategory?type=' + newstr, newstr, null);
             document.getElementById("category-table").innerHTML += '<tr><td class="tm-product-name">' + newstr + '</td><td class="text-center"><a href="#" class="tm-product-delete-link"><i class="far fa-trash-alt tm-product-delete-icon"></i></a></td></tr>';
             document.getElementById("successcate").innerHTML = 'Successful';
 

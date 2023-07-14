@@ -92,7 +92,6 @@ public class AddEmployeeAd extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter outp = response.getWriter();
         EmployeeDAO ed = new EmployeeDAO();
-        AccountDAO ad = new AccountDAO();
         HttpSession session = request.getSession();
         if (session.getAttribute("admin") == null) {
             response.sendRedirect("Admin/loginAd.jsp");
@@ -139,7 +138,7 @@ public class AddEmployeeAd extends HttpServlet {
                 e.setLevel(Integer.parseInt(level));
                 e.setId_empm(id_empm);
                 e.setId_acc(index);
-
+                System.out.println(e.toString());
                 String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\Admin\\img\\img-emp";
                 Part filePart = request.getPart("fileInput");
 //                String image = getFileName(filePart);

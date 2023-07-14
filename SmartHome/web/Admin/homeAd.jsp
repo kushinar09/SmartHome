@@ -307,12 +307,12 @@
                                                     });
                                                     
                                                     function submitN(element, id) {
-                                                        ajaxPost('http://localhost:9999/SmartHome/submitNotification?id=' + id, id, null);
+                                                        ajaxPost('../submitNotification?id=' + id, id, null);
                                                         element.parentElement.parentElement.style.display = 'none';
                                                     }
 
                                                     function deleteN(element, id) {
-                                                        ajaxPost('http://localhost:9999/SmartHome/deleteNotification?id=' + id, id, null);
+                                                        ajaxPost('../deleteNotification?id=' + id, id, null);
                                                         element.parentElement.parentElement.style.display = 'none';
                                                     }
 

@@ -122,7 +122,9 @@ public class EmployeeDAO extends DBContext {
             statement.setString(6, e.getPhone());
             statement.setDate(7, e.getHireDate());
             statement.setString(8, e.getJob());
+            System.out.println("8");
             statement.setInt(9, e.getLevel());
+            System.out.println("9");
             statement.setString(10, e.getId_empm());
             statement.setInt(11, e.getId_acc());
             statement.executeUpdate();
