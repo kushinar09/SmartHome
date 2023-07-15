@@ -127,7 +127,7 @@ public class AddProduct extends HttpServlet {
             p.setPromopercent(0);
             p.setId_prod("NEW" + (pd.getSizeOfProduct() + 1));
 
-            String uploadDirectory = "C:\\Users\\FR\\Desktop\\cms\\PRJ301_BanTQ\\ASM\\img\\img-upload";
+            String uploadDirectory = "C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\img-upload";
             Part filePart = request.getPart("fileInput");
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HHmmssyyyyMMdd");

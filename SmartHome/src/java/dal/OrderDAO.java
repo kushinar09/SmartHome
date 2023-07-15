@@ -61,6 +61,29 @@ public class OrderDAO extends DBContext {
         }
         return null;
     }
+    
+    public List<Order> getOrderByCus(String id_cus) {
+        List<Order> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [ORDER] WHERE id_cus = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id_cus);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Order o = new Order();
+                o.setId(rs.getInt("id"));
+                o.setStatus(rs.getString("status"));
+                o.setId_cus(rs.getString("id_cus"));
+                o.setAddress(rs.getString("address"));
+                o.setStart_date(rs.getDate("start_date"));
+                o.setDelivery_date(rs.getDate("delivery_due"));
+                list.add(o);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
 
     public void changeStatus(String id, String status) {
         try {

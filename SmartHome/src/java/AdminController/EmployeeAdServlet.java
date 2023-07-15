@@ -68,6 +68,7 @@ public class EmployeeAdServlet extends HttpServlet {
             response.sendRedirect("Admin/loginAd.jsp");
         } else {
             session.setAttribute("listea", liste);
+            session.setAttribute("flag", "on");
             response.sendRedirect("Admin/employeeAdm.jsp");
         }
     }

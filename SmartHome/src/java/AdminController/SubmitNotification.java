@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -85,13 +86,20 @@ public class SubmitNotification extends HttpServlet {
         Notification n = cd.getNotificationById(id);
         //them san pham
         if (n.getType() == 2) {
-            System.out.println("2");
             Product p = pd.getProductWaiting(n.getId_prod(), n.getId());
             System.out.println(p.toString());
             pd.insertProduct(p);
-            Path source = Paths.get("C:\\Users\\FR\\Desktop\\cms\\PRJ301_BanTQ\\ASM\\img\\img-upload\\" + p.getImage());
-            Path dest = Paths.get("C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\product\\" + p.getImage());
-            Files.move(source, dest, StandardCopyOption.REPLACE_EXISTING);
+//            Path source = Paths.get("C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\img-upload" + p.getImage());
+//            Path dest = Paths.get("C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\product\\" + p.getImage());
+////            Files.move(source, dest, StandardCopyOption.REPLACE_EXISTING);
+
+            File file = new File("C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\img-upload\\" + p.getImage());
+            if (file.renameTo(new File("C:\\Users\\FR\\Documents\\GitHub\\SmartHome\\SmartHome\\web\\img\\product\\" + p.getImage()))) {
+                file.delete();
+                System.out.println("File moved successfully");
+            } else {
+                System.out.println("Failed to move the file");
+            }
         }
         //xoa san pham
         if (n.getType() == 3) {

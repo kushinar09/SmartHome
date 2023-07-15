@@ -18,6 +18,10 @@
     <c:if test="${sessionScope.admin == null}">
         <c:redirect url = "loginAd.jsp"/>
     </c:if>
+    <c:if test="${sessionScope.flag == null}">
+        <c:redirect url = "../employeeAd"/>
+    </c:if>
+    <c:remove var="flag" scope="session" />
     <body>
         <div class="" id="home">
             <nav class="navbar navbar-expand-xl">
@@ -109,7 +113,7 @@
                             </thead>
                             <tbody id="table_cus">
                                 <c:forEach var="ca" items="${sessionScope.listea}">
-                                    <tr onclick="show(this)" id="row_cus">
+                                    <tr onclick="show(this)" id="row_emp${ca.id}">
                                         <th scope="row"><b>#${ca.id}</b></th>
                                         <td>${ca.name}</td>
                                         <td><b>${ca.gender.toLowerCase() == 'm' ? "Nam" : "Nữ"}</b></td>
@@ -125,7 +129,7 @@
             <div id="list-info">
                 <c:forEach var="e" items="${sessionScope.listea}" varStatus="loop">
                     <c:set var="a" value="${sessionScope.EmployeeDAO.getAccountById(e.id_acc)}" />
-                    <div class="container col-12 tm-block-col" id="info" style="display: none;">
+                    <div class="container col-12 tm-block-col" id="info_emp${e.id}" style="display: none;">
                         <div class="col-12 tm-block-col">
                             <div class="row">
                                 <div class="container mt-5">
@@ -307,9 +311,15 @@
                                                                 }
                                                             }
                                                             function showMess(id) {
+                                                                var str = "id=" + id;
                                                                 if (confirm("Are you sure to delete?")) {
-                                                                    window.location = "../deleteCusAd?id=" + id;
+                                                                    ajaxPost('http://localhost:9999/SmartHome/deleteEmpAd', str, function (xmlDoc) {
+                                                                        alert(xmlDoc.responseText);
+                                                                    });
                                                                 }
+                                                                document.getElementById('row_emp'+id).style.display = 'none';
+                                                                document.getElementById('info_emp'+id).style.display = 'none';
+                                                                
                                                             }
                                                             function previewFile(element) {
                                                                 var preview = element.previousElementSibling.firstElementChild;
@@ -329,6 +339,28 @@
                                                             }
                                                             function add() {
                                                                 window.location.href = 'http://localhost:9999/SmartHome/Admin/addEmployeeAd.jsp';
+                                                            }
+                                                            function ajaxPost(url, data, callback) {
+                                                                var xmlDoc = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                                                                xmlDoc.open('POST', url, true);
+                                                                xmlDoc.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                                xmlDoc.onreadystatechange = function () {
+                                                                    if (xmlDoc.readyState === 4 && xmlDoc.status === 200) {
+                                                                        callback(xmlDoc);
+                                                                    }
+                                                                };
+                                                                xmlDoc.send(data);
+                                                            }
+
+                                                            function ajaxGet(url, callback) {
+                                                                var xmlDoc = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                                                                xmlDoc.open('GET', url, true);
+                                                                xmlDoc.onreadystatechange = function () {
+                                                                    if (xmlDoc.readyState === 4 && xmlDoc.status === 200) {
+                                                                        callback(xmlDoc);
+                                                                    }
+                                                                };
+                                                                xmlDoc.send();
                                                             }
     </script>
 </html>

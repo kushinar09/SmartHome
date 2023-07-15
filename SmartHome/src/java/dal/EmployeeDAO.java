@@ -403,7 +403,7 @@ public class EmployeeDAO extends DBContext {
         }
         return list;
     }
-    
+
     public ta getBonusToxic(int id) {
         try {
             String sql = "SELECT * FROM [TOXIC_ALLOWANCE] WHERE id = ?";
@@ -441,7 +441,7 @@ public class EmployeeDAO extends DBContext {
         }
         return list;
     }
-    
+
     public sa getBonusSenior(int id) {
         try {
             String sql = "SELECT * FROM [SENIOR_ALLOWANCE] WHERE id = ?";
@@ -460,8 +460,8 @@ public class EmployeeDAO extends DBContext {
         }
         return null;
     }
-    
-    public void updateSalary(String id, double basic, double bonus){
+
+    public void updateSalary(String id, double basic, double bonus) {
         try {
             String sql = "UPDATE [SALARY]\n"
                     + "SET [basic] = ?, [bonus] = ? WHERE [id_emp] = ?";
@@ -470,6 +470,51 @@ public class EmployeeDAO extends DBContext {
             statement.setDouble(2, bonus);
             statement.setString(3, id);
             statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    public void deleteManage(String id_mn) {
+        try {
+            String sql1 = "SELECT * FROM [EMPLOYEE] WHERE id_empm = ?";
+            PreparedStatement statement1 = connection.prepareStatement(sql1);
+            statement1.setString(1, id_mn);
+            ResultSet rs = statement1.executeQuery();
+            while (rs.next()) {
+                String sql = "UPDATE [EMPLOYEE]\n"
+                        + "SET [id_empm] = ? WHERE [id_empm] = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, rs.getString("id_emp"));
+                statement.setString(2, id_mn);
+                statement.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    public void deleteEmployee(String id) {
+        try {
+            CommentDAO cd = new CommentDAO();
+            cd.deleteCommentEmp(id);
+
+            deleteManage(id);
+
+            String sql1 = "DELETE ANSWER WHERE id_emp = ?";
+            PreparedStatement statement1 = connection.prepareStatement(sql1);
+            statement1.setString(1, id);
+            statement1.executeUpdate();
+
+            String sql2 = "DELETE SALARY WHERE id_emp = ?";
+            PreparedStatement statement2 = connection.prepareStatement(sql2);
+            statement2.setString(1, id);
+            statement2.executeUpdate();
+
+            String sql3 = "DELETE EMPLOYEE WHERE id_emp = ?";
+            PreparedStatement statement3 = connection.prepareStatement(sql3);
+            statement3.setString(1, id);
+            statement3.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }

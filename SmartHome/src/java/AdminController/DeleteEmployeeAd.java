@@ -4,27 +4,20 @@
  */
 package AdminController;
 
-import dal.AccountDAO;
-import dal.CustomerDAO;
-import dal.OrderDAO;
+import dal.EmployeeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Customer;
-import model.OrderDetail;
 
 /**
  *
  * @author FR
  */
-@WebServlet(name = "CustomerAdServlet", urlPatterns = {"/customerAd"})
-public class CustomerAdServlet extends HttpServlet {
+public class DeleteEmployeeAd extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +36,10 @@ public class CustomerAdServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomerAdServlet</title>");
+            out.println("<title>Servlet DeleteEmployeeAd</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CustomerAdServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteEmployeeAd at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,17 +57,7 @@ public class CustomerAdServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CustomerDAO cd = new CustomerDAO();
-        List<Customer> listc = cd.getAllCustomer();
-        OrderDAO od = new OrderDAO();
-        HttpSession session = request.getSession();
-        if (session.getAttribute("admin") == null) {
-            response.sendRedirect("Admin/loginAd.jsp");
-        } else {
-            session.setAttribute("listca", listc);
-            session.setAttribute("OrderDAO", od);
-            response.sendRedirect("Admin/customerAd.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -88,7 +71,17 @@ public class CustomerAdServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        EmployeeDAO ed = new EmployeeDAO();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("admin") == null) {
+            response.sendRedirect("Admin/loginAd.jsp");
+        } else {
+            String id = request.getParameter("id");
+            ed.deleteEmployee(id);
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().print("Successful");
+        }
     }
 
     /**
@@ -100,5 +93,5 @@ public class CustomerAdServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

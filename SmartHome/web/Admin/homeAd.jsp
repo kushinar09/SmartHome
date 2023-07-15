@@ -117,7 +117,7 @@
                                             <div class="col-10" style="display: flex; align-items: center;">
                                                 <div class="tm-gray-circle"><img src="img/img-emp/${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).image}" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                                 <div class="media-body">
-                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="../detail?id=${n.id_prod}" target="_blank"
+                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã thực hiện <a href="../preview?id=${n.id}&id_prod=${n.id_prod}" target="_blank"
                                                                                                                                                           class="tm-notification-link">Sửa sản phẩm</a>. Kiểm tra thay đổi.</p>
                                                         <%
                                                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -155,7 +155,7 @@
                                             <div class="col-10" style="display: flex; align-items: center;">
                                                 <div class="tm-gray-circle"><img src="img/img-emp/${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).image}" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                                 <div class="media-body">
-                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../detail?id=${n.id_prod}" target="_blank"
+                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../preview?id=${n.id}&id_prod=${n.id_prod}" target="_blank"
                                                                                                                                                         class="tm-notification-link">Thêm sản phẩm</a>. Kiểm tra yêu cầu.</p>
                                                         <%
                                                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -196,7 +196,7 @@
                                             <div class="col-10" style="display: flex; align-items: center;">
                                                 <div class="tm-gray-circle"><img src="img/img-emp/${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).image}" width="80" height="80" alt="Avatar Image" class="rounded-circle"></div>
                                                 <div class="media-body">
-                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../detail?id=${n.id_prod}" target="_blank"
+                                                    <p class="mb-2"><b>${sessionScope.EmployeeDAO.getEmployeeById(n.id_emp).name}</b> đã yêu cầu <a href="../preview?id=${n.id}&id_prod=${n.id_prod}" target="_blank"
                                                                                                                                                         class="tm-notification-link">Xóa sản phẩm</a>. Kiểm tra yêu cầu.</p>
                                                         <%
                                                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -252,7 +252,7 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach var="od" items="${sessionScope.listo}">
-                                        <tr>
+                                        <tr onclick="linkDetail('${od.id}')">
                                             <th scope="row"><b>#${od.id}</b></th>
                                             <td>
                                                 <div class="tm-status-circle ${od.status.toLowerCase()}">
@@ -337,6 +337,14 @@
                                                             }
                                                         };
                                                         xmlDoc.send();
+                                                    }
+                                                    function linkDetail(id){
+                                                        window.location.href = '../viewOrderAd?id=' + id;
+                                                    }
+                                                    
+                                                    function linktoNoti(id, id_prod){
+                                                        var str = "id=" + id + "&id_prod=" + id_prod;
+                                                        window.location.href = 'http://localhost:9999/SmartHome/preview?' + str;
                                                     }
         </script>
     </body>

@@ -54,7 +54,7 @@ public class CommentDAO extends DBContext {
                 statement.setString(4, c.getContent());
                 statement.setDate(5, c.getDay());
                 statement.executeUpdate();
-            }else{
+            } else {
                 statement.setString(1, c.getId_prod());
                 statement.setString(2, c.getId_cus());
                 statement.setString(3, null);
@@ -62,6 +62,28 @@ public class CommentDAO extends DBContext {
                 statement.setDate(5, c.getDay());
                 statement.executeUpdate();
             }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    public void deleteCommentEmp(String id) {
+        try {
+            String sql = "DELETE COMMENT WHERE id_emp = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public void deleteCommenCus(String id) {
+        try {
+            String sql = "DELETE COMMENT WHERE id_cus = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }

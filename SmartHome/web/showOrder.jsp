@@ -31,10 +31,10 @@
             <main class="page payment-page" style="margin-top: 150px;">
                 <section class="payment-form dark">
                     <div class="container">
-                        <div style="position: absolute; top: 20%; left: 25.5%; z-index: 5;">
-                            <a href="order.jsp">Back</a>
-                        </div>
-                        <form style="z-index: 4" action="process?id=${id}" method="post" id="form-order">
+                        <form style="z-index: 4; position: relative;" action="process?id=${id}" method="post" id="form-order">
+                            <div style="position: absolute; top: 10px; left: 40px; z-index: 5;">
+                                <a href="order.jsp">Back</a>
+                            </div>
                             <div class="products">
                                 <h3 class="title">Order #${id}</h3>
                                 <div id="all_products">
@@ -114,8 +114,8 @@
                 textnumb = textnumb.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                 document.getElementById("total_price").innerHTML = textnumb + ' đ';
             }
-            
-            function valueip(element){
+
+            function valueip(element) {
                 document.getElementById("getvalue").value = element.innerHTML;
                 document.getElementById("form-order").submit();
             }
